@@ -1,0 +1,84 @@
+✅ GUI Intentional Test Scenarios
+Test 1: Validate Book Search and Count Update
+
+Objective: Ensure search input filters content correctly.
+
+Steps:
+
+Tap on filterLine (Find).
+
+Type a known book/document title.
+
+Verify that countBooks updates with the correct number of results.
+
+Verify that recyclerView displays matching books only.
+
+Test 2: Validate Sorting Functionality
+
+Objective: Ensure items can be sorted by different criteria.
+
+Steps:
+
+Tap sortBy (default "Date").
+
+Select another sorting option (e.g., Title/Author).
+
+Verify that the items in recyclerView are reordered.
+
+Tap sortOrder toggle.
+
+Verify list changes from ascending → descending.
+
+Test 3: Validate View Mode Toggle
+
+Objective: Ensure users can switch between grid and list views.
+
+Steps:
+
+Tap onGridList.
+
+Verify that recyclerView layout changes to grid.
+
+Tap again.
+
+Verify layout switches back to list.
+
+Test 4: Validate Refresh
+
+Objective: Ensure refresh updates book list.
+
+Steps:
+
+Tap onRefresh.
+
+Verify that new or removed items appear/disappear in recyclerView.
+
+Test 5: Validate Bottom Navigation Tabs
+
+Objective: Ensure navigation works across tabs.
+
+Steps:
+
+Tap Library → verify all stored books are shown.
+
+Tap Folder → verify directory-based file view appears.
+
+Tap Recent → verify recently opened files appear.
+
+Tap Favorites → verify user-marked favorites appear.
+
+Tap Bookmarks → verify bookmarked pages/files appear.
+
+Test 6: Validate Navigation Drawer Access
+
+Objective: Ensure side menu opens correctly.
+
+Steps:
+
+Tap menu2 (hamburger icon).
+
+Verify drawer opens with additional options.
+
+Select an option.
+
+Verify correct navigation action occurs.

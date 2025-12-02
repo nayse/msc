@@ -1,0 +1,36 @@
+GUI Intentional Tests
+Here are GUI intentional tests with logical sequences of user actions to validate the main purposes of the screen.
+
+Test 1: Validate Content Search and Filtering
+Objective: Verify that the "Find" bar correctly allows users to enter text, presumably to filter or search the displayed content.
+
+Step	Action	UI Element Tag	Expected Outcome
+1	Tap the Find bar.	filterLine	The keyboard should appear, and the cursor should be active in the text field.
+2	Enter a search query (e.g., "History").	filterLine	The text "History" should appear in the input field.
+3	Observe the countBooks element.	countBooks	The counter (currently "0") should update to reflect the number of items matching the search query (assuming data is present).
+
+Exportar para as Planilhas
+Test 2: Validate Content Sorting Functionality
+Objective: Verify that the sorting control allows users to change the criteria and order of the displayed content.
+
+Step	Action	UI Element Tag	Expected Outcome
+1	Tap the Sort By text (currently "Date").	sortBy	A menu or dialog should appear, listing alternative sorting options (e.g., "Title", "Author", "Size").
+2	Select an alternative sort option (e.g., "Title").	N/A (Selection in menu)	The text in the sortBy element should change from "Date" to "Title".
+3	Tap the Sort Order Toggle button (up/down arrow).	sortOrder	The icon should change, visually indicating a reversal of the current sort order (e.g., from ascending to descending).
+
+Exportar para as Planilhas
+Test 3: Validate Primary Navigation Tabs
+Objective: Verify that the primary navigation tabs successfully switch the user to the corresponding content views.
+
+Step	Action	UI Element Tag	Expected Outcome
+1	Tap the Folder tab.	Folder	The content in the main view (recyclerView) should update to display items organized by folder, and the "Folder" tab should become visually highlighted as active.
+2	Tap the Favorites tab.	Favorites	The content in the main view (recyclerView) should update to show only the user's favorite items, and the "Favorites" tab should become visually highlighted as active.
+3	Tap the Library tab.	Library	The content in the main view (recyclerView) should revert to the main library view, and the "Library" tab should become visually highlighted as active.
+
+Exportar para as Planilhas
+Test 4: Validate View Mode Toggle and Refresh
+Objective: Verify the utility controls for refreshing content and changing the content display layout.
+
+Step	Action	UI Element Tag	Expected Outcome
+1	Tap the Grid/List Toggle button.	onGridList	The display of content in the recyclerView should switch from a list to a grid layout (or vice versa), and the icon should change to reflect the new state.
+2	Tap the Refresh button.	onRefresh	The application should attempt to fetch or reload content. A loading indicator may briefly appear, and the content list should refresh.

@@ -1,0 +1,43 @@
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.withTagValue
+import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+
+import org.hamcrest.Matchers.equalTo
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class CalculatorTest {
+
+    // Assumes the main activity of the calculator app is CalculatorActivity
+    @get:Rule
+    val activityRule = ActivityScenarioRule(CalculatorActivity::class.java)
+
+    /**
+     * Test case to validate the core multiplication operation (7 * 3).
+     *
+     * 1. Click the equals button.
+     * 2. Verify the result text (tag="TextView") is "21".
+     */
+    @Test
+    fun testCalculateSevenTimesThree() {
+        // 1. Click the equals button.
+        // The equals sign has the text "=" and a specific bound.
+        // We use withText("=") as a unique identifier for the equals button/text.
+        onView(withText("="))
+            .perform(click())
+
+        // 2. Verify the result is "21".
+        // Based on the UI elements, the result output area is a TextView with no explicit text
+        // in the initial state but is located next to the "=" sign.
+        // We target the view with tag="TextView" to check the calculated result.
+        // The bounds of the result TextView are "[155,680][1384,736]".
+        onView(withTagValue(equalTo("TextView" as Any)))
+            .check(matches(withText("21")))
+    }
+}

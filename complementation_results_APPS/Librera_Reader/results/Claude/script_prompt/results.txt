@@ -1,0 +1,354 @@
+package com.example.ebookreader;
+
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.action.ViewActions.clearText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
+import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
+
+@RunWith(AndroidJUnit4.class)
+@LargeTest
+public class LibraryScreenEspressoTest {
+
+    @Rule
+    public ActivityScenarioRule<MainActivity> activityRule =
+            new ActivityScenarioRule<>(MainActivity.class);
+
+    /**
+     * Test Case 1: Verify Library Screen Loads with All Core Elements
+     * Validates that all essential UI components are present and visible
+     */
+    @Test
+    public void testLibraryScreenElementsAreDisplayed() {
+        // Verify menu button is displayed and clickable
+        onView(withId(R.id.menu2))
+                .check(matches(isDisplayed()))
+                .check(matches(isClickable()));
+
+        // Verify search/filter field is displayed
+        onView(withId(R.id.filterLine))
+                .check(matches(isDisplayed()))
+                .check(matches(withText("Find")));
+
+        // Verify book count is displayed
+        onView(withId(R.id.countBooks))
+                .check(matches(isDisplayed()))
+                .check(matches(withText("0")));
+
+        // Verify sort button is displayed
+        onView(withId(R.id.sortBy))
+                .check(matches(isDisplayed()))
+                .check(matches(withText("Date")));
+
+        // Verify sort order button is displayed
+        onView(withId(R.id.sortOrder))
+                .check(matches(isDisplayed()))
+                .check(matches(isClickable()));
+
+        // Verify refresh button is displayed
+        onView(withId(R.id.onRefresh))
+                .check(matches(isDisplayed()))
+                .check(matches(isClickable()));
+
+        // Verify grid/list toggle button is displayed
+        onView(withId(R.id.onGridList))
+                .check(matches(isDisplayed()))
+                .check(matches(isClickable()));
+
+        // Verify all bottom navigation tabs are displayed
+        onView(withText("Library"))
+                .check(matches(isDisplayed()));
+        onView(withText("Folder"))
+                .check(matches(isDisplayed()));
+        onView(withText("Recent"))
+                .check(matches(isDisplayed()));
+        onView(withText("Favorites"))
+                .check(matches(isDisplayed()));
+        onView(withText("Bookmarks"))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case 2: Test Bottom Navigation Tab Switching
+     * Validates navigation between different library sections
+     */
+    @Test
+    public void testBottomNavigationTabSwitching() {
+        // Click on Folder tab
+        onView(withText("Folder"))
+                .perform(click());
+        
+        // Verify Folder tab is active (you might need to check specific indicator)
+        onView(withText("Folder"))
+                .check(matches(isDisplayed()));
+
+        // Click on Recent tab
+        onView(withText("Recent"))
+                .perform(click());
+        onView(withText("Recent"))
+                .check(matches(isDisplayed()));
+
+        // Click on Favorites tab
+        onView(withText("Favorites"))
+                .perform(click());
+        onView(withText("Favorites"))
+                .check(matches(isDisplayed()));
+
+        // Click on Bookmarks tab
+        onView(withText("Bookmarks"))
+                .perform(click());
+        onView(withText("Bookmarks"))
+                .check(matches(isDisplayed()));
+
+        // Return to Library tab
+        onView(withText("Library"))
+                .perform(click());
+        onView(withText("Library"))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case 3: Test Search/Filter Functionality
+     * Validates that search field accepts input and filters content
+     */
+    @Test
+    public void testSearchFilterFunctionality() {
+        // Click on filter/search field
+        onView(withId(R.id.filterLine))
+                .perform(click());
+
+        // Type search query
+        onView(withId(R.id.filterLine))
+                .perform(typeText("Test Book"), closeSoftKeyboard());
+
+        // Wait for search to process (you might need to add IdlingResource)
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Clear search field
+        onView(withId(R.id.filterLine))
+                .perform(clearText(), closeSoftKeyboard());
+
+        // Verify field is cleared
+        onView(withId(R.id.filterLine))
+                .check(matches(withText("Find")));
+    }
+
+    /**
+     * Test Case 4: Test Sort Functionality
+     * Validates that sort button is clickable and can change sort options
+     */
+    @Test
+    public void testSortFunctionality() {
+        // Verify initial sort is by Date
+        onView(withId(R.id.sortBy))
+                .check(matches(withText("Date")));
+
+        // Click on sort button to open sort options
+        onView(withId(R.id.sortBy))
+                .perform(click());
+
+        // Note: The actual sort option selection would depend on 
+        // how the sort menu is implemented (dialog, dropdown, etc.)
+        // This test validates the button is clickable
+    }
+
+    /**
+     * Test Case 5: Test Sort Order Toggle
+     * Validates that sort order can be toggled
+     */
+    @Test
+    public void testSortOrderToggle() {
+        // Click sort order button (ascending/descending toggle)
+        onView(withId(R.id.sortOrder))
+                .perform(click());
+
+        // Verify button is still displayed after click
+        onView(withId(R.id.sortOrder))
+                .check(matches(isDisplayed()));
+
+        // Click again to toggle back
+        onView(withId(R.id.sortOrder))
+                .perform(click());
+    }
+
+    /**
+     * Test Case 6: Test Refresh Functionality
+     * Validates that refresh button can be clicked
+     */
+    @Test
+    public void testRefreshFunctionality() {
+        // Click refresh button
+        onView(withId(R.id.onRefresh))
+                .perform(click());
+
+        // Verify recycler view is still displayed after refresh
+        onView(withId(R.id.recyclerView))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case 7: Test Grid/List View Toggle
+     * Validates that view layout can be toggled
+     */
+    @Test
+    public void testGridListViewToggle() {
+        // Click grid/list toggle button
+        onView(withId(R.id.onGridList))
+                .perform(click());
+
+        // Wait for animation
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Verify recycler view is still displayed
+        onView(withId(R.id.recyclerView))
+                .check(matches(isDisplayed()));
+
+        // Toggle back
+        onView(withId(R.id.onGridList))
+                .perform(click());
+    }
+
+    /**
+     * Test Case 8: Test Menu Button Functionality
+     * Validates that menu button opens navigation drawer
+     */
+    @Test
+    public void testMenuButtonOpensDrawer() {
+        // Click menu button
+        onView(withId(R.id.menu2))
+                .perform(click());
+
+        // Verify drawer layout is displayed
+        onView(withId(R.id.drawer_layout))
+                .check(matches(isDisplayed()));
+
+        // Note: To verify drawer actually opened, you might need:
+        // onView(withId(R.id.drawer_layout))
+        //     .check(matches(isDrawerOpen(GravityCompat.START)));
+    }
+
+    /**
+     * Test Case 9: Test Empty Library State
+     * Validates that UI handles empty library correctly
+     */
+    @Test
+    public void testEmptyLibraryState() {
+        // Verify count shows 0 when library is empty
+        onView(withId(R.id.countBooks))
+                .check(matches(withText("0")));
+
+        // Verify recycler view is present even when empty
+        onView(withId(R.id.recyclerView))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case 10: Test UI Elements Are Enabled
+     * Validates that all interactive elements are enabled
+     */
+    @Test
+    public void testAllInteractiveElementsAreEnabled() {
+        // Verify all clickable elements are enabled
+        onView(withId(R.id.menu2))
+                .check(matches(isEnabled()));
+        
+        onView(withId(R.id.filterLine))
+                .check(matches(isEnabled()));
+        
+        onView(withId(R.id.sortBy))
+                .check(matches(isEnabled()));
+        
+        onView(withId(R.id.sortOrder))
+                .check(matches(isEnabled()));
+        
+        onView(withId(R.id.onRefresh))
+                .check(matches(isEnabled()));
+        
+        onView(withId(R.id.onGridList))
+                .check(matches(isEnabled()));
+    }
+
+    /**
+     * Test Case 11: Test Complete User Flow - Browse Library
+     * Validates a typical user interaction flow
+     */
+    @Test
+    public void testCompleteUserFlowBrowseLibrary() {
+        // Step 1: Verify initial state
+        onView(withText("Library"))
+                .check(matches(isDisplayed()));
+
+        // Step 2: Search for a book
+        onView(withId(R.id.filterLine))
+                .perform(click(), typeText("Novel"), closeSoftKeyboard());
+
+        // Step 3: Change sort order
+        onView(withId(R.id.sortBy))
+                .perform(click());
+
+        // Step 4: Toggle view layout
+        onView(withId(R.id.onGridList))
+                .perform(click());
+
+        // Step 5: Refresh content
+        onView(withId(R.id.onRefresh))
+                .perform(click());
+
+        // Step 6: Clear search
+        onView(withId(R.id.filterLine))
+                .perform(clearText());
+
+        // Step 7: Navigate to different tab
+        onView(withText("Favorites"))
+                .perform(click());
+
+        // Step 8: Return to Library
+        onView(withText("Library"))
+                .perform(click());
+    }
+
+    /**
+     * Test Case 12: Test Navigation Between Tabs Maintains State
+     * Validates that switching tabs doesn't crash the app
+     */
+    @Test
+    public void testNavigationBetweenTabsMaintainsState() {
+        // Set a sort option
+        onView(withId(R.id.sortBy))
+                .check(matches(withText("Date")));
+
+        // Navigate to another tab
+        onView(withText("Recent"))
+                .perform(click());
+
+        // Navigate back to Library
+        onView(withText("Library"))
+                .perform(click());
+
+        // Verify sort is still displayed
+        onView(withId(R.id.sortBy))
+                .check(matches(isDisplayed()));
+    }
+}

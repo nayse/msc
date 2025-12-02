@@ -1,0 +1,91 @@
+🎯 Primary Functional Objective of the Screen
+
+This screen is for creating and editing a text note file (.txt).
+The user can:
+
+Enter or modify text in the content area.
+
+Save the note.
+
+Undo/redo changes.
+
+Insert metadata (timestamps, dates, location).
+
+Toggle formatting options (Markdown, styles).
+
+Perform auxiliary actions (expand text, draw, etc.).
+
+Essentially, it is a note editor with support for basic editing and metadata insertion.
+
+🧪 GUI Intentional Tests
+Test 1: Create and Save a Note
+
+Objective: Verify that a user can create and save a note.
+
+Tap inside the content text field.
+
+Type text (e.g., "This is a test note.").
+
+Press Save (floppy disk icon).
+
+Validate that the note is saved with filename "New Note (2).txt" or user-modified name.
+
+Test 2: Undo/Redo Editing
+
+Objective: Ensure undo/redo functionality works correctly.
+
+Enter "Hello World".
+
+Delete "World".
+
+Press Undo → Verify "Hello World" reappears.
+
+Press Redo → Verify "Hello" is restored without "World".
+
+Test 3: Insert Metadata
+
+Objective: Check insertion of automatic content.
+
+Tap Timestamp button (clock icon) → Verify current time is inserted.
+
+Tap Datestamp button (calendar icon) → Verify today’s date is inserted.
+
+Tap Location button (pin icon) → Verify location text/coordinates are inserted.
+
+Test 4: Toggle Markdown Mode
+
+Objective: Ensure formatting mode works.
+
+Enter text: "**bold** _italic_ [link](url)".
+
+Tap Markdown icon (</>).
+
+Validate preview mode correctly renders bold, italic, and link formatting.
+
+Test 5: Expand and Draw Features
+
+Objective: Validate auxiliary editing tools.
+
+Tap Text Expand button → Verify text editor expands or zooms.
+
+Tap Draw button (paint icon) → Verify a drawing canvas is opened and input is possible.
+
+Test 6: Title Editing
+
+Objective: Ensure note title can be modified.
+
+Tap the title text field (New Note (2).txt).
+
+Rename to "MeetingNotes.txt".
+
+Save the file → Validate it is stored with the new filename.
+
+Test 7: Exit Without Saving
+
+Objective: Validate user prompt when leaving unsaved changes.
+
+Type "Unsaved content".
+
+Press Back arrow (top left).
+
+Validate that a prompt appears asking to save/discard/cancel.

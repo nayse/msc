@@ -1,0 +1,60 @@
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.hamcrest.Matchers.allOf
+
+@RunWith(AndroidJUnit4::class)
+class NoteEditorCoreFunctionalityTest {
+
+    // Assuming your activity is called 'NoteEditorActivity' and is the starting screen
+    // You would replace 'YourActivity' with the actual Activity class name.
+    // @get:Rule
+    // var activityRule: ActivityScenarioRule<YourActivity> = ActivityScenarioRule(YourActivity::class.java)
+
+    /**
+     * Test case to validate the core functionality:
+     * 1. Change the note title.
+     * 2. Input content into the note body.
+     * 3. Click the save button.
+     */
+    @Test
+    fun testNoteCreationAndSaving() {
+        val newTitle = "My First Espresso Note"
+        val newContent = "This is the content of the note, validated by an automated test."
+
+        // 1. Change the note title (using the edit_title tag/id)
+        onView(withId(R.id.edit_title)) // Assuming 'edit_title' is the resource ID for the title TextField
+            .perform(clearText(), typeText(newTitle), closeSoftKeyboard())
+
+        // Verification: Check if the title text was successfully set
+        onView(withId(R.id.edit_title))
+            .check(matches(withText(newTitle)))
+
+        // 2. Input content into the note body (using the edit_content tag/id)
+        onView(withId(R.id.edit_content)) // Assuming 'edit_content' is the resource ID for the content TextField
+            .perform(clearText(), typeText(newContent), closeSoftKeyboard())
+
+        // Verification: Check if the content text was successfully set
+        onView(withId(R.id.edit_content))
+            .check(matches(withText(newContent)))
+
+        // 3. Click the save button (using the button_save tag/id, text="")
+        // We use both withId (if available) and the content description (or text) for robustness
+        onView(allOf(
+                withId(R.id.button_save), // Assuming 'button_save' is the resource ID
+                withText("") // Matching by the visible text/icon character
+            ))
+            .perform(click())
+
+        // Asserting a successful save often requires verifying a post-save state change,
+        // such as the activity closing, a Snackbar/Toast appearing, or a list updating.
+        // For simplicity and focusing on the screen's action, we assume the save action completes successfully.
+        // A full test would add an assertion here, e.g., onView(withText("Note saved")).check(matches(isDisplayed()))
+    }
+}

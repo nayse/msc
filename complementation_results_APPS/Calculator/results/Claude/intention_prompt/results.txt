@@ -1,0 +1,97 @@
+GUI Intentional Tests
+Test 1: Complete Correct Answer Submission
+Objective: Verify user can successfully answer a multiplication problem correctly
+Actions:
+
+Verify problem "7 * 3 =" is displayed
+Tap button "2"
+Tap button "1"
+Verify "21" appears in answer field
+Tap ">" button to submit
+Verify progress bar advances or new problem appears
+
+Expected Result: Answer is accepted, progress updates, and next problem is shown
+Test 2: Incorrect Answer Submission
+Objective: Validate system handles incorrect answers appropriately
+Actions:
+
+Verify problem "7 * 3 =" is displayed
+Tap button "2"
+Tap button "0"
+Verify "20" appears in answer field
+Tap ">" button to submit
+Observe feedback (error indication, retry prompt, etc.)
+
+Expected Result: System indicates incorrect answer and allows retry
+Test 3: Answer Correction Using Backspace
+Objective: Test the backspace functionality for correcting input errors
+Actions:
+
+Verify problem "7 * 3 =" is displayed
+Tap button "2"
+Tap button "2"
+Verify "22" appears in answer field
+Tap "<" button once
+Verify "2" remains in answer field
+Tap button "1"
+Verify "21" appears in answer field
+Tap ">" button to submit
+
+Expected Result: Backspace removes last digit, correct answer can be entered and submitted
+Test 4: Multi-digit Answer Entry
+Objective: Verify the system accepts multi-digit answers correctly
+Actions:
+
+Observe current problem "7 * 3 ="
+Tap button "2"
+Tap button "1"
+Verify both digits appear in answer field sequentially
+Tap ">" button
+
+Expected Result: Both digits are captured and answer is processed correctly
+Test 5: Clear All Input
+Objective: Test clearing entire answer using backspace repeatedly
+Actions:
+
+Tap button "2"
+Tap button "1"
+Verify "21" in answer field
+Tap "<" button twice
+Verify answer field is empty
+Tap button "2"
+Tap button "1"
+Tap ">" button
+
+Expected Result: All digits can be removed and re-entered successfully
+Test 6: Progress Tracking
+Objective: Verify progress bar updates as problems are completed
+Actions:
+
+Note initial progress bar state
+Enter correct answer "21"
+Tap ">" button
+Observe progress bar advancement
+Complete additional problems
+Verify progress bar continues to advance
+
+Expected Result: Progress bar visually indicates completion percentage through the quiz
+Test 7: Zero Answer Entry
+Objective: Test entering zero as an answer (for problems like 0*7)
+Actions:
+
+Wait for a problem with zero as answer or observe current problem
+Tap button "0"
+Verify "0" appears in answer field
+Tap ">" button
+
+Expected Result: Single zero digit is accepted as valid input
+Test 8: Rapid Button Tapping
+Objective: Validate system handles rapid consecutive inputs
+Actions:
+
+Quickly tap button "2" three times
+Verify appropriate number of digits appear (may vary by design)
+Use "<" to clear
+Enter correct answer normally
+
+Expected Result: System either captures all rapid inputs or implements appropriate input throttling

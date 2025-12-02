@@ -1,0 +1,112 @@
+GUI Intentional Tests
+Test Case 1: Basic Library Navigation
+Objective: Verify user can navigate between different library sections
+Actions:
+1. Launch application (currently on Library tab)
+2. Tap on "Folder" tab at bottom
+3. Tap on "Recent" tab
+4. Tap on "Favorites" tab
+5. Tap on "Bookmarks" tab
+6. Return to "Library" tab
+
+Expected Result: Each tab should display its respective content, with the active tab highlighted in the bottom navigation bar.
+Test Case 2: Search and Filter Books
+Objective: Validate search functionality to find specific books
+Actions:
+1. Start from Library tab
+2. Tap on "Find" search field
+3. Enter search term "Harry Potter"
+4. Verify search results update in real-time
+5. Check that countBooks updates to show number of results
+6. Clear search field
+7. Verify all books are displayed again
+
+Expected Result: Search should filter books by title/author, count should update accordingly, and clearing search should restore full library view.
+Test Case 3: Sort Library by Different Criteria
+Objective: Test sorting functionality to organize books
+Actions:
+1. Verify current sort is "Date"
+2. Tap on "Date" sort button
+3. Select "Title" from sort options
+4. Tap sort order button (ascending/descending toggle)
+5. Verify books reorder accordingly
+6. Change sort to "Author"
+7. Change sort to "Recent"
+
+Expected Result: Books should reorder based on selected criteria, and sort order should toggle between ascending and descending.
+Test Case 4: Change View Layout
+Objective: Verify grid/list view toggle functionality
+Actions:
+1. Note current view layout (appears to be grid)
+2. Tap on grid/list toggle button (top-right)
+3. Verify view changes to list layout
+4. Tap toggle button again
+5. Verify view changes back to grid layout
+
+Expected Result: View should toggle between grid and list layouts, with appropriate visual changes in how books are displayed.
+Test Case 5: Refresh Library Content
+Objective: Test refresh functionality to update library
+Actions:
+1. From Library tab
+2. Tap the refresh button (circular arrows icon)
+3. Observe loading indicator (if any)
+4. Verify library content updates
+5. Check that newly added books appear
+6. Verify countBooks is accurate
+
+Expected Result: Library should refresh and display any new or updated content, with appropriate loading feedback.
+Test Case 6: Access Menu Options
+Objective: Verify menu functionality and available options
+Actions:
+1. Tap hamburger menu button (top-left)
+2. Verify navigation drawer opens
+3. Review available menu options
+4. Select an option (e.g., Settings)
+5. Navigate back to Library
+6. Close menu by tapping outside or back button
+
+Expected Result: Menu should slide in from left, display available options, and allow navigation to different app sections.
+Test Case 7: Empty Library State Handling
+Objective: Verify behavior when no books are present
+Actions:
+1. Ensure library is empty (countBooks shows "0")
+2. Verify appropriate empty state message/graphic
+3. Try using search function
+4. Try changing sort options
+5. Try refreshing
+6. Attempt to add a book via menu
+
+Expected Result: App should display helpful empty state messaging, gracefully handle operations when no content exists, and guide user to add books.
+Test Case 8: Filter and Sort Combination
+Objective: Test combined search and sort functionality
+Actions:
+1. Enter search term in Find field
+2. While search is active, change sort to "Title"
+3. Toggle sort order
+4. Add another search filter
+5. Clear search while maintaining sort preference
+6. Verify sort persists after search is cleared
+
+Expected Result: Search filtering and sorting should work independently and in combination, with sort preferences persisting across filter changes.
+Test Case 9: Navigation Tab Persistence
+Objective: Verify tab states are maintained correctly
+Actions:
+1. Navigate to "Recent" tab
+2. Apply a sort preference
+3. Navigate to "Favorites" tab
+4. Return to "Recent" tab
+5. Verify sort preference is maintained
+6. Navigate to "Library" tab
+7. Check if different tabs maintain independent states
+
+Expected Result: Each tab should remember its own sort/filter state when navigating between tabs.
+Test Case 10: Quick Actions Accessibility
+Objective: Validate all toolbar buttons are functional
+Actions:
+1. Tap each toolbar button in sequence: menu, find, sort, sort order, refresh, view toggle
+2. Verify each button provides appropriate feedback
+3. Verify each button performs its intended function
+4. Test rapid successive taps on each button
+5. Verify no crashes or unexpected behavior
+
+Expected Result: All toolbar buttons should be responsive, provide visual feedback on interaction, and execute their functions without errors.

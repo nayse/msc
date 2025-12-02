@@ -1,0 +1,88 @@
+✅ GUI Intentional Test Scenarios
+1. Basic Multiplication Test
+
+Action Sequence:
+
+Tap 7
+
+Tap *
+
+Tap 3
+
+Tap =
+
+Expected Result: Display shows 21.
+
+2. Zero Multiplication
+
+Action Sequence:
+
+Tap 0
+
+Tap *
+
+Tap 8
+
+Tap =
+
+Expected Result: Display shows 0.
+
+3. Multi-digit Input
+
+Action Sequence:
+
+Tap 1 → 2
+
+Tap *
+
+Tap 3 → 4
+
+Tap =
+
+Expected Result: Display shows 408 (12 * 34).
+
+4. Backspace Functionality
+
+Action Sequence:
+
+Tap 9 → 8 → 7
+
+Tap < (once)
+
+Expected Result: Display shows 98.
+
+5. Chain Calculation (if supported)
+
+Action Sequence:
+
+Tap 2
+
+Tap *
+
+Tap 5
+
+Tap = (result 10)
+
+Tap *
+
+Tap 3
+
+Tap =
+
+Expected Result: Display shows 30.
+
+6. Boundary Test (Large Numbers)
+
+Action Sequence:
+
+Input multiple digits (e.g., 99999)
+
+Multiply by another large number (e.g., 99999)
+
+Tap =
+
+Expected Result: Display handles large result or shows an error if beyond limit.
+
+👉 These intentional tests validate that the calculator screen fulfills its primary function: accepting numeric input, performing multiplication, handling corrections, and displaying results.
+
+Do you want me to expand the test plan to cover all arithmetic operations (+, -, /) (assuming the app supports them), or should I keep it focused on multiplication as shown?

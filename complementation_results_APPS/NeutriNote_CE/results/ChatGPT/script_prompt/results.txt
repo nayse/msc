@@ -1,0 +1,40 @@
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.espresso.action.ViewActions;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.*;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.*;
+
+@RunWith(AndroidJUnit4.class)
+public class NoteEditorTest {
+
+    @Rule
+    public ActivityTestRule<MainActivity> activityRule =
+            new ActivityTestRule<>(MainActivity.class);
+
+    @Test
+    public void testCreateAndSaveNote() {
+        // Step 1: Clear and edit the note title
+        onView(withId(R.id.edit_title))
+                .perform(clearText(), typeText("TestNote.txt"), closeSoftKeyboard());
+
+        // Step 2: Enter note content
+        onView(withId(R.id.edit_content))
+                .perform(clearText(), typeText("This is my test note."), closeSoftKeyboard());
+
+        // Step 3: Save the note
+        onView(withId(R.id.button_save)).perform(click());
+
+        // Step 4: Verify that the note title and content are correctly displayed
+        onView(withId(R.id.edit_title))
+                .check(matches(withText("TestNote.txt")));
+        onView(withId(R.id.edit_content))
+                .check(matches(withText("This is my test note.")));
+    }
+}

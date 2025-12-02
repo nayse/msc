@@ -1,0 +1,63 @@
+GUI Intentional Tests & Action Sequences:
+
+Here are some test cases designed to validate the core functionality, with increasing complexity:
+
+Test 1: Basic Addition
+
+Objective: Verify addition functionality.
+Actions:
+Click "7" button. (Verify '7' appears in the display)
+Click "+" button (Not present in the provided data, assuming it exists).
+Click "3" button. (Verify '3' appears in the display)
+Click "=" button. (Verify result '10' appears in the display)
+Test 2: Basic Multiplication
+
+Objective: Verify multiplication functionality.
+Actions:
+Click "7" button.
+Click "*" button.
+Click "3" button.
+Click "=" button. (Verify result '21' appears in the display)
+Test 3: Mixed Operations (Order of Operations)
+
+Objective: Verify correct order of operations.
+Actions:
+Click "7" button.
+Click "*" button.
+Click "3" button.
+Click "+" button.
+Click "2" button.
+Click "=" button. (Verify result '23' appears in the display)
+Test 4:  Using Less Than and Greater Than Operators
+
+Objective: Verify functionality of less than/greater than operators.
+Actions:
+Click "7" button.
+Click "<" button.
+Click "8" button.
+Click "=" button. (Verify result 'false' or equivalent appears in the display)
+Click "7" button.
+Click ">" button.
+Click "6" button.
+Click "=" button. (Verify result 'true' or equivalent appears in the display)
+Test 5:  Zero Division Error Handling
+
+Objective: Verify error handling when attempting to divide by zero.
+Actions:
+Click "7" button.
+Click "/" button (Not present in provided data, assuming it exists).
+Click "0" button.
+Click "=" button. (Verify an appropriate error message appears - e.g., "Division by zero")
+Test 6:  Multiple Operations and Clearing
+
+Objective: Verify the ability to perform multiple operations and clear the display.
+Actions:
+Click "7" button.
+Click "*" button.
+Click "3" button.
+Click "=" button. (Verify result '21' appears)
+Click "<" button. (Verify the display clears or returns to 0).
+Click "7" button.
+Click "+" button.
+Click "3" button.
+Click "=" button. (Verify result '10' appears)

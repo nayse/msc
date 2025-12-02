@@ -1,0 +1,48 @@
+GUI Intentional Tests for Validation
+The main purpose of the screen is to allow the user to make a selection using a variety of filters (numbered regions, named regions, and transport types). The logical sequence of user actions should test the interactivity of these elements, ensuring that selecting them leads to a predictable and meaningful change in the app's state, likely a visual indication of selection/filtering.
+
+Test ID	Objective	Pre-conditions	User Actions (Steps)	Expected Result
+TEST_01	Validate Single Area Selection by Number	Screen is open, no filter is currently active.	
+1. Click on the 
+
+Text with tag "1" and text "1" (bounds="[926,865][1138,1035]").
+
+The element "1" should show a visual state change (e.g., highlighting, color change) to indicate it's selected. The other numbered areas should remain unselected.
+TEST_02	Validate Single Area Selection by Colored Button	Screen is open, no filter is currently active.	
+1. Click on the 
+
+View with tag "View" corresponding to "3" (bounds="[637,1640][805,1780]").
+
+The selected button ("3") should show a visual state change. The corresponding area "3" on the map might also be highlighted.
+TEST_03	Validate Named Area Selection	Screen is open, no filter is currently active.	
+1. Click on the 
+
+View with tag "View" for "Alto Garda" (bounds="[531,1948][885,2116]").
+
+The "Alto Garda" button should visually indicate selection. The corresponding area on the map should highlight if the map view is dynamic.
+TEST_04	Validate Transport Mode Selection	Screen is open, no filter is currently active.	
+1. Click on the 
+
+View with tag "View" for "Funicular" (bounds="[608,2256][934,2424]").
+
+The "Funicular" button should visually indicate selection.
+TEST_05	Validate Exclusive Selection (if applicable)	
+Screen is open, 
+
+Area 1 (Text tag="1", bounds="[926,865][1138,1035]") is already selected.
+
+1. Click on the 
+
+Text with tag "4" and text "4" (bounds="[775,1106][987,1276]").
+
+Area 4 should visually indicate selection. Area 1 should revert to an unselected state, confirming only one geographical area can be active at a time.
+TEST_06	Validate "All" Transport Selection	
+Screen is open, 
+
+Railway mode is selected (View bounds="[298,2256][594,2424]").
+
+1. Click on the 
+
+View with tag "View" for "All" (bounds="[948,2256][1143,2424]").
+
+The "All" button should visually indicate selection. The "Railway" button should revert to an unselected state. The filter on the map should reset to show all transport options.

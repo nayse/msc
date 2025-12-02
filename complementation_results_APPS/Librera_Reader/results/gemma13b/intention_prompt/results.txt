@@ -1,0 +1,47 @@
+Test Case 1: Basic Search Functionality
+
+ID: TC_001
+Description: Verify search functionality returns expected results.
+Actions:
+Click on the "Find" text field.
+Enter a valid search term (e.g., "Fiction").
+Press Enter/Submit or click the Search button (if present).
+Expected Result: The recyclerView displays items matching the search term ("Fiction"). The count of books should be greater than 0.
+Test Case 2: Sorting by Date
+
+ID: TC_002
+Description: Verify sorting functionality works correctly.
+Actions:
+Click on the "Date" dropdown/selector.
+Select a sort order (e.g., "Newest to Oldest").
+Expected Result: The items in the recyclerView are sorted by date, with the newest items appearing first.
+Test Case 3: Navigation between Categories
+
+ID: TC_003
+Description: Verify navigation between different categories (Library, Folder, Recent, Favorites, Bookmarks).
+Actions:
+Click on "Folder" tab.
+Verify the content displayed in recyclerView changes to show items within the "Folder" category.
+Click on "Recent" tab.
+Verify the content displayed in recyclerView changes to show recently accessed items.
+Expected Result: The content of the recyclerView dynamically updates to reflect the selected category, showing appropriate items for each category.
+Test Case 4: Refresh and Grid List Display
+
+ID: TC_004
+Description: Verify that the display format can be changed between list and grid view.
+Actions:
+Click on "onRefresh" button.
+Verify the content displayed in recyclerView changes to a list view.
+Click on "onGridList" button.
+Verify the content displayed in recyclerView changes to a grid view.
+Expected Result: The display format of the recyclerView dynamically updates between list and grid views.
+Test Case 5: Verify Count of Books
+
+ID: TC_005
+Description: Verify that the count of books is displayed correctly.
+Actions:
+Add a book to the library.
+Verify the text "countBooks" changes to 1.
+Add another book to the library.
+Verify the text "countBooks" changes to 2.
+Expected Result: The count of books is displayed correctly and updates as books are added or removed from the library.

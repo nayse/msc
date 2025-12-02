@@ -1,0 +1,67 @@
+import androidx.annotation.UiThread
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.ViewInteraction
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class CalculatorTest {
+
+    @UiThread
+    fun waitForUiToLoad() {
+        // Add a small delay to allow UI elements to load
+        Thread.sleep(1000) // Adjust as needed
+    }
+
+
+    @Test
+    fun testAddition() {
+        waitForUiToLoad()
+        Espresso.onView(withId(R.id.button_7))  // Assuming button IDs are like this, adjust accordingly
+            .perform(ViewActions.click())
+        Espresso.onView(withId(R.id.button_plus)) // Assuming a plus button exists
+            .perform(ViewActions.click())
+        Espresso.onView(withId(R.id.button_3))
+            .perform(ViewActions.click())
+        Espresso.onView(withId(R.id.button_equals))
+            .perform(ViewActions.click())
+
+        Espresso.onView(withId(R.id.resultTextView)) // Assuming a TextView for the result
+            .check(ViewAssertions.matches(withText("10")))  // Check if the result is 10
+    }
+
+    @Test
+    fun testMultiplication() {
+        waitForUiToLoad()
+        Espresso.onView(withId(R.id.button_7))
+            .perform(ViewActions.click())
+        Espresso.onView(withId(R.id.button_multiply)) // Assuming a multiply button exists
+            .perform(ViewActions.click())
+        Espresso.onView(withId(R.id.button_3))
+            .perform(ViewActions.click())
+        Espresso.onView(withId(R.id.button_equals))
+            .perform(ViewActions.click())
+
+        Espresso.onView(withId(R.id.resultTextView))
+            .check(ViewAssertions.matches(withText("21")))
+    }
+
+    @Test
+    fun testDivisionByZero() {
+        waitForUiToLoad()
+        Espresso.onView(withId(R.id.button_7))
+            .perform(ViewActions.click())
+        Espresso.onView(withId(R.id.button_divide)) // Assuming a divide button exists
+            .perform(ViewActions.click())
+        Espresso.onView(withId(R.id.button_0))
+            .perform(ViewActions.click())
+        Espresso.onView(withId(R.id.button_equals))
+            .perform(ViewActions.click())
+
+        Espresso.onView(withId(R.id.resultTextView))
+            .check(ViewAssertions.matches(withText("Error: Division by zero"))) // Adjust the expected error message
+    }
+}

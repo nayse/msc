@@ -1,0 +1,52 @@
+3. GUI Intentional Test Scenarios
+
+Here’s a structured set of tests to validate the screen’s main functionality.
+
+A. Region Selection
+
+Action: Tap region "1" on the map.
+Expectation: Only data for region 1 should be highlighted/displayed.
+
+Action: Tap region button "2" in the legend.
+Expectation: Map highlights area 2; content updates to region 2.
+
+Action: Tap multiple regions in sequence (e.g., "3", then "6").
+Expectation: Last selected region becomes active; prior selection is deselected.
+
+Action: Tap the same region again.
+Expectation: Region selection toggles off (returns to default or "All").
+
+B. City Selection
+
+Action: Tap “Pergine”.
+Expectation: Only information related to Pergine is shown.
+
+Action: Tap “Rovereto”, then “Trento”.
+Expectation: City filter updates accordingly; only one city is active at a time.
+
+C. Transport Mode Filters
+
+Action: Tap “Railway”.
+Expectation: Only railway routes appear.
+
+Action: Tap “Funicular”.
+Expectation: Only funicular routes appear.
+
+Action: Tap “All”.
+Expectation: All transport modes are shown again.
+
+D. Combined Filters
+
+Action: Select Region 4 + City “Trento” + Transport “Railway”.
+Expectation: Results filtered by region 4, city Trento, and railway only.
+
+Action: Change transport filter from “Railway” to “Funicular” without changing region.
+Expectation: View updates instantly, keeping region filter intact.
+
+E. Reset & Navigation
+
+Action: Open “Selected area” dropdown in top bar.
+Expectation: User can reset or choose a global “All” option.
+
+Action: Tap filter icon (top-right).
+Expectation: Additional filtering/sorting options appear (or panel expands).

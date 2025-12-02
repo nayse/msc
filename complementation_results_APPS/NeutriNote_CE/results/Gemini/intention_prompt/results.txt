@@ -1,0 +1,36 @@
+GUI Intentional Tests for Note Creation and Editing
+The following intentional tests validate the main purpose of the screen by performing a sequence of user actions that simulate creating and editing a note.
+
+Test 1: Successful Note Creation, Content Input, and Saving
+This test verifies the user's ability to input a title and content into the note and then successfully save the note.
+
+Step	Action	UI Element	Expected Outcome
+1	Type "Meeting Notes"	TextField (tag="edit_title", text="New Note (2).txt")	The note title field should display "Meeting Notes".
+2	Type "Discussed Q4 plans."	TextField (tag="edit_content", text="Content")	The note content field should display "Discussed Q4 plans."
+3	Click	Button (tag="button_save", text="")	The application should save the note content and title. A confirmation message (e.g., "Note saved") might appear, or the screen should return to a previous view (e.g., a list of notes).
+
+Exportar para as Planilhas
+Test 2: Using Editing/Formatting Tools (Undo and Redo)
+This test validates the functionality of common editing tools like Undo and Redo, which are crucial for content manipulation.
+
+Step	Action	UI Element	Expected Outcome
+1	Type "Initial text."	TextField (tag="edit_content")	The content field displays "Initial text."
+2	Click	Button (tag="button_undo", text="")	The text "Initial text." should be removed from the content field (undoing the typing action). The field may become empty, depending on the number of undo levels.
+3	Click	Button (tag="button_redo", text="")	The text "Initial text." should reappear in the content field (redoing the typing action).
+
+Exportar para as Planilhas
+Test 3: Inserting a Stamp (Timestamp/Datestamp)
+This test confirms that the application can insert dynamic information, such as a timestamp, into the note content, a common feature in note-taking apps.
+
+Step	Action	UI Element	Expected Outcome
+1	Type "Note started at: "	TextField (tag="edit_content")	The content field displays "Note started at: "
+2	Click	Button (tag="button_timestamp", text="")	The current time should be inserted into the content field immediately following "Note started at: ".
+3	Click	Button (tag="button_datestamp", text="")	The current date should be inserted into the content field.
+
+Exportar para as Planilhas
+Test 4: Toggling Markdown View
+This test verifies the functionality to switch between a standard editing view and a view optimized for Markdown, indicating support for rich-text formatting.
+
+Step	Action	UI Element	Expected Outcome
+1	Click	Text (tag="menu_markdown_view")	The note's content view should toggle to a Markdown rendering or editing mode. The icon/text might change to indicate the current mode.
+2	Click	Button (tag="button_markdown", text="")	Clicking the specific markdown button at the bottom should provide text formatting options (e.g., bold, italic) using markdown syntax (e.g., **text**).

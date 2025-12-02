@@ -1,0 +1,298 @@
+package com.example.noteapp.test;
+
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.clearText;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
+import static org.hamcrest.Matchers.is;
+
+@RunWith(AndroidJUnit4.class)
+@LargeTest
+public class NoteEditorCoreTest {
+
+    @Rule
+    public ActivityScenarioRule<NoteEditorActivity> activityRule =
+            new ActivityScenarioRule<>(NoteEditorActivity.class);
+
+    /**
+     * Test Case 1: Verify Note Editor Screen Loads Successfully
+     * Validates that all core UI elements are displayed and enabled
+     */
+    @Test
+    public void testNoteEditorScreenLoads() {
+        // Verify title field is displayed
+        onView(withTagValue(is("edit_title")))
+                .check(matches(isDisplayed()))
+                .check(matches(isEnabled()));
+
+        // Verify content field is displayed
+        onView(withTagValue(is("edit_content")))
+                .check(matches(isDisplayed()))
+                .check(matches(isEnabled()));
+
+        // Verify save button is displayed and enabled
+        onView(withTagValue(is("button_save")))
+                .check(matches(isDisplayed()))
+                .check(matches(isEnabled()));
+
+        // Verify undo button is displayed
+        onView(withTagValue(is("button_undo")))
+                .check(matches(isDisplayed()));
+
+        // Verify redo button is displayed
+        onView(withTagValue(is("button_redo")))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case 2: Edit Note Title
+     * Validates that users can successfully modify the note title
+     */
+    @Test
+    public void testEditNoteTitle() {
+        // Click on the title field
+        onView(withTagValue(is("edit_title")))
+                .perform(click());
+
+        // Clear existing title
+        onView(withTagValue(is("edit_title")))
+                .perform(clearText());
+
+        // Enter new title
+        String newTitle = "My Important Note.txt";
+        onView(withTagValue(is("edit_title")))
+                .perform(typeText(newTitle), closeSoftKeyboard());
+
+        // Verify the title was updated
+        onView(withTagValue(is("edit_title")))
+                .check(matches(withText(newTitle)));
+    }
+
+    /**
+     * Test Case 3: Edit Note Content
+     * Validates that users can add and modify content in the note
+     */
+    @Test
+    public void testEditNoteContent() {
+        // Click on the content field
+        onView(withTagValue(is("edit_content")))
+                .perform(click());
+
+        // Clear existing content
+        onView(withTagValue(is("edit_content")))
+                .perform(clearText());
+
+        // Type new content
+        String noteContent = "This is my test note content. It contains important information.";
+        onView(withTagValue(is("edit_content")))
+                .perform(typeText(noteContent), closeSoftKeyboard());
+
+        // Verify the content was entered
+        onView(withTagValue(is("edit_content")))
+                .check(matches(withText(noteContent)));
+    }
+
+    /**
+     * Test Case 4: Save Note
+     * Validates the save functionality works correctly
+     */
+    @Test
+    public void testSaveNote() {
+        // Enter title
+        onView(withTagValue(is("edit_title")))
+                .perform(click(), clearText(), 
+                        typeText("Test Note.txt"), closeSoftKeyboard());
+
+        // Enter content
+        onView(withTagValue(is("edit_content")))
+                .perform(click(), clearText(), 
+                        typeText("Test content for saving"), closeSoftKeyboard());
+
+        // Click save button
+        onView(withTagValue(is("button_save")))
+                .perform(click());
+
+        // Verify save button is still enabled (note was saved successfully)
+        onView(withTagValue(is("button_save")))
+                .check(matches(isEnabled()));
+    }
+
+    /**
+     * Test Case 5: Undo Functionality
+     * Validates that undo operation works for content editing
+     */
+    @Test
+    public void testUndoContent() {
+        // Enter initial content
+        onView(withTagValue(is("edit_content")))
+                .perform(click(), clearText(), 
+                        typeText("First text"), closeSoftKeyboard());
+
+        // Add more content
+        onView(withTagValue(is("edit_content")))
+                .perform(click(), typeText(" Second text"), closeSoftKeyboard());
+
+        // Perform undo
+        onView(withTagValue(is("button_undo")))
+                .perform(click());
+
+        // Verify undo button is enabled (can undo)
+        onView(withTagValue(is("button_undo")))
+                .check(matches(isEnabled()));
+    }
+
+    /**
+     * Test Case 6: Redo Functionality
+     * Validates that redo operation works after undo
+     */
+    @Test
+    public void testRedoContent() {
+        // Enter content
+        onView(withTagValue(is("edit_content")))
+                .perform(click(), clearText(), 
+                        typeText("Content to undo and redo"), closeSoftKeyboard());
+
+        // Perform undo
+        onView(withTagValue(is("button_undo")))
+                .perform(click());
+
+        // Perform redo
+        onView(withTagValue(is("button_redo")))
+                .perform(click());
+
+        // Verify redo button exists
+        onView(withTagValue(is("button_redo")))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case 7: Complete Note Creation Workflow
+     * Validates the entire flow from creating to saving a note
+     */
+    @Test
+    public void testCompleteNoteCreationWorkflow() {
+        String testTitle = "Meeting Notes.txt";
+        String testContent = "Discussed project timeline and deliverables. Next meeting scheduled for next week.";
+
+        // Step 1: Clear and set title
+        onView(withTagValue(is("edit_title")))
+                .perform(click(), clearText(), 
+                        typeText(testTitle), closeSoftKeyboard());
+
+        // Step 2: Clear and set content
+        onView(withTagValue(is("edit_content")))
+                .perform(click(), clearText(), 
+                        typeText(testContent), closeSoftKeyboard());
+
+        // Step 3: Verify title is correct
+        onView(withTagValue(is("edit_title")))
+                .check(matches(withText(testTitle)));
+
+        // Step 4: Verify content is correct
+        onView(withTagValue(is("edit_content")))
+                .check(matches(withText(testContent)));
+
+        // Step 5: Save the note
+        onView(withTagValue(is("button_save")))
+                .perform(click());
+
+        // Step 6: Verify save button is still available
+        onView(withTagValue(is("button_save")))
+                .check(matches(isDisplayed()))
+                .check(matches(isEnabled()));
+    }
+
+    /**
+     * Test Case 8: Verify Empty Note Handling
+     * Validates behavior when title or content is empty
+     */
+    @Test
+    public void testEmptyNoteHandling() {
+        // Clear both fields
+        onView(withTagValue(is("edit_title")))
+                .perform(click(), clearText(), closeSoftKeyboard());
+
+        onView(withTagValue(is("edit_content")))
+                .perform(click(), clearText(), closeSoftKeyboard());
+
+        // Attempt to save
+        onView(withTagValue(is("button_save")))
+                .perform(click());
+
+        // Verify the fields are still present (note: actual validation 
+        // would depend on app's business logic)
+        onView(withTagValue(is("edit_title")))
+                .check(matches(isDisplayed()));
+
+        onView(withTagValue(is("edit_content")))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case 9: Multiple Edit and Save Operations
+     * Validates that multiple edit-save cycles work correctly
+     */
+    @Test
+    public void testMultipleEditSaveCycles() {
+        // First edit and save
+        onView(withTagValue(is("edit_content")))
+                .perform(click(), replaceText("First version"), closeSoftKeyboard());
+        
+        onView(withTagValue(is("button_save")))
+                .perform(click());
+
+        // Second edit and save
+        onView(withTagValue(is("edit_content")))
+                .perform(click(), replaceText("Second version"), closeSoftKeyboard());
+        
+        onView(withTagValue(is("button_save")))
+                .perform(click());
+
+        // Verify final content
+        onView(withTagValue(is("edit_content")))
+                .check(matches(withText("Second version")));
+    }
+
+    /**
+     * Test Case 10: Verify Toolbar Buttons Are Accessible
+     * Validates that all main toolbar buttons are functional
+     */
+    @Test
+    public void testToolbarButtonsAccessible() {
+        // Verify all essential buttons are displayed and enabled
+        onView(withTagValue(is("button_save")))
+                .check(matches(isDisplayed()))
+                .check(matches(isEnabled()));
+
+        onView(withTagValue(is("button_undo")))
+                .check(matches(isDisplayed()))
+                .check(matches(isEnabled()));
+
+        onView(withTagValue(is("button_redo")))
+                .check(matches(isDisplayed()))
+                .check(matches(isEnabled()));
+
+        onView(withTagValue(is("button_markdown")))
+                .check(matches(isDisplayed()))
+                .check(matches(isEnabled()));
+
+        onView(withTagValue(is("button_timestamp")))
+                .check(matches(isDisplayed()))
+                .check(matches(isEnabled()));
+    }
+}

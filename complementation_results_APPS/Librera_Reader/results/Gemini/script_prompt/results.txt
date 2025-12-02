@@ -1,0 +1,96 @@
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import android.widget.TextView
+
+@RunWith(AndroidJUnit4::class)
+class HomeScreenCoreFunctionalityTest {
+
+    // Assuming the Activity that hosts this screen is named MainActivity
+    @get:Rule
+    val activityRule = ActivityScenarioRule(MainActivity::class.java)
+
+    /**
+     * Validates navigation by clicking the main bottom tabs and checking
+     * if the text or state of the tab is correctly displayed.
+     */
+    @Test
+    fun testBottomNavigationTabs() {
+        // 1. Navigate to the 'Folder' tab
+        onView(withText("Folder")) // Folder tab has Text(tag="Folder", text="Folder") 
+            .perform(click())
+            .check(matches(isDisplayed()))
+
+        // 2. Navigate to the 'Recent' tab
+        onView(withText("Recent")) // Recent tab has Text(tag="Recent", text="Recent") 
+            .perform(click())
+            .check(matches(isDisplayed()))
+
+        // 3. Navigate to the 'Favorites' tab
+        onView(withText("Favorites")) // Favorites tab has Text(tag="Favorites", text="Favorites") 
+            .perform(click())
+            .check(matches(isDisplayed()))
+
+        // 4. Navigate back to 'Library' (Default/Home)
+        onView(withText("Library")) // Library tab has Text(tag="Library", text="Library") 
+            .perform(click())
+            .check(matches(isDisplayed()))
+    }
+
+    /**
+     * Validates the ability to interact with the search/filter bar.
+     */
+    @Test
+    fun testSearchFilterInteraction() {
+        val filterLineId = withTagValue(`is`("filterLine")) // The search/filter element 
+        
+        // 1. Check if the 'Find' text is displayed
+        onView(filterLineId) 
+            .check(matches(withText("Find"))) // Initial text is "Find" 
+            
+        // 2. Click the 'Find' bar to focus/initiate search
+        onView(filterLineId)
+            .perform(click())
+            
+        // 3. Type a search query
+        onView(filterLineId)
+            .perform(typeText("Sample Book Title"))
+            .check(matches(withText("Sample Book Title")))
+
+        // 4. Clear the text field
+        onView(filterLineId)
+            .perform(clearText())
+            .check(matches(withText(""))) // The text is now empty
+    }
+
+    /**
+     * Validates interaction with the sorting controls.
+     */
+    @Test
+    fun testSortingControlsInteraction() {
+        // 1. Click the 'Sort By' field to change criteria (e.g., from Date to Title)
+        // This validates that the clickable action triggers a new selection UI (like a dialog or menu)
+        onView(withText("Date")) // The sort criteria Text element 
+            .perform(click())
+            .check(matches(isDisplayed())) // Check if the element itself is visible
+
+        // 2. Click the 'Sort Order' toggle (e.g., Ascending/Descending)
+        val sortOrderTag = withTagValue(`is`("sortOrder")) // The sort order toggle View 
+        onView(sortOrderTag)
+            .perform(click()) // Click 1 to change order
+            .perform(click()) // Click 2 to revert or change again
+            .check(matches(isDisplayed()))
+
+        // 3. Click the 'Refresh' button
+        val onRefreshTag = withTagValue(`is`("onRefresh")) // The refresh button View 
+        onView(onRefreshTag)
+            .perform(click())
+            .check(matches(isDisplayed()))
+    }
+}

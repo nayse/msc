@@ -1,0 +1,65 @@
+GUI Intentional Tests:
+
+Here are some test cases designed to validate this functionality.  I'll structure them with: Test Case ID, Description, Steps, and Expected Result.
+
+Test Suite 1: Region Selection & Verification
+
+Test Case ID: TS1-001
+
+Description: Verify that clicking on a numbered region selects it and potentially displays associated information.
+
+Steps:
+
+Locate the text element labeled "1".
+Click on the "1" element.
+Expected Result: The area corresponding to region 1 should visually highlight (e.g., change color, border). Ideally, additional information related to region 1 is displayed (though this isn't explicitly stated in the data provided).
+
+Test Case ID: TS1-002
+
+Description: Verify that clicking on a different numbered region deselects the previous selection and selects the new one.
+
+Steps:
+
+Click on "1" (as per TS1-001).
+Locate the text element labeled "2".
+Click on the "2" element.
+Expected Result: The area corresponding to region 1 should no longer be highlighted, and the area corresponding to region 2 should now be highlighted.
+
+Test Suite 2: Filter Verification
+
+Test Case ID: TS2-001
+
+Description: Verify that clicking on a filter (e.g., "Railway") filters the displayed information to show only items related to railways.
+
+Steps:
+
+Locate the text element labeled "Railway".
+Click on the "Railway" element.
+Expected Result: The map should update to display only areas or points of interest associated with railways.
+
+Test Case ID: TS2-002
+
+Description: Verify that clicking the "All" filter removes any applied filters and shows all data.
+
+Steps:
+
+Click on the "Railway" element (as per TS2-001).
+Locate the text element labeled "All".
+Click on the "All" element.
+Expected Result: The map should display all available data, removing any previous filtering applied by the "Railway" filter.
+
+Test Suite 3: Scrolling & Content Visibility
+
+Test Case ID: TS3-001
+Description: Verify that scrolling the ScrollView reveals additional content.
+Steps:
+Locate the ScrollView.
+Scroll down within the ScrollView.
+Expected Result: Additional elements (e.g., more regions, filters) should become visible as the user scrolls.
+Test Suite 4: Edge Cases & Error Handling (Beyond Data Provided)
+
+These would require further information about the application's behavior but are important to consider:
+
+What happens if a user clicks on an area that isn't selectable?
+Does the application provide feedback when a filter is applied or removed?
+How does the application handle errors (e.g., network issues, data loading failures)?

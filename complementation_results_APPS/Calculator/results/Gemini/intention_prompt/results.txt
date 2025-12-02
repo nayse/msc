@@ -1,0 +1,5 @@
+GUI Intentional Tests
+The following logical sequence of user actions and expected outcomes validates the screen's main purpose: to compute the multiplication 7×3.
+
+Step	User Action	Element Tag	Element Text	Expected Outcome	Rationale
+1	Tap the equals button.	Text(tag="=")	=	The result, 21, should appear in the result display area.	Validates the core multiplication functionality of the calculator for the displayed expression.

@@ -1,0 +1,111 @@
+GUI Screen Analysis
+Primary Functional Objective
+This is a note-taking/text editing screen where users can create, edit, and manage text notes. The main purpose is to allow users to write and format content, with the filename "New Note (2).txt" and editable content area.
+GUI Intentional Tests
+Test Case 1: Basic Note Creation and Editing
+Objective: Validate that users can create and edit note content
+Actions:
+
+Tap on the content text field (edit_content) at coordinates [720, 1677]
+Enter text "This is my first note"
+Verify the text appears in the content area
+Tap the save button (button_save) at coordinates [84, 2952]
+Verify the note is saved successfully
+
+Expected Result: User can input text and save the note successfully
+Test Case 2: Title Modification
+Objective: Validate that users can modify the note title
+Actions:
+
+Tap on the title field (edit_title) at coordinates [510, 428]
+Clear existing text "New Note (2).txt"
+Enter new title "Meeting Notes.txt"
+Tap outside the title field to confirm
+Tap the save button at coordinates [84, 2952]
+
+Expected Result: The note title is updated and saved with the new name
+Test Case 3: Undo/Redo Functionality
+Objective: Validate undo and redo operations work correctly
+Actions:
+
+Tap on content field at coordinates [720, 1677]
+Type "First sentence"
+Type "Second sentence"
+Tap the undo button (button_undo) at coordinates [252, 2952]
+Verify "Second sentence" is removed
+Tap the redo button (button_redo) at coordinates [420, 2952]
+Verify "Second sentence" reappears
+
+Expected Result: Undo removes the last action and redo restores it
+Test Case 4: Timestamp Insertion
+Objective: Validate timestamp functionality adds current time to note
+Actions:
+
+Tap on content field at coordinates [720, 1677]
+Position cursor where timestamp should be inserted
+Tap the timestamp button (button_timestamp) at coordinates [756, 2952]
+Verify current timestamp is inserted at cursor position
+
+Expected Result: Current timestamp is inserted into the note content
+Test Case 5: Datestamp Insertion
+Objective: Validate datestamp functionality adds current date to note
+Actions:
+
+Tap on content field at coordinates [720, 1677]
+Position cursor where datestamp should be inserted
+Tap the datestamp button (button_datestamp) at coordinates [924, 2952]
+Verify current date is inserted at cursor position
+
+Expected Result: Current date is inserted into the note content
+Test Case 6: Markdown Preview
+Objective: Validate markdown view toggle functionality
+Actions:
+
+Tap on content field and enter markdown text "# Header\nBold text"
+Tap the markdown button (button_markdown) at coordinates [588, 2952]
+Verify markdown is rendered with proper formatting
+Tap markdown view button (menu_markdown_view) at coordinates [880, 256]
+Verify toggle between edit and preview mode
+
+Expected Result: Markdown content is properly rendered in preview mode
+Test Case 7: Location Stamp Insertion
+Objective: Validate location stamp adds current location to note
+Actions:
+
+Tap on content field at coordinates [720, 1677]
+Tap the location stamp button (button_locationstamp) at coordinates [1092, 2952]
+Grant location permissions if prompted
+Verify current location is inserted into note
+
+Expected Result: Current geographic location is inserted into the note
+Test Case 8: Text Expansion
+Objective: Validate text expansion/fullscreen mode
+Actions:
+
+Tap the text expand button (button_text_expand) at coordinates [1260, 2952]
+Verify the content area expands to fullscreen or larger view
+Tap the expand button again to return to normal view
+
+Expected Result: Content area toggles between normal and expanded view
+Test Case 9: Style Menu Navigation
+Objective: Validate style menu opens and applies text formatting
+Actions:
+
+Tap on content field and select some text
+Tap the style menu button (menu_style) at coordinates [1048, 256]
+Verify style options appear (bold, italic, etc.)
+Select a style option
+Verify selected text is formatted accordingly
+
+Expected Result: Style menu opens and selected formatting is applied to text
+Test Case 10: Back Navigation with Unsaved Changes
+Objective: Validate warning when leaving with unsaved changes
+Actions:
+
+Tap on content field at coordinates [720, 1677]
+Type "Unsaved content"
+Tap the back button (ImageButton) at coordinates [98, 256]
+Verify a warning dialog appears about unsaved changes
+Choose to save or discard changes
+
+Expected Result: User is warned about unsaved changes before navigating away

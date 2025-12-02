@@ -1,0 +1,60 @@
+package com.example.app.ui;
+
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.example.app.MainActivity;
+import com.example.app.R;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+
+@RunWith(AndroidJUnit4.class)
+public class AreaSelectionTest {
+
+    @Rule
+    public ActivityScenarioRule<MainActivity> activityRule =
+            new ActivityScenarioRule<>(MainActivity.class);
+
+    /**
+     * Validate selecting region 1 updates the screen correctly.
+     */
+    @Test
+    public void testSelectRegion1() {
+        // Click on region "1"
+        onView(withText("1")).perform(click());
+
+        // Verify region 1 is active (e.g., highlighted or displayed in title)
+        onView(withText("1")).check(matches(isDisplayed()));
+    }
+
+    /**
+     * Validate selecting region 2 updates the screen correctly.
+     */
+    @Test
+    public void testSelectRegion2() {
+        onView(withText("2")).perform(click());
+        onView(withText("2")).check(matches(isDisplayed()));
+    }
+
+    /**
+     * Validate switching between regions updates selection.
+     */
+    @Test
+    public void testSwitchRegions() {
+        // Select region 3
+        onView(withText("3")).perform(click());
+        onView(withText("3")).check(matches(isDisplayed()));
+
+        // Now select region 6
+        onView(withText("6")).perform(click());
+        onView(withText("6")).check(matches(isDisplayed()));
+    }
+}

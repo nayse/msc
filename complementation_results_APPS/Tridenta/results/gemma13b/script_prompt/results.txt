@@ -1,0 +1,26 @@
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.ViewInteraction
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class RegionSelectionTest {
+
+    @Test
+    fun testRegionSelection() {
+        // 1. Find the "1" text element (or use a more robust selector if needed).
+        val regionOne: ViewInteraction = Espresso.onView(ViewMatchers.withId(R.id.region_one)) // Assuming you have an ID for this view
+
+        // 2. Perform a click action on the element.
+        regionOne.performClick()
+
+        // 3. Assert that the "1" region is now highlighted (or visually different).
+        //    This requires a more specific assertion based on how highlighting is implemented.
+        //    Example: Check for a background color change, or an opacity change.
+        Espresso.onView(ViewMatchers.withId(R.id.region_one))
+            .check(ViewMatchers.hasBackgroundColor(android.graphics.Color.RED)) // Example assertion - adjust as needed
+
+    }
+}

@@ -1,0 +1,41 @@
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+@RunWith(AndroidJUnit4.class)
+public class CalculatorCoreTest {
+
+    @Rule
+    public ActivityTestRule<MainActivity> activityRule =
+            new ActivityTestRule<>(MainActivity.class);
+
+    @Test
+    public void testMultiplicationCoreFunctionality() {
+        // Press "7"
+        Espresso.onView(ViewMatchers.withText("7"))
+                .perform(ViewActions.click());
+
+        // Press "*"
+        Espresso.onView(ViewMatchers.withText("*"))
+                .perform(ViewActions.click());
+
+        // Press "3"
+        Espresso.onView(ViewMatchers.withText("3"))
+                .perform(ViewActions.click());
+
+        // Press "="
+        Espresso.onView(ViewMatchers.withText("="))
+                .perform(ViewActions.click());
+
+        // Verify result is "21"
+        Espresso.onView(ViewMatchers.withText("21"))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+}

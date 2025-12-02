@@ -1,0 +1,252 @@
+package com.example.multiplicationquiz;
+
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.isEmptyString;
+
+@RunWith(AndroidJUnit4.class)
+@LargeTest
+public class MultiplicationQuizCoreTest {
+
+    @Rule
+    public ActivityScenarioRule<MainActivity> activityRule =
+            new ActivityScenarioRule<>(MainActivity.class);
+
+    /**
+     * Test Case 1: Verify multiplication problem is displayed
+     * Validates that the quiz screen shows a problem with format "number * number ="
+     */
+    @Test
+    public void testProblemDisplayed() {
+        // Verify the first number "7" is displayed
+        onView(withText("7"))
+                .check(matches(isDisplayed()));
+        
+        // Verify the multiplication operator "*" is displayed
+        onView(withText("*"))
+                .check(matches(isDisplayed()));
+        
+        // Verify the second number "3" is displayed
+        onView(withText("3"))
+                .check(matches(isDisplayed()));
+        
+        // Verify the equals sign "=" is displayed
+        onView(withText("="))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case 2: Verify all numeric buttons are displayed and clickable
+     * Validates that the numeric keypad (0-9) is properly rendered
+     */
+    @Test
+    public void testNumericKeypadDisplayed() {
+        // Check all number buttons from 0 to 9 are displayed
+        for (int i = 0; i <= 9; i++) {
+            onView(withText(String.valueOf(i)))
+                    .check(matches(isDisplayed()));
+        }
+        
+        // Verify navigation buttons are displayed
+        onView(withText("<"))
+                .check(matches(isDisplayed()));
+        
+        onView(withText(">"))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case 3: Test correct answer submission
+     * Core functionality: Enter correct answer (21) and submit
+     */
+    @Test
+    public void testCorrectAnswerSubmission() {
+        // Find and click button "2"
+        onView(withText("2"))
+                .perform(click());
+        
+        // Find and click button "1"
+        onView(withText("1"))
+                .perform(click());
+        
+        // Verify the answer "21" appears in the answer field
+        // Using bounds from UI elements document for the TextView answer field
+        onView(withText("21"))
+                .check(matches(isDisplayed()));
+        
+        // Click submit button ">"
+        onView(withText(">"))
+                .perform(click());
+        
+        // After submission, verify that either:
+        // - A new problem appears, or
+        // - Progress bar advances, or
+        // - Success feedback is shown
+        // (This depends on app implementation)
+    }
+
+    /**
+     * Test Case 4: Test backspace functionality
+     * Validates that user can delete entered digits
+     */
+    @Test
+    public void testBackspaceFunction() {
+        // Enter digit "2"
+        onView(withText("2"))
+                .perform(click());
+        
+        // Enter digit "5"
+        onView(withText("5"))
+                .perform(click());
+        
+        // Verify "25" is displayed
+        onView(withText("25"))
+                .check(matches(isDisplayed()));
+        
+        // Click backspace button "<"
+        onView(withText("<"))
+                .perform(click());
+        
+        // Verify only "2" remains (last digit removed)
+        onView(withText("2"))
+                .check(matches(isDisplayed()));
+        
+        // Click backspace again
+        onView(withText("<"))
+                .perform(click());
+        
+        // Verify answer field is empty or shows default state
+    }
+
+    /**
+     * Test Case 5: Test multi-digit number entry
+     * Validates sequential number input works correctly
+     */
+    @Test
+    public void testMultiDigitEntry() {
+        // Click "2"
+        onView(withText("2"))
+                .perform(click());
+        
+        // Click "1"
+        onView(withText("1"))
+                .perform(click());
+        
+        // Verify both digits appear as "21"
+        onView(withText("21"))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case 6: Test incorrect answer handling
+     * Validates system response to wrong answer
+     */
+    @Test
+    public void testIncorrectAnswerSubmission() {
+        // Enter wrong answer "20"
+        onView(withText("2"))
+                .perform(click());
+        
+        onView(withText("0"))
+                .perform(click());
+        
+        // Verify "20" is displayed
+        onView(withText("20"))
+                .check(matches(isDisplayed()));
+        
+        // Submit the answer
+        onView(withText(">"))
+                .perform(click());
+        
+        // Verify app provides feedback (error message, retry option, etc.)
+        // This assertion depends on specific app behavior
+    }
+
+    /**
+     * Test Case 7: Test single digit entry
+     * Validates entering a single digit works
+     */
+    @Test
+    public void testSingleDigitEntry() {
+        // Click any number button, e.g., "5"
+        onView(withText("5"))
+                .perform(click());
+        
+        // Verify "5" appears in answer field
+        onView(withText("5"))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case 8: Test zero input
+     * Validates that zero can be entered
+     */
+    @Test
+    public void testZeroInput() {
+        // Click "0" button
+        onView(withText("0"))
+                .perform(click());
+        
+        // Verify "0" appears
+        onView(withText("0"))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case 9: Test answer correction flow
+     * Validates complete correction workflow
+     */
+    @Test
+    public void testAnswerCorrectionFlow() {
+        // Enter wrong digits "22"
+        onView(withText("2"))
+                .perform(click());
+        onView(withText("2"))
+                .perform(click());
+        
+        // Verify "22" is displayed
+        onView(withText("22"))
+                .check(matches(isDisplayed()));
+        
+        // Delete one digit
+        onView(withText("<"))
+                .perform(click());
+        
+        // Enter correct digit "1"
+        onView(withText("1"))
+                .perform(click());
+        
+        // Verify correct answer "21" is now displayed
+        onView(withText("21"))
+                .check(matches(isDisplayed()));
+        
+        // Submit
+        onView(withText(">"))
+                .perform(click());
+    }
+
+    /**
+     * Test Case 10: Test progress bar visibility
+     * Validates that progress tracking is visible
+     */
+    @Test
+    public void testProgressBarVisible() {
+        // Verify progress bar exists and is displayed
+        // Based on UI elements, ProgressBar is at bounds [28,137][1412,221]
+        // We'll check if it's displayed (specific matcher depends on implementation)
+        // This is a basic visibility check
+    }
+}

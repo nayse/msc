@@ -1,0 +1,80 @@
+GUI Intentional Tests:
+
+Here are some test cases designed to validate the core functionality of this screen. I'll structure them with: Test Case ID, Description, Steps, and Expected Result.  I'm assuming the application has standard Android behavior for saving, etc.
+
+1. Create a New Note & Save:
+
+Test Case ID: TC_NOTE_001
+Description: Verify that a user can create a new note, enter content, and save it successfully.
+Steps:
+Tap on the "edit_title" TextField.
+Enter a title (e.g., "Test Note 1").
+Tap on the "edit_content" TextField.
+Enter some content (e.g., "This is a test note.").
+Tap on the "button_save" button ().
+Expected Result: The application saves the note, and the user should be navigated back to a notes list or see confirmation of saving.
+2. Undo/Redo Functionality:
+
+Test Case ID: TC_NOTE_002
+Description: Verify that undo/redo functionality works as expected.
+Steps:
+Create and save a note (following steps from TC_NOTE_001).
+Modify the content of the saved note.
+Tap on the "button_undo" button ().
+Verify that the content reverts to its previous state.
+Tap on the "button_redo" button ().
+Verify that the content returns to the modified state.
+Expected Result: The undo and redo buttons correctly revert and reapply changes to the note's content.
+3. Markdown Formatting:
+
+Test Case ID: TC_NOTE_003
+Description: Verify markdown formatting functionality.
+Steps:
+Create a new note.
+Enter some text using markdown syntax (e.g., # Heading, *italic*, **bold**).
+Tap on the "button_markdown" button ().
+Verify that the content is rendered correctly with the applied Markdown formatting.
+Expected Result: The text should be displayed in a formatted manner, reflecting the markdown syntax used.
+4. Timestamping:
+
+Test Case ID: TC_NOTE_004
+Description: Verify timestamp functionality.
+Steps:
+Create a new note.
+Tap on the "button_timestamp" button ().
+Verify that a current timestamp is added to the content of the note.
+Expected Result: A timestamp should be visible in the note's content, reflecting the time of insertion.
+5. Location Tagging:
+
+Test Case ID: TC_NOTE_005
+Description: Verify location tagging functionality.
+Steps:
+Create a new note.
+Tap on the "button_locationstamp" button ().
+Verify that the current location is added to the content of the note.
+Expected Result: The note's content should include the user’s current geographical coordinates or a readable location description.
+6. Text Expansion:
+
+Test Case ID: TC_NOTE_006
+Description: Verify text expansion functionality.
+Steps:
+Create a new note.
+Enter some content in the "edit_content" TextField.
+Tap on the "button_text_expand" button ().
+Verify that the text is expanded to fill the available space.
+Expected Result: The text should be displayed with a larger font size, filling the screen's available space.
+7. Drawing Functionality:
+
+Test Case ID: TC_NOTE_007
+Description: Verify drawing functionality.
+Steps:
+Create a new note.
+Tap on the "button_draw" button ().
+Verify that the application opens a drawing interface, allowing the user to draw on the screen.
+Expected Result: The app should open a drawing tool where users can create visual content within their notes.
+Important Considerations:
+
+These tests assume standard Android behavior for UI elements and saving mechanisms.
+The specific implementation of features like location tagging might require additional permissions or API calls that need to be tested separately.
+Error handling (e.g., what happens if the save fails, or there's no network connection) should also be included in a more comprehensive test suite.
+I hope this detailed analysis and set of tests are helpful! Let me know if you would like any modifications or further elaboration on these scenarios.

@@ -1,0 +1,37 @@
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.ViewInteraction
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class NoteTakingScreenTest {
+
+    @Test
+    fun testCreateAndSaveNote() {
+        // 1. Tap on the title TextField
+        val titleTextField: ViewInteraction = Espresso.onView(withId(R.id.edit_title)) // Assuming R.id.edit_title is the ID of the title field
+            .perform(ViewActions.click())
+
+        // 2. Enter a title
+        titleTextField.perform(ViewActions.typeText("Test Note"))
+
+        // 3. Tap on the content TextField
+        val contentTextField: ViewInteraction = Espresso.onView(withId(R.id.edit_content)) // Assuming R.id.edit_content is the ID of the content field
+            .perform(ViewActions.click())
+
+        // 4. Enter some content
+        contentTextField.perform(ViewActions.typeText("This is a test note."))
+
+        // 5. Tap on the Save button
+        val saveButton: ViewInteraction = Espresso.onView(withId(R.id.button_save)) // Assuming R.id.button_save is the ID of the save button
+            .perform(ViewActions.click())
+
+        // 6. Assert that the note was saved (This part needs adaptation based on how your app indicates success)
+        // Example: Check for a toast message, or navigation to a notes list screen.  Adapt this assertion!
+        Espresso.onView(withText("Note Saved")).check(ViewAssertions.Visibility()) //Example Assertion
+
+    }
+}
