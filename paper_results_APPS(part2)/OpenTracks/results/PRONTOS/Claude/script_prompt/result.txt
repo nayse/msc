@@ -1,0 +1,243 @@
+package com.example.trackrecorder;
+
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.*;
+
+@RunWith(AndroidJUnit4.class)
+@LargeTest
+public class TrackRecorderCoreTest {
+
+    @Rule
+    public ActivityScenarioRule<MainActivity> activityRule = 
+        new ActivityScenarioRule<>(MainActivity.class);
+
+    @Test
+    public void testCoreTrackRecordingFunctionality() {
+        // Test 1: Verify main screen elements are visible and accessible
+        verifyMainScreenElements();
+        
+        // Test 2: Test primary action - Start new track recording
+        testStartNewTrackRecording();
+        
+        // Test 3: Verify sensor functionality
+        testSensorStartButton();
+        
+        // Test 4: Test basic navigation and UI interaction
+        testBasicNavigation();
+    }
+
+    private void verifyMainScreenElements() {
+        // Verify track list area is visible
+        onView(withId(R.id.track_list))
+            .check(matches(isDisplayed()));
+
+        // Verify main toolbar is visible and clickable
+        onView(withId(R.id.track_list_toolbar))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()));
+
+        // Verify FAB button is visible and clickable
+        onView(withId(R.id.track_list_fab_action))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()));
+
+        // Verify bottom action bar is visible
+        onView(withId(R.id.bottom_app_bar))
+            .check(matches(isDisplayed()));
+
+        // Verify sensor start button is visible
+        onView(withId(R.id.sensor_start_button))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()));
+
+        // Verify stats button is visible
+        onView(withId(R.id.aggregated_stats_button))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()));
+    }
+
+    private void testStartNewTrackRecording() {
+        // Click the main FAB button to start new track recording
+        onView(withId(R.id.track_list_fab_action))
+            .perform(click());
+
+        // Verify that clicking FAB triggers appropriate action
+        // This could open a new activity, show a dialog, or change UI state
+        // Expected behavior: Start recording interface appears or recording begins
+        
+        // Wait for potential UI changes
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Verify recording state indicators (if any)
+        // This would depend on the specific implementation
+        // Example: Check if recording indicator appears
+        // onView(withId(R.id.recording_indicator))
+        //     .check(matches(isDisplayed()));
+    }
+
+    private void testSensorStartButton() {
+        // Test sensor start button functionality
+        onView(withId(R.id.sensor_start_button))
+            .perform(click());
+
+        // Verify sensor activation
+        // Expected: Button state changes or sensor status updates
+        
+        // Wait for sensor initialization
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Verify sensor button is still accessible after click
+        onView(withId(R.id.sensor_start_button))
+            .check(matches(isDisplayed()));
+    }
+
+    private void testBasicNavigation() {
+        // Test toolbar search functionality
+        onView(withId(R.id.track_list_toolbar))
+            .perform(click());
+
+        // Verify toolbar responds to interaction
+        onView(withId(R.id.track_list_toolbar))
+            .check(matches(isDisplayed()));
+
+        // Test settings button
+        onView(withId(R.id.track_list_settings))
+            .perform(click());
+
+        // Brief pause for any UI transitions
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Verify settings interaction doesn't crash the app
+        onView(withId(R.id.track_list_settings))
+            .check(matches(isDisplayed()));
+
+        // Test markers button
+        onView(withId(R.id.track_list_markers))
+            .perform(click());
+
+        // Verify markers button interaction
+        onView(withId(R.id.track_list_markers))
+            .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testStatsButtonFunctionality() {
+        // Dedicated test for stats functionality
+        onView(withId(R.id.aggregated_stats_button))
+            .perform(click());
+
+        // Verify stats button interaction
+        // Expected: Stats screen opens or stats dialog appears
+        
+        // Brief pause for UI response
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Verify the button remains accessible
+        onView(withId(R.id.aggregated_stats_button))
+            .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testScrollViewFunctionality() {
+        // Test the main scrollable area
+        onView(withId(R.id.track_list_search_view))
+            .check(matches(isDisplayed()));
+
+        // Test scrolling if content is available
+        onView(withId(R.id.track_list))
+            .perform(ViewActions.swipeUp());
+
+        // Verify scrolling doesn't break the UI
+        onView(withId(R.id.track_list))
+            .check(matches(isDisplayed()));
+
+        // Scroll back down
+        onView(withId(R.id.track_list))
+            .perform(ViewActions.swipeDown());
+    }
+
+    @Test
+    public void testCoreWorkflowIntegration() {
+        // Integration test for core workflow
+        
+        // 1. Start with main screen verification
+        onView(withId(R.id.track_list_fab_action))
+            .check(matches(isDisplayed()));
+
+        // 2. Activate sensors
+        onView(withId(R.id.sensor_start_button))
+            .perform(click());
+
+        // Brief pause for sensor initialization
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // 3. Start track recording
+        onView(withId(R.id.track_list_fab_action))
+            .perform(click());
+
+        // 4. Verify UI remains stable after core actions
+        onView(withId(R.id.track_list))
+            .check(matches(isDisplayed()));
+
+        onView(withId(R.id.bottom_app_bar))
+            .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testUIResponsiveness() {
+        // Test rapid interactions to ensure UI responsiveness
+        
+        // Rapid clicks on different buttons
+        onView(withId(R.id.track_list_markers))
+            .perform(click());
+
+        onView(withId(R.id.track_list_settings))
+            .perform(click());
+
+        onView(withId(R.id.aggregated_stats_button))
+            .perform(click());
+
+        // Verify all elements remain functional
+        onView(withId(R.id.track_list_fab_action))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()));
+
+        onView(withId(R.id.sensor_start_button))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()));
+    }
+}

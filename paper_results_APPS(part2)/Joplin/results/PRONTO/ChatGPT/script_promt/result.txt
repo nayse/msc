@@ -1,0 +1,32 @@
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class TodoListCoreFunctionalityTest {
+
+    @get:Rule
+    val activityRule = ActivityTestRule(MainActivity::class.java)
+
+    @Test
+    fun testMarkTaskAsCompleted() {
+        // Verifica se o título do projeto está visível
+        onView(withText("new_to_do"))
+            .check(matches(isDisplayed()))
+
+        // Marca a primeira tarefa como concluída (simulando click no checkbox)
+        onView(withText("Verificar se precisa gerar nova VM"))
+            .perform(click())
+
+        // Verifica se o item agora aparece como completado (visualmente pode ser por opacidade/recuo ou desaparecimento)
+        // Supondo que o item desaparece ao marcar como concluído:
+        onView(withText("Verificar se precisa gerar nova VM"))
+            .check(doesNotExist())
+    }
+}

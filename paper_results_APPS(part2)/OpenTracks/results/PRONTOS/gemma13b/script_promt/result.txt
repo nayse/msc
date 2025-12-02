@@ -1,0 +1,33 @@
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.ViewInteraction
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class TrackListScreenTest {
+
+    @Test
+    fun testStartRecording() {
+        // 1. Find the "sensor_start_button" and click it.  Adjust the resource ID if needed.
+        val startButton: ViewInteraction = Espresso.onView(
+            ViewMatchers.withId(R.id.sensor_start_button) // Replace with actual resource ID
+        ).perform(Espresso.click())
+
+        // 2. Wait for permissions to be requested (if necessary).  This is crucial!
+        //    You might need to add a delay or check for the existence of permission dialogs.
+        //    The exact implementation depends on your app's behavior.
+        Thread.sleep(2000) // Adjust as needed - this is just an example
+
+        // 3. Verify that recording has started (e.g., by checking a status text or icon).
+        //    This requires knowing how the application indicates that recording has begun.
+        //    Example: Check for a TextView with specific text.  Adapt to your app's UI.
+        Espresso.onView(ViewMatchers.withId(R.id.recording_status_text)) // Replace with actual ID
+            .check(ViewMatchers.withText("Recording"))
+
+        // 4. Optional: Verify that a timer or other indicator is running.
+        //    This would require more complex assertions and potentially using `DataDrivenTest`
+        //    to check the value of a TextView over time.
+    }
+}

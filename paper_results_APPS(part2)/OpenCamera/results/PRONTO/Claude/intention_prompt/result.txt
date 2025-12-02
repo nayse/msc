@@ -1,0 +1,174 @@
+# Camera Application GUI Test Cases
+
+## Test Suite: Primary Camera Functionality Validation
+
+### Test Case 1: Basic Photo Capture
+**Objective:** Validate core photo-taking functionality
+**Priority:** High
+
+**Test Steps:**
+1. Launch camera application
+2. Wait for camera preview to load in TextureView bounds [0,630][1440,2550]
+3. Verify live camera feed is displaying
+4. Tap "take_photo" button at bounds [545,2686][895,3036]
+5. Verify photo capture sound/animation
+6. Check that photo is saved (storage should decrease from 4.0GB)
+
+**Expected Result:** Photo successfully captured and saved
+
+---
+
+### Test Case 2: Camera Switch Functionality
+**Objective:** Test front/rear camera switching
+**Priority:** High
+
+**Test Steps:**
+1. Start with rear camera active
+2. Tap "switch_camera" button at bounds [895,2826][1105,3036]
+3. Verify camera preview switches to front camera
+4. Take a photo to confirm front camera is working
+5. Tap "switch_camera" again to return to rear camera
+6. Verify rear camera preview is restored
+
+**Expected Result:** Seamless switching between front and rear cameras
+
+---
+
+### Test Case 3: Video Recording
+**Objective:** Validate video recording functionality
+**Priority:** High
+
+**Test Steps:**
+1. Ensure camera is in photo mode initially
+2. Tap "switch_video" button at bounds [335,2826][545,3036]
+3. Verify UI changes to video mode (recording indicator appears)
+4. Tap main capture button to start recording
+5. Record for 5 seconds
+6. Tap capture button again to stop recording
+7. Verify video is saved and storage is updated
+
+**Expected Result:** Video successfully recorded and saved
+
+---
+
+### Test Case 4: Zoom Control
+**Objective:** Test zoom functionality
+**Priority:** Medium
+
+**Test Steps:**
+1. Locate zoom seekbar at bounds [0,2441][175,2966]
+2. Drag zoom slider from bottom to top
+3. Verify camera preview zooms in progressively
+4. Drag slider back to bottom
+5. Verify camera preview zooms out to original level
+6. Take photo at different zoom levels to confirm functionality
+
+**Expected Result:** Smooth zoom in/out with preview updating accordingly
+
+---
+
+### Test Case 5: Exposure Controls
+**Objective:** Test exposure adjustment features
+**Priority:** Medium
+
+**Test Steps:**
+1. Tap "exposure" button at bounds [410,144][620,354]
+2. Verify exposure adjustment controls appear
+3. Adjust exposure settings (increase/decrease)
+4. Observe preview brightness changes in real-time
+5. Tap "exposure_lock" button at bounds [0,144][210,354]
+6. Verify exposure is locked (settings don't auto-adjust)
+7. Take photo with locked exposure
+
+**Expected Result:** Exposure adjustments reflect in preview and captured images
+
+---
+
+### Test Case 6: Settings Access
+**Objective:** Validate settings menu functionality
+**Priority:** Medium
+
+**Test Steps:**
+1. Tap "settings" button at bounds [1230,144][1440,354]
+2. Verify settings menu opens
+3. Navigate through available settings options
+4. Modify a setting (e.g., image quality, flash mode)
+5. Return to main camera screen
+6. Verify setting change is applied
+
+**Expected Result:** Settings accessible and changes persist
+
+---
+
+### Test Case 7: Gallery Integration
+**Objective:** Test gallery access and photo review
+**Priority:** Medium
+
+**Test Steps:**
+1. Take at least one photo first
+2. Tap "gallery" button at bounds [1202,2798][1356,2952]
+3. Verify gallery opens showing recent photos
+4. Select the just-taken photo
+5. Verify photo displays correctly
+6. Return to camera from gallery
+7. Confirm camera is ready for next capture
+
+**Expected Result:** Seamless transition to gallery and back
+
+---
+
+### Test Case 8: Popup Menu Options
+**Objective:** Test additional camera options
+**Priority:** Low
+
+**Test Steps:**
+1. Tap "popup" button (three dots) at bounds [820,144][1030,354]
+2. Verify popup menu appears with additional options
+3. Test each available option (flash, timer, grid, etc.)
+4. Verify each option functions correctly
+5. Close popup menu and return to main camera
+
+**Expected Result:** All popup menu options work as expected
+
+---
+
+### Test Case 9: Camera Status Information
+**Objective:** Validate status display accuracy
+**Priority:** Low
+
+**Test Steps:**
+1. Observe status display showing "ISO 200 1/100s 4.0GB"
+2. Change camera settings (ISO, exposure)
+3. Verify status updates reflect changes
+4. Take multiple photos
+5. Verify storage amount decreases appropriately
+6. Check timestamp accuracy
+
+**Expected Result:** Status information updates correctly and accurately
+
+---
+
+### Test Case 10: App Navigation and State
+**Objective:** Test app stability and state management
+**Priority:** High
+
+**Test Steps:**
+1. Use camera for 2 minutes with various functions
+2. Minimize app and return
+3. Verify camera state is preserved
+4. Rotate device (if supported)
+5. Verify UI adapts correctly
+6. Test rapid successive button presses
+7. Verify app remains stable
+
+**Expected Result:** App maintains stability and proper state management
+
+---
+
+## Test Execution Notes
+
+- **Screen Resolution:** Tests designed for 1440x3120 device
+- **UI Bounds:** All coordinate-based actions use provided UI element bounds
+- **Prerequisites:** Sufficient storage space, camera permissions granted
+- **Test Environment:** Physical device recommended for camera hardware testing
+- **Performance:** Monitor for any lag or freezing during rapid interactions

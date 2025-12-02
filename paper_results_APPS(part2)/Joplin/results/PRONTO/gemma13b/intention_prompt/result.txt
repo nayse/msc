@@ -1,0 +1,35 @@
+Test Suite: New Note/To-Do Creation & Initial Setup
+
+Test Case 1: Create a New To-Do Item
+
+Objective: Verify that the "New to-do" button correctly opens the creation screen for a new to-do item.
+Steps:
+Locate and click on the "New to-do" button (tag="button", bounds="[208,2833][698,2973]").
+Verify that a screen/dialog opens allowing the user to enter text for the to-do item.
+Enter some text into the to-do field (e.g., "Buy groceries").
+Save the to-do item.
+Verify that the new to-do item appears in a list or view on the main screen.
+Test Case 2: Create a New Note
+
+Objective: Verify that the "New note" button correctly opens the creation screen for a new note.
+Steps:
+Locate and click on the "New note" button (tag="button", bounds="[768,2833][1232,2973]").
+Verify that a screen/dialog opens allowing the user to enter text for the new note.
+Enter some text into the note field (e.g., "Meeting notes").
+Save the note.
+Verify that the new note appears in a list or view on the main screen.
+Test Case 3: Explore Content Creation Options (Attachment, Recording, Camera, Drawing)
+
+Objective: Verify that each content creation button opens the appropriate functionality.
+Steps:
+Click on "Attachment" button. Verify it opens a file selection dialog or similar mechanism for attaching files.
+Click on "Recording" button. Verify it starts audio recording.
+Click on "Camera" button. Verify it opens the device's camera interface.
+Click on "Drawing" button. Verify it opens a drawing canvas/tool.
+Test Case 4: Navigate through Welcome Screen Content
+
+Objective: Verify that the list items are accessible and provide information as expected.
+Steps:
+Scroll down the screen to view all list items.
+Click on each list item (e.g., "Importing and exporting notes").
+Verify that a new screen or section opens with relevant information about the topic.

@@ -1,0 +1,59 @@
+
+The primary functional objective of this GUI screen is to allow users to input details for a new financial transaction, either an income or an expense, and then submit or cancel it. 
+
+GUI Intentional Tests:
+
+Test Case 1: Add a new Expense Transaction
+
+Initial State: The "New Transaction" dialog is displayed, with "Enter title" and "Enter amount" fields visible, "Expense" and "Income" radio buttons, and default selections for account ("Main Account") and category ("none"). 
+Action 1: Tap on the "Enter title" text field. 
+Action 2: Input "Coffee" into the title text field. 
+Action 3: Ensure "Expense" radio button is selected (it is by default, but verify). 
+Action 4: Tap on the "Enter amount" text field. 
+Action 5: Input "5.50" into the amount text field. 
+Action 6: (Optional) Tap on the date "2025-06-03" to open the date picker and select a different date, then confirm the date. 
+Action 7: (Optional) Tap on the "Account" spinner "Main Account" to change the account if multiple accounts are available. 
+Action 8: (Optional) Tap on the "Category" spinner "none" to select a category. 
+Action 9: Tap the "SUBMIT" button. 
+Expected Result: The "New Transaction" dialog closes, and the new expense transaction "Coffee" with amount "5.50" is successfully added and reflected in the main transaction list.
+Test Case 2: Add a new Income Transaction
+
+Initial State: The "New Transaction" dialog is displayed. 
+Action 1: Tap on the "Enter title" text field. 
+Action 2: Input "Salary" into the title text field. 
+Action 3: Tap on the "Income" radio button to select it. 
+Action 4: Tap on the "Enter amount" text field. 
+Action 5: Input "2500.00" into the amount text field. 
+Action 6: Tap the "SUBMIT" button. 
+Expected Result: The "New Transaction" dialog closes, and the new income transaction "Salary" with amount "2500.00" is successfully added and reflected in the main transaction list.
+Test Case 3: Cancel New Transaction
+
+Initial State: The "New Transaction" dialog is displayed. 
+Action 1: Tap on the "Enter title" text field. 
+Action 2: Input "Test Entry" into the title text field. 
+Action 3: Tap on the "Enter amount" text field. 
+Action 4: Input "100.00" into the amount text field. 
+Action 5: Tap the "CANCEL" button. 
+Expected Result: The "New Transaction" dialog closes, and no new transaction is added to the list.
+Test Case 4: Add New Account
+
+Initial State: The "New Transaction" dialog is displayed. 
+Action 1: Tap the "+" button next to the "Account" spinner. 
+Expected Result: A new dialog or screen appears, prompting the user to add a new account.
+Test Case 5: Add New Category
+
+Initial State: The "New Transaction" dialog is displayed. 
+Action 1: Tap the "+" button next to the "Category" spinner. 
+Expected Result: A new dialog or screen appears, prompting the user to add a new category.
+Test Case 6: Input Validation - Empty Title
+
+Initial State: The "New Transaction" dialog is displayed. 
+Action 1: Input "10.00" into the "Enter amount" text field. 
+Action 2: Tap the "SUBMIT" button. 
+Expected Result: An error message or toast appears, indicating that the title field cannot be empty, and the dialog remains open.
+Test Case 7: Input Validation - Empty Amount
+
+Initial State: The "New Transaction" dialog is displayed. 
+Action 1: Input "Groceries" into the "Enter title" text field. 
+Action 2: Tap the "SUBMIT" button. 
+Expected Result: An error message or toast appears, indicating that the amount field cannot be empty or must be a valid number, and the dialog remains open.

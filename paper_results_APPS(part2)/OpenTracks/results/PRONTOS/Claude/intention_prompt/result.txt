@@ -1,0 +1,137 @@
+# GUI Test Scenarios for Track Recording Application
+
+## Test Scenario 1: Start New Track Recording
+**Objective**: Validate the primary function of starting a new GPS track recording
+
+**Test Steps**:
+1. Launch the application
+2. Verify the main screen loads with empty track list
+3. Tap the red FAB button (track_list_fab_action) at coordinates [1160,2658][1384,2882]
+4. Verify new track recording interface appears
+5. Confirm GPS/location services are activated
+6. Validate recording indicators are visible
+
+**Expected Result**: New track recording begins successfully with active GPS tracking
+
+---
+
+## Test Scenario 2: Access Application Settings
+**Objective**: Verify settings functionality for app configuration
+
+**Test Steps**:
+1. From main screen, tap the settings button (track_list_settings) at [1048,214][1216,382]
+2. Verify settings menu/screen opens
+3. Check availability of configuration options (GPS accuracy, units, etc.)
+4. Navigate back to main screen
+5. Confirm settings are accessible and functional
+
+**Expected Result**: Settings interface opens with relevant configuration options
+
+---
+
+## Test Scenario 3: View Aggregated Statistics
+**Objective**: Test the statistics viewing functionality
+
+**Test Steps**:
+1. Tap the aggregated stats button (aggregated_stats_button) at [56,2840][224,3008]
+2. Verify statistics screen/dialog appears
+3. Check for relevant metrics display (distance, time, elevation, etc.)
+4. Verify data presentation is clear and accurate
+5. Navigate back to main screen
+
+**Expected Result**: Statistics are displayed correctly with meaningful track data
+
+---
+
+## Test Scenario 4: Search and Filter Tracks
+**Objective**: Validate track search functionality
+
+**Test Steps**:
+1. Tap the search toolbar (track_list_toolbar) at [56,200][1384,396]
+2. Enter search criteria (track name, date, location)
+3. Verify search results filter the track list appropriately
+4. Clear search and verify full list returns
+5. Test search with various criteria types
+
+**Expected Result**: Search function filters tracks accurately based on input criteria
+
+---
+
+## Test Scenario 5: Sensor Management
+**Objective**: Test sensor start/stop functionality
+
+**Test Steps**:
+1. Tap the sensor start button (sensor_start_button) at [224,2840][392,3008]
+2. Verify sensor activation (GPS, accelerometer, etc.)
+3. Check for sensor status indicators
+4. Test sensor stop functionality
+5. Verify sensor data is being collected during active state
+
+**Expected Result**: Sensors activate/deactivate properly with clear status feedback
+
+---
+
+## Test Scenario 6: Location and Navigation Features
+**Objective**: Validate GPS and navigation functionality
+
+**Test Steps**:
+1. Tap the location marker button at [880,214][1048,382]
+2. Verify current location is displayed/centered
+3. Test the navigation arrow button (ImageButton) at [70,200][238,396]
+4. Check compass or direction functionality
+5. Verify location accuracy and updates
+
+**Expected Result**: Location services work accurately with proper navigation aids
+
+---
+
+## Test Scenario 7: Complete Track Recording Workflow
+**Objective**: End-to-end validation of the primary use case
+
+**Test Steps**:
+1. Start new track recording via FAB button
+2. Allow recording for a test period
+3. Check real-time track display and statistics
+4. Stop recording using appropriate control
+5. Verify track is saved to track list
+6. Open saved track to view details and statistics
+7. Confirm track data integrity and completeness
+
+**Expected Result**: Complete workflow from start to finish works seamlessly
+
+---
+
+## Test Scenario 8: UI Responsiveness and Navigation
+**Objective**: Validate overall user interface behavior
+
+**Test Steps**:
+1. Test all clickable elements respond appropriately
+2. Verify smooth scrolling in track list area [0,452][1440,3120]
+3. Check toolbar functionality and button states
+4. Test screen orientation changes (if applicable)
+5. Verify proper layout on different screen sizes
+
+**Expected Result**: UI is responsive with consistent behavior across all interactions
+
+---
+
+## Edge Case Testing
+
+### Test Scenario 9: No GPS Signal Handling
+**Test Steps**:
+1. Disable GPS/location services
+2. Attempt to start track recording
+3. Verify appropriate error handling and user feedback
+
+### Test Scenario 10: Storage Limit Testing
+**Test Steps**:
+1. Fill device storage to near capacity
+2. Attempt to record new tracks
+3. Verify graceful handling of storage limitations
+
+### Test Scenario 11: Background App Behavior
+**Test Steps**:
+1. Start track recording
+2. Switch to other apps or lock screen
+3. Verify recording continues in background
+4. Return to app and check data continuity

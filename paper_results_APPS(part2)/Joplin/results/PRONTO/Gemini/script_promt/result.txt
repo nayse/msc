@@ -1,0 +1,50 @@
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
+
+@RunWith(AndroidJUnit4.class)
+public class MainScreenCoreFunctionalityTest {
+
+    @Rule
+    public ActivityScenarioRule<MainActivity> activityScenarioRule =
+            new ActivityScenarioRule<>(MainActivity.class); // Replace MainActivity with your actual main activity
+
+    @Test
+    public void testNewTodoButtonFunctionality() {
+        // Click the "New to-do" button
+        onView(allOf(ViewMatchers.withTagValue(org.hamcrest.Matchers.<Object>is("button")),
+                ViewMatchers.hasDescendant(withText("New to-do"))))
+                .perform(click());
+
+        // TODO: Add assertions to verify navigation to the new to-do creation screen.
+        // This will depend on the actual implementation of your app.
+        // Example: Check for a unique element on the new to-do screen.
+        // onView(withText("Create New To-Do Item")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testNewNoteButtonFunctionality() {
+        // Click the "New note" button
+        onView(allOf(ViewMatchers.withTagValue(org.hamcrest.Matchers.<Object>is("button")),
+                ViewMatchers.hasDescendant(withText("New note"))))
+                .perform(click());
+
+        // TODO: Add assertions to verify navigation to the new note creation screen.
+        // This will depend on the actual implementation of your app.
+        // Example: Check for a unique element on the new note screen.
+        // onView(withText("Create New Note")).check(matches(isDisplayed()));
+    }
+}

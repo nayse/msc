@@ -1,0 +1,38 @@
+
+The primary functional objective of this screen appears to be the management and display of a list of tracks, as indicated by the presence of track_list_search_view , track_list_toolbar , and track_list  elements. The screen also provides functionalities related to markers, settings, and sensor-based actions.
+
+Here are GUI intentional tests with actions and a logical sequence of user actions to validate the main purpose of the screen:
+
+Test Case 1: Verify track list display and search functionality
+
+Objective: To ensure that the track list is displayed correctly and the search functionality works as expected.
+User Actions:
+Observe the screen to confirm the presence of the track_list area. 
+Tap on the track_list_toolbar (the text field for search). 
+Enter a search query into the track_list_toolbar. 
+Verify that the track_list updates to show relevant search results, or a message indicating no results if applicable. 
+Test Case 2: Verify access to settings and markers
+
+Objective: To ensure that the user can access the settings and markers features.
+User Actions:
+Tap the track_list_markers button. 
+Verify that the application navigates to the markers screen or displays a markers-related interface.
+Navigate back to the main screen (if applicable).
+Tap the track_list_settings button. 
+Verify that the application navigates to the settings screen or displays a settings-related interface.
+Test Case 3: Verify sensor start and aggregated stats functionality
+
+Objective: To ensure the sensor-related actions and aggregated statistics can be accessed.
+User Actions:
+Tap the sensor_start_button. 
+Verify that an action related to starting a sensor occurs (e.g., a sensor activity begins, a confirmation message appears).
+Tap the aggregated_stats_button. 
+Verify that the application navigates to a screen displaying aggregated statistics or shows a relevant pop-up.
+Test Case 4: Verify the floating action button (FAB) functionality
+
+Objective: To ensure the primary action button on the screen is functional.
+User Actions:
+Tap the track_list_fab_action button. 
+Verify that a primary action is initiated (e.g., a new track creation screen opens, a recording starts).
+
+Fontes

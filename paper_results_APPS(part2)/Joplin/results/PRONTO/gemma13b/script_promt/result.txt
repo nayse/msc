@@ -1,0 +1,53 @@
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.ViewInteraction
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class NewNoteCreationTest {
+
+    @Test
+    fun createNewNote() {
+        // 1. Find the "New note" button and click it.  Adjust tag/text if needed based on actual app.
+        val newNoteButton: ViewInteraction = Espresso.onView(
+            ViewMatchers.withText("New note") // Or use a more robust selector like resource ID or content description
+        )
+
+        newNoteButton.perform(ViewActions.click())
+
+        // 2. Wait for the Note creation screen to appear (adjust timeout as needed).  This is crucial!
+        Espresso.delay(1000) // Simple delay - consider using IdlingResource for more robust waiting
+
+        // 3. Enter text into the note title field. Adjust ID/text based on actual app.
+        val noteTitleField: ViewInteraction = Espresso.onView(
+            ViewMatchers.withId(R.id.note_title_edit) // Replace with the actual resource ID of the edit text field
+        )
+
+        noteTitleField.perform(ViewActions.typeText("Test Note"))
+
+        // 4. Enter text into the note content field. Adjust ID/text based on actual app.
+        val noteContentField: ViewInteraction = Espresso.onView(
+            ViewMatchers.withId(R.id.note_content_edit) // Replace with the actual resource ID of the edit text field
+        )
+
+        noteContentField.perform(ViewActions.typeText("This is a test note created via Espresso."))
+
+
+        // 5. Find and click the "Save" button (or equivalent). Adjust tag/text if needed.
+        val saveButton: ViewInteraction = Espresso.onView(
+            ViewMatchers.withText("Save") // Or use a more robust selector like resource ID or content description
+        )
+
+        saveButton.perform(ViewActions.click())
+
+        // 6. Verify that the note was created (e.g., check for its presence in a list).  This is crucial!
+        Espresso.delay(1000) // Simple delay - consider using IdlingResource for more robust waiting
+
+        // Example: Check if a note with the title "Test Note" exists in a RecyclerView or similar view.
+        // You'll need to adapt this based on how your app displays notes.
+        // Espresso.onView(withId(R.id.note_list)).check(matches(hasItem(withText("Test Note"))))
+
+    }
+}

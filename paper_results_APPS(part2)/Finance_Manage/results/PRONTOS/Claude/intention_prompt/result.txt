@@ -1,0 +1,165 @@
+# New Transaction Screen - GUI Test Cases
+
+## Test Case 1: Create Valid Expense Transaction
+**Objective**: Verify user can successfully create a complete expense transaction
+
+**Pre-conditions**: User is on the "New Transaction" dialog screen
+
+**Test Steps**:
+1. Tap on the title field (`editText_transaction_name`)
+2. Enter "Grocery Shopping" as the transaction title
+3. Verify "Expense" radio button (`radioButton_transaction_expense`) is selected by default
+4. Tap on the amount field (`dialog_transaction_amount`)
+5. Clear existing text and enter "85.50"
+6. Verify the date field shows current date (2025-06-03)
+7. Verify "Main Account" is selected in account dropdown (`account_spinner`)
+8. Tap on category dropdown (`category_spinner`)
+9. Select or create an appropriate category (e.g., "Food & Groceries")
+10. Tap "SUBMIT" button (`button1`)
+
+**Expected Results**: 
+- Transaction is successfully created and saved
+- Dialog closes and returns to main transactions screen
+- New expense appears in the transaction list
+
+## Test Case 2: Create Valid Income Transaction
+**Objective**: Verify user can successfully create an income transaction
+
+**Test Steps**:
+1. Tap on the title field and enter "Salary Payment"
+2. Tap "Income" radio button (`radioButton_transaction_income`)
+3. Verify radio button selection changes to Income
+4. Enter "2500.00" in amount field
+5. Verify date and account settings
+6. Set category to "Salary" or appropriate income category
+7. Tap "SUBMIT" button
+
+**Expected Results**: 
+- Income transaction is created successfully
+- Amount is recorded as positive/income value
+- Transaction appears in the list with income formatting
+
+## Test Case 3: Mandatory Field Validation
+**Objective**: Verify system validates required fields before submission
+
+**Test Steps**:
+1. Leave title field empty (`editText_transaction_name` shows "Enter title")
+2. Leave amount field empty (`dialog_transaction_amount` shows "Enter amount")
+3. Tap "SUBMIT" button
+4. Verify validation messages appear
+5. Fill in title only, leave amount empty, tap "SUBMIT"
+6. Fill in amount only, leave title empty, tap "SUBMIT"
+
+**Expected Results**:
+- System prevents submission with empty required fields
+- Appropriate validation messages are displayed
+- Focus returns to first empty required field
+
+## Test Case 4: Cancel Transaction Creation
+**Objective**: Verify user can cancel transaction creation without saving
+
+**Test Steps**:
+1. Enter partial transaction data (title: "Test Transaction")
+2. Enter amount "100.00"
+3. Tap "CANCEL" button (`button2`)
+4. Verify return to previous screen
+
+**Expected Results**:
+- Dialog closes without saving any data
+- No new transaction is created
+- User returns to main transactions screen
+
+## Test Case 5: Account Management
+**Objective**: Test account selection and addition functionality
+
+**Test Steps**:
+1. Tap on account dropdown (`account_spinner`)
+2. Verify "Main Account" is displayed
+3. Tap the "+" button next to account (`button_add_account`)
+4. Verify account creation/selection interface appears
+5. Return and verify account selection works properly
+
+**Expected Results**:
+- Account dropdown shows available accounts
+- Add account functionality is accessible
+- Selected account is properly associated with transaction
+
+## Test Case 6: Category Management
+**Objective**: Test category selection and addition functionality
+
+**Test Steps**:
+1. Note current category shows "none" (`category_spinner`)
+2. Tap on category dropdown
+3. Select existing category if available
+4. Tap the "+" button (`button_add_category`) to add new category
+5. Create new category and verify it's selectable
+6. Complete transaction with new category
+
+**Expected Results**:
+- Category dropdown functions properly
+- New categories can be created and selected
+- Category is properly saved with transaction
+
+## Test Case 7: Date Selection
+**Objective**: Verify date selection functionality
+
+**Test Steps**:
+1. Note default date (2025-06-03) in date field (`dialog_transaction_date`)
+2. Tap on the date field
+3. Verify date picker opens
+4. Select different date
+5. Verify date updates in the field
+6. Complete transaction creation
+
+**Expected Results**:
+- Date picker interface opens when date field is tapped
+- Selected date is properly displayed and saved
+- Transaction is recorded with correct date
+
+## Test Case 8: Amount Input Validation
+**Objective**: Test various amount input scenarios
+
+**Test Steps**:
+1. Enter valid decimal amount (e.g., "123.45")
+2. Enter amount with more than 2 decimal places (e.g., "123.456")
+3. Enter non-numeric characters (e.g., "abc")
+4. Enter negative amount (e.g., "-50")
+5. Enter zero amount ("0")
+6. Test very large amounts
+
+**Expected Results**:
+- Valid amounts are accepted and properly formatted
+- Invalid inputs are rejected or corrected
+- Appropriate validation messages for edge cases
+- Amount formatting follows currency standards
+
+## Test Case 9: UI State Persistence
+**Objective**: Verify form state is maintained during interaction
+
+**Test Steps**:
+1. Fill in all transaction fields
+2. Tap on account dropdown and navigate away
+3. Return to form and verify all data is still present
+4. Repeat for category dropdown
+5. Test form state after device rotation (if applicable)
+
+**Expected Results**:
+- Form data persists during navigation within dialog
+- No data loss occurs during normal interactions
+- Form remains stable during orientation changes
+
+## Test Case 10: Transaction Type Toggle
+**Objective**: Verify expense/income radio button functionality
+
+**Test Steps**:
+1. Verify "Income" is initially selected (as shown in UI)
+2. Tap "Expense" radio button (`radioButton_transaction_expense`)
+3. Verify selection changes and only one option is selected
+4. Tap "Income" radio button again
+5. Complete transaction with each type and verify proper categorization
+
+**Expected Results**:
+- Only one transaction type can be selected at a time
+- Visual feedback clearly shows selected type
+- Transaction is properly categorized based on selection
+- Amount handling differs appropriately for income vs expense

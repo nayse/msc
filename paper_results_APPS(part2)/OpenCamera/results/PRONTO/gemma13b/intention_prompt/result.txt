@@ -1,0 +1,56 @@
+2. GUI Intentional Test Cases:
+
+Here's a sequence of tests designed to validate the core functionality of this camera screen, along with actions and expected results:
+
+Test Suite: Camera Functionality Validation
+
+Test 1: Basic Photo Capture & Storage
+
+Action Sequence:
+Verify preview is displaying live video feed.
+Tap the take_photo button.
+Wait for a brief moment (to allow capture).
+Navigate to the device's gallery/photos app.
+Expected Result: A new image should be present in the gallery, confirming successful photo capture and storage.
+Test 2: Camera Switching
+
+Action Sequence:
+Verify preview is displaying live video feed.
+Tap the switch_camera button.
+Observe the preview area.
+Expected Result: The camera should switch to the opposite direction (e.g., from rear to front), and the preview should reflect this change.
+Test 3: Video Recording & Playback
+
+Action Sequence:
+Verify preview is displaying live video feed.
+Tap the switch_video button (if available, otherwise assume a long press on take photo starts recording).
+Allow the app to record for at least 5 seconds.
+Stop the recording.
+Navigate to the device's gallery/videos app.
+Expected Result: A new video file should be present in the gallery, confirming successful video capture and storage.
+Test 4: Zoom Functionality
+
+Action Sequence:
+Verify preview is displaying live video feed.
+Drag the zoom_seekbar.
+Observe the preview area.
+Expected Result: The image in the preview should zoom in or out based on the position of the slider.
+Test 5: Exposure Settings (If Applicable)
+
+Action Sequence:
+Verify exposure_lock and exposure buttons are present.
+Tap the exposure_lock button.
+Observe if the exposure settings change or become locked.
+Tap the exposure button to adjust the exposure.
+Expected Result: The exposure should be adjusted, and the image in the preview area should reflect the changes.
+Test 6: Settings Access
+
+Action Sequence:
+Tap the settings button.
+Expected Result: A settings menu or screen should open, allowing access to app configurations (resolution, quality, etc.).
+Important Considerations for Testing:
+
+Permissions: Ensure the application has necessary permissions (camera, storage) granted before running these tests.
+Device Variations: Test on different devices and Android versions to account for potential inconsistencies.
+Edge Cases: Consider edge cases like low light conditions, fast camera switching, and recording in various resolutions.
+Error Handling: Verify how the app handles errors (e.g., insufficient storage space).

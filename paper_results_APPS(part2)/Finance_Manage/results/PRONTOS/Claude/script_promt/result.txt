@@ -1,0 +1,273 @@
+@RunWith(AndroidJUnit4.class)
+@LargeTest
+public class NewTransactionDialogTest {
+
+    @Rule
+    public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
+
+    /**
+     * Test Case: Create Valid Expense Transaction
+     * Validates the core functionality of creating a complete expense transaction
+     */
+    @Test
+    public void testCreateValidExpenseTransaction() {
+        // Verify dialog title is displayed
+        onView(withId(R.id.alertTitle))
+                .check(matches(withText("New Transaction")))
+                .check(matches(isDisplayed()));
+
+        // Enter transaction title
+        onView(withId(R.id.editText_transaction_name))
+                .perform(clearText(), typeText("Grocery Shopping"))
+                .check(matches(withText("Grocery Shopping")));
+
+        // Verify Expense is selected by default and select it if not
+        onView(withId(R.id.radioButton_transaction_expense))
+                .perform(click())
+                .check(matches(isChecked()));
+
+        // Enter transaction amount
+        onView(withId(R.id.dialog_transaction_amount))
+                .perform(clearText(), typeText("85.50"))
+                .check(matches(withText("85.50")));
+
+        // Verify date is displayed (should show 2025-06-03)
+        onView(withId(R.id.dialog_transaction_date))
+                .check(matches(withText("2025-06-03")))
+                .check(matches(isDisplayed()));
+
+        // Verify account is set to "Main Account"
+        onView(withId(R.id.account_spinner))
+                .check(matches(hasDescendant(withText("Main Account"))));
+
+        // Close keyboard to ensure submit button is visible
+        closeSoftKeyboard();
+
+        // Submit the transaction
+        onView(withId(R.id.button1))
+                .check(matches(withText("SUBMIT")))
+                .check(matches(isEnabled()))
+                .perform(click());
+
+        // Verify dialog is closed (transaction submitted successfully)
+        onView(withId(R.id.alertTitle))
+                .check(doesNotExist());
+    }
+
+    /**
+     * Test Case: Create Valid Income Transaction
+     * Validates creating an income transaction with radio button toggle
+     */
+    @Test
+    public void testCreateValidIncomeTransaction() {
+        // Enter transaction title
+        onView(withId(R.id.editText_transaction_name))
+                .perform(clearText(), typeText("Salary Payment"));
+
+        // Select Income radio button
+        onView(withId(R.id.radioButton_transaction_income))
+                .perform(click())
+                .check(matches(isChecked()));
+
+        // Verify Expense is no longer selected
+        onView(withId(R.id.radioButton_transaction_expense))
+                .check(matches(not(isChecked())));
+
+        // Enter amount
+        onView(withId(R.id.dialog_transaction_amount))
+                .perform(clearText(), typeText("2500.00"));
+
+        closeSoftKeyboard();
+
+        // Submit transaction
+        onView(withId(R.id.button1))
+                .perform(click());
+
+        // Verify dialog closes
+        onView(withId(R.id.alertTitle))
+                .check(doesNotExist());
+    }
+
+    /**
+     * Test Case: Mandatory Field Validation
+     * Validates that required fields are enforced before submission
+     */
+    @Test
+    public void testMandatoryFieldValidation() {
+        // Try to submit with empty fields
+        onView(withId(R.id.button1))
+                .perform(click());
+
+        // Dialog should still be visible (submission failed)
+        onView(withId(R.id.alertTitle))
+                .check(matches(isDisplayed()));
+
+        // Fill only title, leave amount empty
+        onView(withId(R.id.editText_transaction_name))
+                .perform(clearText(), typeText("Test Transaction"));
+
+        closeSoftKeyboard();
+
+        onView(withId(R.id.button1))
+                .perform(click());
+
+        // Dialog should still be visible
+        onView(withId(R.id.alertTitle))
+                .check(matches(isDisplayed()));
+
+        // Now fill amount and submit should work
+        onView(withId(R.id.dialog_transaction_amount))
+                .perform(clearText(), typeText("100.00"));
+
+        closeSoftKeyboard();
+
+        onView(withId(R.id.button1))
+                .perform(click());
+
+        // Dialog should close now
+        onView(withId(R.id.alertTitle))
+                .check(doesNotExist());
+    }
+
+    /**
+     * Test Case: Cancel Transaction Creation
+     * Validates that cancel button closes dialog without saving
+     */
+    @Test
+    public void testCancelTransaction() {
+        // Enter some data
+        onView(withId(R.id.editText_transaction_name))
+                .perform(clearText(), typeText("Test Transaction"));
+
+        onView(withId(R.id.dialog_transaction_amount))
+                .perform(clearText(), typeText("50.00"));
+
+        closeSoftKeyboard();
+
+        // Click Cancel button
+        onView(withId(R.id.button2))
+                .check(matches(withText("CANCEL")))
+                .perform(click());
+
+        // Verify dialog is closed
+        onView(withId(R.id.alertTitle))
+                .check(doesNotExist());
+    }
+
+    /**
+     * Test Case: Radio Button Functionality
+     * Validates exclusive selection of transaction type
+     */
+    @Test
+    public void testTransactionTypeSelection() {
+        // Initially Income should be selected (based on UI screenshot)
+        onView(withId(R.id.radioButton_transaction_income))
+                .check(matches(isChecked()));
+
+        onView(withId(R.id.radioButton_transaction_expense))
+                .check(matches(not(isChecked())));
+
+        // Click Expense
+        onView(withId(R.id.radioButton_transaction_expense))
+                .perform(click())
+                .check(matches(isChecked()));
+
+        // Verify Income is now unselected
+        onView(withId(R.id.radioButton_transaction_income))
+                .check(matches(not(isChecked())));
+
+        // Click Income again
+        onView(withId(R.id.radioButton_transaction_income))
+                .perform(click())
+                .check(matches(isChecked()));
+
+        // Verify Expense is now unselected
+        onView(withId(R.id.radioButton_transaction_expense))
+                .check(matches(not(isChecked())));
+    }
+
+    /**
+     * Test Case: UI Elements Visibility
+     * Validates all core UI elements are present and visible
+     */
+    @Test
+    public void testUIElementsVisibility() {
+        // Check dialog title
+        onView(withId(R.id.alertTitle))
+                .check(matches(withText("New Transaction")))
+                .check(matches(isDisplayed()));
+
+        // Check title input field
+        onView(withId(R.id.editText_transaction_name))
+                .check(matches(isDisplayed()))
+                .check(matches(withHint("Enter title")));
+
+        // Check radio buttons
+        onView(withId(R.id.radioButton_transaction_expense))
+                .check(matches(isDisplayed()))
+                .check(matches(withText("Expense")));
+
+        onView(withId(R.id.radioButton_transaction_income))
+                .check(matches(isDisplayed()))
+                .check(matches(withText("Income")));
+
+        // Check amount field
+        onView(withId(R.id.dialog_transaction_amount))
+                .check(matches(isDisplayed()))
+                .check(matches(withHint("Enter amount")));
+
+        // Check date field
+        onView(withId(R.id.dialog_transaction_date))
+                .check(matches(isDisplayed()))
+                .check(matches(withText("2025-06-03")));
+
+        // Check account section
+        onView(withText("Account"))
+                .check(matches(isDisplayed()));
+
+        onView(withId(R.id.account_spinner))
+                .check(matches(isDisplayed()));
+
+        // Check category section  
+        onView(withText("Category"))
+                .check(matches(isDisplayed()));
+
+        onView(withId(R.id.category_spinner))
+                .check(matches(isDisplayed()));
+
+        // Check action buttons
+        onView(withId(R.id.button1))
+                .check(matches(withText("SUBMIT")))
+                .check(matches(isDisplayed()))
+                .check(matches(isEnabled()));
+
+        onView(withId(R.id.button2))
+                .check(matches(withText("CANCEL")))
+                .check(matches(isDisplayed()))
+                .check(matches(isEnabled()));
+    }
+
+    /**
+     * Test Case: Amount Input Validation
+     * Validates proper handling of amount input
+     */
+    @Test
+    public void testAmountInputValidation() {
+        // Test valid decimal amount
+        onView(withId(R.id.dialog_transaction_amount))
+                .perform(clearText(), typeText("123.45"))
+                .check(matches(withText("123.45")));
+
+        // Test zero amount
+        onView(withId(R.id.dialog_transaction_amount))
+                .perform(clearText(), typeText("0"))
+                .check(matches(withText("0")));
+
+        // Test large amount
+        onView(withId(R.id.dialog_transaction_amount))
+                .perform(clearText(), typeText("999999.99"))
+                .check(matches(withText("999999.99")));
+
+        closeSoftKeyboard();
+    }
+}

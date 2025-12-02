@@ -1,0 +1,38 @@
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
+import static org.hamcrest.Matchers.is;
+
+@RunWith(AndroidJUnit4.class)
+public class CameraScreenTest {
+
+    @Rule
+    public ActivityScenarioRule<YourCameraActivity> activityRule =
+            new ActivityScenarioRule<>(YourCameraActivity.class);
+
+    @Test
+    public void testCameraPreviewAndCapturePhoto() {
+        // Check if camera preview is displayed
+        Espresso.onView(withTagValue(is("preview")))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        // Check if the take photo button is visible and clickable
+        Espresso.onView(withTagValue(is("take_photo")))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+                .check(ViewAssertions.matches(ViewMatchers.isClickable()));
+
+        // Perform click on take photo button
+        Espresso.onView(withTagValue(is("take_photo"))).perform(click());
+
+        // Optional: Add delay or mock to check result after capture
+    }
+}

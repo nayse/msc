@@ -1,0 +1,29 @@
+
+The primary functional objective of this screen is to provide options for creating new content (to-do items, notes, or media attachments) within the Joplin application.
+
+Here are GUI intentional tests to validate the main purpose of the screen:
+
+Test Case 1: Verify "New to-do" button functionality.
+
+Action: Tap the "New to-do" button.
+Expected Outcome: The user is navigated to a new screen or a new to-do item creation interface.
+Test Case 2: Verify "New note" button functionality.
+
+Action: Tap the "New note" button.
+Expected Outcome: The user is navigated to a new screen or a new note creation interface.
+Test Case 3: Verify "Attachment" button functionality.
+
+Action: Tap the "Attachment" button.
+Expected Outcome: A file picker or attachment options are displayed.
+Test Case 4: Verify "Recording" button functionality.
+
+Action: Tap the "Recording" button.
+Expected Outcome: The audio recording interface is initiated or options for recording are presented.
+Test Case 5: Verify "Camera" button functionality.
+
+Action: Tap the "Camera" button.
+Expected Outcome: The device's camera application is launched or an in-app camera interface is displayed.
+Test Case 6: Verify "Drawing" button functionality.
+
+Action: Tap the "Drawing" button.
+Expected Outcome: A drawing canvas or interface is opened.

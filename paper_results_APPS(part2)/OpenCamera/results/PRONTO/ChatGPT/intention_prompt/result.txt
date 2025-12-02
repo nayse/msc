@@ -1,0 +1,83 @@
+✅ Intentional GUI Tests to Validate the Main Purpose
+🔍 Test Objective: Validate the camera interface functionality for capturing media with manual controls.
+Test 1: Take a Photo Using Default Settings
+Preconditions: App is open and camera preview is visible.
+
+Actions:
+
+Observe the ISO and shutter speed values (e.g., ISO 200, 1/100s).
+
+Press the "Take Photo" button (take_photo).
+
+Expected Result: Photo is captured and saved successfully; preview resets.
+
+Test 2: Lock Exposure and Capture Photo
+Actions:
+
+Tap the Exposure Lock button (exposure_lock).
+
+Confirm visual feedback that exposure is locked.
+
+Tap Take Photo.
+
+Expected Result: Image captured with locked exposure; no dynamic exposure adjustment.
+
+Test 3: Adjust Exposure Compensation
+Actions:
+
+Tap the Exposure Compensation button (exposure).
+
+Increase or decrease exposure via slider.
+
+Observe preview changes accordingly.
+
+Expected Result: Live preview updates exposure; capture reflects adjusted exposure.
+
+Test 4: Switch to Video Mode and Record
+Actions:
+
+Tap the Switch to Video button (switch_video).
+
+Tap Record (button likely replaces "Take Photo").
+
+Record a few seconds and stop.
+
+Expected Result: Video is recorded, saved, and accessible from gallery.
+
+Test 5: Switch Camera (Front/Back)
+Actions:
+
+Tap the Switch Camera button (switch_camera).
+
+Observe the preview flip.
+
+Expected Result: Preview switches to front or back camera correctly.
+
+Test 6: Check Captured Media in Gallery
+Actions:
+
+Tap the Gallery button (gallery).
+
+View the most recent photo or video.
+
+Expected Result: Media opens in viewer app; no crash or delay.
+
+Test 7: Use Zoom Control
+Actions:
+
+Drag the Zoom Seekbar (zoom_seekbar) up or down.
+
+Observe the preview zoom in/out smoothly.
+
+Expected Result: Zoom transitions are responsive and fluid.
+
+Test 8: Open and Validate Settings
+Actions:
+
+Tap the Settings icon (settings).
+
+Modify any setting (e.g., resolution, aspect ratio).
+
+Return to preview.
+
+Expected Result: Setting change is applied; preview or capture adjusts accordingly.

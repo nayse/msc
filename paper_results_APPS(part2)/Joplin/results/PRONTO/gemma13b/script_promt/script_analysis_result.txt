@@ -1,0 +1,7 @@
+=== GUI Test Script Analysis for result.txt ===
+Test Cases (@Test): 1
+UI Interactions (onView): 5
+User Actions (perform): 4
+Total Lines (LOC): 53
+Executable LOC: 30
+Covers Main Functionality: False

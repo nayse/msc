@@ -1,0 +1,42 @@
+✅ GUI Intentional Tests (Functional UI Test Cases)
+Test Case 1: Validate Welcome Screen Loads
+Precondition: App is freshly installed or user navigates to the Welcome screen.
+
+Action: Launch the app.
+
+Expected Result: The welcome notes list (1–5) is displayed with titles such as “Welcome to Joplin!” and the quick action menu appears at the bottom.
+
+Test Case 2: Create a New Note
+Action: Tap the "New note" button at the bottom.
+
+Expected Result: A note editor opens allowing the user to enter text.
+
+Test Case 3: Create a New To-Do
+Action: Tap the "New to-do" button at the bottom.
+
+Expected Result: A to-do editor opens with checkboxes and a text area.
+
+Test Case 4: Add an Attachment
+Action: Tap the "Attachment" icon.
+
+Expected Result: The device’s file browser opens allowing file selection.
+
+Test Case 5: Record Audio Note
+Action: Tap the "Recording" icon.
+
+Expected Result: Audio recording starts or a recording UI appears.
+
+Test Case 6: Add Note via Camera
+Action: Tap the "Camera" icon.
+
+Expected Result: The camera app opens for capturing an image.
+
+Test Case 7: Create a Handwritten Note
+Action: Tap the "Drawing" icon.
+
+Expected Result: A drawing interface opens allowing hand drawing.
+
+Test Case 8: Access Help Note
+Action: Tap "1. Welcome to Joplin!" from the list.
+
+Expected Result: Opens a note with instructions about Joplin.

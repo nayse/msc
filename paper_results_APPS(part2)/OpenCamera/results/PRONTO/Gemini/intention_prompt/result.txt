@@ -1,0 +1,31 @@
+
+The primary functional objective of the GUI screen is to operate as a camera application. This is evidenced by the presence of a "take_photo" button, "switch_video" and "switch_camera" buttons, and a "gallery" button, all of which are core functionalities of a camera interface. The "preview" and "TextureView" elements also suggest a live camera feed display.
+
+Here are GUI intentional tests to validate the main purpose of the screen:
+
+Test Case 1: Capture a Photo
+
+Action: Tap the "take_photo" button.
+Expected Outcome: A photo should be captured and saved. The screen might briefly flash or show a confirmation.
+Test Case 2: Switch to Video Mode and Back
+
+Action: Tap the "switch_video" button.
+Expected Outcome: The camera mode should switch to video recording. The "take_photo" button might change to a record button, or a video recording indicator should appear.
+Action: Tap the "switch_video" button again (or the new record button if it's a toggle).
+Expected Outcome: The camera should switch back to photo mode.
+Test Case 3: Switch Camera (Front/Rear)
+
+Action: Tap the "switch_camera" button.
+Expected Outcome: The camera view should switch between the front and rear cameras (if applicable on the device). The image displayed in the "preview" area should change accordingly.
+Test Case 4: Access Gallery
+
+Action: Tap the "gallery" button.
+Expected Outcome: The application should navigate to the device's image gallery, displaying previously captured photos/videos.
+Test Case 5: Adjust Exposure Lock
+
+Action: Tap the "exposure_lock" button.
+Expected Outcome: The exposure should be locked, meaning the brightness settings will remain constant even if the scene lighting changes. There might be a visual indicator on screen.
+Test Case 6: Access Settings
+
+Action: Tap the "settings" button.
+Expected Outcome: A settings menu or screen should appear, allowing the user to configure camera-related options.

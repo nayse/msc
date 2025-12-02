@@ -1,0 +1,67 @@
+🧪 GUI Intentional Tests
+Below are GUI tests designed to validate the primary objective (recording a new transaction), with actions and expected outcomes.
+
+Test Case 1: Add a Valid Income Transaction
+Action 1: Tap the title field and enter "Salary".
+
+Action 2: Ensure "Income" is selected (default).
+
+Action 3: Tap the amount field and enter "5000".
+
+Action 4: Leave the default date or choose a different date.
+
+Action 5: Select "Main Account" from the account dropdown.
+
+Action 6: Choose a category like "Salary" from the category dropdown.
+
+Action 7: Tap SUBMIT.
+
+Expected Result: Transaction is saved and appears in the list of latest transactions.
+
+Test Case 2: Add a Valid Expense Transaction
+Action 1: Tap the title field and enter "Groceries".
+
+Action 2: Tap "Expense" radio button.
+
+Action 3: Enter "250" in the amount field.
+
+Action 4: Select or confirm the date.
+
+Action 5: Select "Main Account".
+
+Action 6: Choose "Food" or another relevant category.
+
+Action 7: Tap SUBMIT.
+
+Expected Result: Expense transaction is saved and categorized accordingly.
+
+Test Case 3: Submit Without Required Fields
+Action 1: Tap SUBMIT without filling in any field.
+
+Expected Result: Validation error messages appear for missing title and amount. Submission is blocked.
+
+Test Case 4: Add a New Account
+Action 1: Tap the + button next to Account dropdown.
+
+Action 2: Enter "Savings" and confirm.
+
+Expected Result: "Savings" appears in the account dropdown and can be selected.
+
+Test Case 5: Add a New Category
+Action 1: Tap the + button next to Category dropdown.
+
+Action 2: Enter "Freelance" and confirm.
+
+Expected Result: "Freelance" appears in the category list and can be selected.
+
+Test Case 6: Cancel Transaction Creation
+Action 1: Tap the CANCEL button.
+
+Expected Result: Dialog is dismissed without saving any data.
+
+Test Case 7: Edit Date of Transaction
+Action 1: Tap the date field.
+
+Action 2: Select a different date (e.g., 2025-06-01).
+
+Expected Result: Date field updates to selected date.

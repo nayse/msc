@@ -1,0 +1,66 @@
+✅ GUI Intentional Tests:
+🧪 Test 1: Start a New Recording (Main Goal Test)
+Goal: Ensure a user can start a new track recording.
+
+Action: Tap FAB track_list_fab_action (red circle button).
+
+Expected Result: Recording starts and UI transitions to a tracking screen (e.g., map, distance, duration).
+
+Assertion: A visual or toast message confirms recording started.
+
+🧪 Test 2: Access Aggregated Stats
+Goal: Validate user can view past performance data.
+
+Action: Tap aggregated_stats_button.
+
+Expected Result: A stats or history screen opens.
+
+Assertion: List of previous tracks or performance metrics is displayed.
+
+🧪 Test 3: Start Sensor Tracking Manually
+Goal: Ensure tracking hardware (like GPS) can be toggled.
+
+Action: Tap sensor_start_button.
+
+Expected Result: Sensor starts, GPS icon or status indicator changes.
+
+Assertion: Confirmation message or indicator shows sensor is active.
+
+🧪 Test 4: Use Search Bar
+Goal: Filter or search among recorded tracks.
+
+Action: Tap on track_list_toolbar (search bar).
+
+Action: Enter track name or keyword.
+
+Expected Result: List updates to show matching entries.
+
+Assertion: Only relevant results are shown.
+
+🧪 Test 5: Open App Settings
+Goal: Allow configuration changes.
+
+Action: Tap track_list_settings button.
+
+Expected Result: Navigates to settings/preferences screen.
+
+Assertion: User can see and change app settings.
+
+🧪 Test 6: Manage Map Markers
+Goal: Toggle or configure markers.
+
+Action: Tap track_list_markers button.
+
+Expected Result: Marker options appear or are toggled.
+
+Assertion: Markers are added, removed, or managed.
+
+🧪 Test 7: Explore More Options (Overflow Menu)
+Goal: Access hidden or less-used features.
+
+Action: Tap 3-dot menu icon.
+
+Expected Result: Contextual menu appears.
+
+Assertion: User sees options like "Import", "Export", "About", etc.
+

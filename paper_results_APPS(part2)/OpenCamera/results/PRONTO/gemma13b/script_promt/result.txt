@@ -1,0 +1,58 @@
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.ViewInteraction
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class CameraCoreFunctionalityTest {
+
+    @Test
+    fun capturePhotoAndVerify() {
+        // 1. Verify Preview is Displaying (Optional, but good practice)
+        Espresso.onView(withId(R.id.preview)) // Assuming 'preview' has an ID
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        // 2. Capture Photo
+        val takePhotoButton = Espresso.onView(withId(R.id.take_photo))  // Assuming 'take_photo' has an ID
+        takePhotoButton.perform(ViewActions.click())
+
+        // 3. Verify Photo is Saved (Requires Media Scan Listener - See Notes)
+        // This part is tricky and requires a more robust solution involving media scan listeners or polling for the file existence.  See notes below.
+    }
+
+    @Test
+    fun switchCamera() {
+        // 1. Verify Preview is Displaying
+        Espresso.onView(withId(R.id.preview))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        // 2. Switch Camera
+        val switchCameraButton = Espresso.onView(withId(R.id.switch_camera)) // Assuming 'switch_camera' has an ID
+        switchCameraButton.perform(ViewActions.click())
+
+        // 3. Verify Camera Switched (Check for changes in preview - difficult to automate reliably)
+        // This would require checking image properties or comparing frames, which is beyond the scope of this basic example.
+    }
+
+    @Test
+    fun startStopVideo() {
+        // 1. Verify Preview is Displaying
+        Espresso.onView(withId(R.id.preview))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        // 2. Start Video Recording (Assuming a long press on take_photo starts recording)
+        val takePhotoButton = Espresso.onView(withId(R.id.take_photo))
+        takePhotoButton.perform(ViewActions.longPress()) // Or use ViewActions.click() if it's a dedicated video button
+
+        // 3. Wait for a few seconds to allow recording
+        Espresso.delay(2000)  // Use Thread.sleep() or a more robust waiting mechanism in production code
+
+        // 4. Stop Video Recording (Assuming same action as start)
+        takePhotoButton.perform(ViewActions.longPress()) // Or ViewActions.click()
+
+        // 5. Verify Video is Saved (Similar to photo verification - requires media scan listener or polling)
+    }
+}

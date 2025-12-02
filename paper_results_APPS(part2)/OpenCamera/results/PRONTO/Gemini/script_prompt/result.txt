@@ -1,0 +1,48 @@
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
+import static org.hamcrest.Matchers.is;
+
+@RunWith(AndroidJUnit4.class)
+public class CameraCoreFunctionalityTest {
+
+    @Rule
+    public ActivityScenarioRule<MainActivity> activityScenarioRule =
+            new ActivityScenarioRule<>(MainActivity.class);
+
+    @Test
+    public void testTakePhotoAndSwitchModes() {
+        // 1. Verify the "take_photo" button is displayed and clickable
+        Espresso.onView(withTagValue(is((Object)"take_photo")))
+                .check(matches(isDisplayed()))
+                .perform(click());
+        // Add a delay or assertion here if there's a visual cue after taking a photo
+        // For example, if a thumbnail appears or a toast message.
+        // Thread.sleep(2000); // Only use Thread.sleep for debugging, avoid in real tests.
+
+        // 2. Verify "switch_video" button is displayed and clickable, then switch to video mode
+        Espresso.onView(withTagValue(is((Object)"switch_video")))
+                .check(matches(isDisplayed()))
+                .perform(click());
+        // Assert that the UI has changed to video mode (e.g., the "take_photo" button tag
+        // might change, or a video specific element appears).
+        // This requires knowing the expected UI state after switching to video.
+        // For this example, we'll assume a simple click without deeper UI validation.
+
+        // 3. Switch back to photo mode (assuming "switch_video" is a toggle)
+        Espresso.onView(withTagValue(is((Object)"switch_video")))
+                .perform(click());
+        // Assert that the UI has changed back to photo mode.
+    }
+}

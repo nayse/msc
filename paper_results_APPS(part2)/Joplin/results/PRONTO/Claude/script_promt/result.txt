@@ -1,0 +1,286 @@
+package com.joplin.android.test;
+
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
+
+/**
+ * Espresso test for Joplin welcome screen core functionality
+ * Tests the primary objective: Quick access to note and to-do creation
+ */
+@RunWith(AndroidJUnit4.class)
+@LargeTest
+public class JoplinWelcomeScreenTest {
+
+    @Rule
+    public ActivityScenarioRule<MainActivity> activityRule =
+            new ActivityScenarioRule<>(MainActivity.class);
+
+    /**
+     * Test Case: Verify core UI elements are displayed
+     * Validates that essential buttons for note creation are visible
+     */
+    @Test
+    public void testCoreUIElementsAreDisplayed() {
+        // Verify welcome header is displayed
+        onView(withText("Welcome!"))
+                .check(matches(isDisplayed()));
+
+        // Verify "New note" button is displayed and clickable
+        onView(allOf(
+                withText("New note"),
+                ViewMatchers.isClickable()
+        )).check(matches(isDisplayed()));
+
+        // Verify "New to-do" button is displayed and clickable
+        onView(allOf(
+                withText("New to-do"),
+                ViewMatchers.isClickable()
+        )).check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case: Create New Note - Core Functionality
+     * Tests the primary function of note creation
+     */
+    @Test
+    public void testCreateNewNote() {
+        // Click on "New note" button
+        onView(withText("New note"))
+                .perform(click());
+
+        // Wait for note editor to load (assuming it opens a new activity/fragment)
+        // Verify note editor interface appears
+        try {
+            Thread.sleep(1000); // Allow transition time
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Verify note creation was successful by checking for editor elements
+        // This would depend on the actual note editor layout
+        // For now, we'll verify the action completed without crash
+        
+        // Navigate back to main screen if needed
+        Espresso.pressBack();
+        
+        // Verify we're back to main screen
+        onView(withText("Welcome!"))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case: Create New To-Do - Core Functionality
+     * Tests the secondary core function of to-do creation
+     */
+    @Test
+    public void testCreateNewToDo() {
+        // Click on "New to-do" button
+        onView(withText("New to-do"))
+                .perform(click());
+
+        // Wait for to-do editor to load
+        try {
+            Thread.sleep(1000); // Allow transition time
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Navigate back to main screen if needed
+        Espresso.pressBack();
+        
+        // Verify we're back to main screen
+        onView(withText("Welcome!"))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case: Quick Action Buttons Functionality
+     * Tests that attachment/media buttons are accessible
+     */
+    @Test
+    public void testQuickActionButtonsAreAccessible() {
+        // Verify attachment button is displayed and clickable
+        onView(withText("Attachment"))
+                .check(matches(isDisplayed()))
+                .check(matches(ViewMatchers.isClickable()));
+
+        // Verify camera button is displayed and clickable
+        onView(withText("Camera"))
+                .check(matches(isDisplayed()))
+                .check(matches(ViewMatchers.isClickable()));
+
+        // Verify recording button is displayed and clickable
+        onView(withText("Recording"))
+                .check(matches(isDisplayed()))
+                .check(matches(ViewMatchers.isClickable()));
+
+        // Verify drawing button is displayed and clickable
+        onView(withText("Drawing"))
+                .check(matches(isDisplayed()))
+                .check(matches(ViewMatchers.isClickable()));
+    }
+
+    /**
+     * Test Case: Navigation Menu Access
+     * Tests that users can access tutorial/help content
+     */
+    @Test
+    public void testNavigationMenuAccess() {
+        // Verify tutorial menu items are displayed and clickable
+        onView(withText("1. Welcome to Joplin!"))
+                .check(matches(isDisplayed()))
+                .check(matches(ViewMatchers.isClickable()));
+
+        onView(withText("2. Importing and exporting notes"))
+                .check(matches(isDisplayed()))
+                .check(matches(ViewMatchers.isClickable()));
+
+        onView(withText("3. Synchronising your notes"))
+                .check(matches(isDisplayed()))
+                .check(matches(ViewMatchers.isClickable()));
+
+        onView(withText("4. Tips"))
+                .check(matches(isDisplayed()))
+                .check(matches(ViewMatchers.isClickable()));
+
+        onView(withText("5. Joplin Privacy Policy"))
+                .check(matches(isDisplayed()))
+                .check(matches(ViewMatchers.isClickable()));
+    }
+
+    /**
+     * Test Case: Core User Workflow
+     * Tests the complete flow of accessing and using core features
+     */
+    @Test
+    public void testCoreUserWorkflow() {
+        // Step 1: Verify main screen loads properly
+        onView(withText("Welcome!"))
+                .check(matches(isDisplayed()));
+
+        // Step 2: Test quick access to note creation
+        onView(withText("New note"))
+                .perform(click());
+
+        // Allow processing time
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Navigate back
+        Espresso.pressBack();
+
+        // Step 3: Test quick access to to-do creation
+        onView(withText("New to-do"))
+                .perform(click());
+
+        // Allow processing time
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Navigate back
+        Espresso.pressBack();
+
+        // Step 4: Verify return to main screen
+        onView(withText("Welcome!"))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case: Button Responsiveness
+     * Tests that core buttons respond appropriately to user interaction
+     */
+    @Test
+    public void testButtonResponsiveness() {
+        // Test New Note button click response
+        onView(withText("New note"))
+                .perform(click());
+
+        // Verify some response occurred (screen change, dialog, etc.)
+        // This test ensures the button isn't unresponsive
+        try {
+            Thread.sleep(200); // Minimal wait for response
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Navigate back to test next button
+        Espresso.pressBack();
+
+        // Test New To-Do button click response
+        onView(withText("New to-do"))
+                .perform(click());
+
+        // Verify response
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Return to main screen
+        Espresso.pressBack();
+
+        // Final verification - main screen is still accessible
+        onView(withText("Welcome!"))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test Case: Screen Stability
+     * Ensures the screen remains stable during normal operations
+     */
+    @Test
+    public void testScreenStability() {
+        // Perform multiple interactions to test stability
+        for (int i = 0; i < 3; i++) {
+            // Click tutorial items
+            onView(withText("1. Welcome to Joplin!"))
+                    .perform(click());
+            
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Navigate back if needed
+            Espresso.pressBack();
+
+            // Verify main screen is still stable
+            onView(withText("Welcome!"))
+                    .check(matches(isDisplayed()));
+        }
+
+        // Final verification that core buttons still work
+        onView(withText("New note"))
+                .check(matches(isDisplayed()))
+                .check(matches(ViewMatchers.isClickable()));
+
+        onView(withText("New to-do"))
+                .check(matches(isDisplayed()))
+                .check(matches(ViewMatchers.isClickable()));
+    }
+}

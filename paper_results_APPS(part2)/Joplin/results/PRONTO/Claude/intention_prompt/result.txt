@@ -1,0 +1,284 @@
+# Joplin Welcome Screen - GUI Intentional Tests
+
+## Test Suite Overview
+**Application**: Joplin Note-Taking App  
+**Screen**: Welcome/Tutorial Screen  
+**Primary Objective**: User onboarding and quick access to core functionalities
+
+---
+
+## Test Category 1: Navigation and Tutorial Access
+
+### Test Case 1.1: Welcome Tutorial Navigation
+**Objective**: Validate users can access tutorial content
+**Priority**: High
+
+**Test Steps**:
+1. Launch Joplin application
+2. Verify "Welcome!" header is displayed
+3. Tap on "1. Welcome to Joplin!" menu item
+4. Verify tutorial content loads
+5. Navigate back to main menu
+6. Repeat for each numbered menu item (2-5)
+
+**Expected Results**:
+- Each menu item should be clickable and load relevant content
+- Navigation should be smooth without crashes
+- Content should be relevant to the menu item selected
+
+### Test Case 1.2: Menu Drawer Functionality
+**Objective**: Test hamburger menu accessibility
+**Priority**: Medium
+
+**Test Steps**:
+1. Identify hamburger menu icon (top-left)
+2. Tap hamburger menu
+3. Verify menu drawer opens
+4. Test menu item selections
+5. Close menu drawer
+
+**Expected Results**:
+- Menu drawer opens smoothly
+- All menu items are accessible
+- Menu closes when expected
+
+---
+
+## Test Category 2: Core Content Creation Features
+
+### Test Case 2.1: New Note Creation
+**Objective**: Validate primary note creation functionality
+**Priority**: Critical
+
+**Test Steps**:
+1. Locate "New note" button (blue button, bottom-right area)
+2. Tap "New note" button
+3. Verify note editor opens
+4. Enter sample text: "Test note content"
+5. Save the note
+6. Verify note appears in notes list
+
+**Expected Results**:
+- Note editor opens immediately
+- Text input works correctly
+- Note saves successfully
+- Note is accessible after creation
+
+### Test Case 2.2: New To-Do Creation
+**Objective**: Test task management functionality
+**Priority**: Critical
+
+**Test Steps**:
+1. Locate "New to-do" button (outlined button, bottom-left area)
+2. Tap "New to-do" button
+3. Verify to-do editor opens
+4. Enter task: "Complete Joplin testing"
+5. Set due date (if available)
+6. Save the to-do
+7. Verify to-do appears in task list
+
+**Expected Results**:
+- To-do editor opens with appropriate fields
+- Task creation works correctly
+- To-do is saved and retrievable
+- Checkbox functionality works for task completion
+
+---
+
+## Test Category 3: Media and Attachment Features
+
+### Test Case 3.1: Attachment Functionality
+**Objective**: Test file attachment capability
+**Priority**: High
+
+**Test Steps**:
+1. Tap "Attachment" button (paperclip icon)
+2. Verify file picker opens
+3. Select a test file (document/image)
+4. Confirm attachment
+5. Verify file is attached to current note/context
+
+**Expected Results**:
+- File picker opens with available files
+- File selection works correctly
+- Attachment process completes successfully
+- Attached file is accessible
+
+### Test Case 3.2: Camera Integration
+**Objective**: Validate camera functionality for note capture
+**Priority**: High
+
+**Test Steps**:
+1. Tap "Camera" button
+2. Verify camera app/interface opens
+3. Take a test photo
+4. Confirm photo capture
+5. Verify photo is added to note context
+
+**Expected Results**:
+- Camera opens without errors
+- Photo capture works correctly
+- Image is properly integrated into Joplin
+- Image quality is maintained
+
+### Test Case 3.3: Audio Recording
+**Objective**: Test voice note functionality
+**Priority**: Medium
+
+**Test Steps**:
+1. Tap "Recording" button (microphone icon)
+2. Grant microphone permissions if prompted
+3. Start recording a 10-second voice note
+4. Stop recording
+5. Verify audio file is created and attached
+
+**Expected Results**:
+- Recording interface opens
+- Audio capture works clearly
+- Recording stops when commanded
+- Audio file is properly saved and accessible
+
+### Test Case 3.4: Drawing Feature
+**Objective**: Test sketching/drawing capability
+**Priority**: Medium
+
+**Test Steps**:
+1. Tap "Drawing" button
+2. Verify drawing interface opens
+3. Create a simple sketch using available tools
+4. Save the drawing
+5. Verify drawing is attached to note context
+
+**Expected Results**:
+- Drawing tools are responsive
+- Sketch creation works smoothly
+- Drawing saves correctly
+- Integrated drawing is viewable
+
+---
+
+## Test Category 4: User Experience and Interface
+
+### Test Case 4.1: Screen Responsiveness
+**Objective**: Validate interface responsiveness
+**Priority**: Medium
+
+**Test Steps**:
+1. Interact with all visible buttons rapidly
+2. Test scrolling behavior on tutorial list
+3. Rotate device (if applicable)
+4. Test touch targets for accuracy
+
+**Expected Results**:
+- No delayed responses or freezing
+- Smooth scrolling experience
+- Interface adapts to orientation changes
+- All buttons are easily tappable
+
+### Test Case 4.2: Search Functionality
+**Objective**: Test search feature access
+**Priority**: High
+
+**Test Steps**:
+1. Locate search icon (magnifying glass, top-right)
+2. Tap search icon
+3. Enter search query: "welcome"
+4. Verify search results display
+5. Select a search result
+
+**Expected Results**:
+- Search interface opens immediately
+- Search executes and returns relevant results
+- Results are clickable and lead to correct content
+
+---
+
+## Test Category 5: Tutorial Content Validation
+
+### Test Case 5.1: Tutorial Content Completeness
+**Objective**: Ensure all tutorial sections provide value
+**Priority**: Medium
+
+**Test Steps**:
+1. Systematically go through each tutorial item:
+   - "Welcome to Joplin!"
+   - "Importing and exporting notes"
+   - "Synchronising your notes"
+   - "Tips"
+   - "Joplin Privacy Policy"
+2. Verify each section contains relevant, helpful information
+3. Test any interactive elements within tutorials
+
+**Expected Results**:
+- Each tutorial section loads completely
+- Content is informative and relevant
+- No broken links or missing information
+- Interactive elements function correctly
+
+---
+
+## Test Category 6: Integration and Workflow Tests
+
+### Test Case 6.1: Complete User Workflow
+**Objective**: Test end-to-end user journey
+**Priority**: Critical
+
+**Test Steps**:
+1. New user opens Joplin
+2. Reviews welcome tutorial
+3. Creates first note with text content
+4. Adds an attachment to the note
+5. Creates a to-do item
+6. Takes a photo and adds to note
+7. Records a voice memo
+8. Uses search to find created content
+
+**Expected Results**:
+- Smooth progression through all steps
+- All created content is retained and accessible
+- No data loss during the workflow
+- User can successfully accomplish basic note-taking tasks
+
+---
+
+## Performance and Error Handling
+
+### Test Case 7.1: Error Scenarios
+**Objective**: Validate graceful error handling
+**Priority**: High
+
+**Test Steps**:
+1. Test with no internet connection (for sync features)
+2. Test with insufficient storage space
+3. Test camera access with denied permissions
+4. Test microphone access with denied permissions
+5. Attempt to create content with very long titles/content
+
+**Expected Results**:
+- Clear error messages displayed
+- App doesn't crash under error conditions
+- User is guided on how to resolve issues
+- App maintains functionality where possible
+
+---
+
+## Success Criteria Summary
+
+**Critical Success Factors**:
+- New note creation works flawlessly
+- New to-do creation functions correctly
+- All media attachment features (camera, recording, drawing, files) work
+- Tutorial content is accessible and informative
+- Search functionality operates correctly
+
+**Performance Benchmarks**:
+- Button response time < 200ms
+- Content creation completion < 3 seconds
+- Media capture completion < 5 seconds
+- No memory leaks during extended use
+
+**User Experience Goals**:
+- Intuitive navigation for new users
+- Clear visual feedback for all actions
+- Consistent interface behavior
+- Accessible design for various user needs

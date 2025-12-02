@@ -1,0 +1,167 @@
+@RunWith(AndroidJUnit4.class)
+@LargeTest
+public class CameraCoreTest {
+    
+    @Rule
+    public ActivityTestRule<CameraActivity> activityRule = 
+        new ActivityTestRule<>(CameraActivity.class);
+    
+    @Test
+    public void testCoreCameraFunctionality() {
+        // Test Objective: Validate core photo capture functionality
+        
+        // Step 1: Verify camera preview is loaded and visible
+        onView(withId(R.id.preview))
+            .check(matches(isDisplayed()));
+            
+        // Verify TextureView (camera feed) is active
+        onView(withId(R.id.TextureView))
+            .check(matches(isDisplayed()));
+        
+        // Step 2: Wait for camera to initialize (2 seconds)
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // Step 3: Verify take photo button is visible and enabled
+        onView(withId(R.id.take_photo))
+            .check(matches(isDisplayed()))
+            .check(matches(isEnabled()));
+        
+        // Step 4: Capture photo by tapping the main capture button
+        onView(withId(R.id.take_photo))
+            .perform(click());
+        
+        // Step 5: Verify photo capture completed
+        // Wait for capture animation/processing
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // Step 6: Verify camera is ready for next capture
+        // Check that preview is still active after photo capture
+        onView(withId(R.id.preview))
+            .check(matches(isDisplayed()));
+            
+        // Verify capture button is still enabled for next photo
+        onView(withId(R.id.take_photo))
+            .check(matches(isEnabled()));
+    }
+    
+    @Test
+    public void testCameraPreviewInitialization() {
+        // Test Objective: Ensure camera preview loads correctly
+        
+        // Verify main camera container is present
+        onView(withId(R.id.locker))
+            .check(matches(isDisplayed()));
+        
+        // Verify preview area bounds are correct
+        onView(withId(R.id.preview))
+            .check(matches(isDisplayed()))
+            .check(matches(hasMinimumChildCount(1)));
+        
+        // Verify camera controls are accessible
+        onView(withId(R.id.take_photo))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()));
+    }
+    
+    @Test 
+    public void testMultiplePhotoCapture() {
+        // Test Objective: Validate multiple consecutive photo captures
+        
+        // Wait for camera initialization
+        SystemClock.sleep(2000);
+        
+        // Take first photo
+        onView(withId(R.id.take_photo))
+            .check(matches(isDisplayed()))
+            .perform(click());
+        
+        // Wait for first capture to complete
+        SystemClock.sleep(1500);
+        
+        // Verify camera is ready for second photo
+        onView(withId(R.id.take_photo))
+            .check(matches(isEnabled()));
+        
+        // Take second photo
+        onView(withId(R.id.take_photo))
+            .perform(click());
+        
+        // Wait for second capture
+        SystemClock.sleep(1000);
+        
+        // Verify camera remains stable and functional
+        onView(withId(R.id.preview))
+            .check(matches(isDisplayed()));
+            
+        onView(withId(R.id.take_photo))
+            .check(matches(isEnabled()));
+    }
+    
+    @Before
+    public void setUp() {
+        // Grant camera permissions if needed
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            UiAutomation uiAutomation = InstrumentationRegistry.getInstrumentation().getUiAutomation();
+            uiAutomation.grantRuntimePermission(
+                activityRule.getActivity().getPackageName(),
+                Manifest.permission.CAMERA
+            );
+            uiAutomation.grantRuntimePermission(
+                activityRule.getActivity().getPackageName(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            );
+        }
+    }
+    
+    @After
+    public void tearDown() {
+        // Clean up any test artifacts if needed
+        // This ensures test isolation
+    }
+}
+
+// Additional helper class for camera-specific matchers
+class CameraMatchers {
+    
+    public static Matcher<View> isPreviewActive() {
+        return new TypeSafeMatcher<View>() {
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("camera preview is active");
+            }
+            
+            @Override
+            public boolean matchesSafely(View view) {
+                // Check if TextureView has active surface
+                if (view instanceof TextureView) {
+                    TextureView textureView = (TextureView) view;
+                    return textureView.isAvailable() && textureView.getSurfaceTexture() != null;
+                }
+                return false;
+            }
+        };
+    }
+    
+    public static Matcher<View> isCameraReady() {
+        return new TypeSafeMatcher<View>() {
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("camera is ready for capture");
+            }
+            
+            @Override
+            public boolean matchesSafely(View view) {
+                // Custom logic to verify camera readiness
+                return view.isEnabled() && view.getVisibility() == View.VISIBLE;
+            }
+        };
+    }
+}

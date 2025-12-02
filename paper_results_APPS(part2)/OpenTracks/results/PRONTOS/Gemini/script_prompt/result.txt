@@ -1,0 +1,48 @@
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+@RunWith(AndroidJUnit4.class)
+public class TrackListScreenTest {
+
+    @Rule
+    public ActivityScenarioRule<MainActivity> activityScenarioRule =
+            new ActivityScenarioRule<>(MainActivity.class);
+
+    @Test
+    public void testTrackListDisplayAndSearch() {
+        // 1. Verify the track_list is displayed
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("track_list")))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        // 2. Tap on the track_list_toolbar (search field)
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("track_list_toolbar")))
+                .perform(ViewActions.click());
+
+        // 3. Enter a search query
+        String searchQuery = "MyTrack";
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("track_list_toolbar")))
+                .perform(ViewActions.typeText(searchQuery), ViewActions.pressImeActionButton()); // pressImeActionButton to dismiss keyboard
+
+        // 4. Verify the search query is visible in the search field
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("track_list_toolbar")))
+                .check(ViewAssertions.matches(ViewMatchers.withText(searchQuery)));
+
+        // 5. (Optional but recommended for a more robust test) Verify that the track list
+        //    content changes based on the search query. This would typically involve
+        //    checking for a specific item in the list or checking for the absence of items
+        //    that shouldn't be there after the search. For simplicity, this example
+        //    only checks if the search query is entered. A more complete test would
+        //    require knowledge of the data populating the track list.
+        //    Example:
+        //    Espresso.onView(ViewMatchers.withText("Expected Search Result Item"))
+        //            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+}
