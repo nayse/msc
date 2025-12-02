@@ -1,0 +1,41 @@
+
+The primary functional objective of this screen is to allow users to view and navigate a calendar, as well as to create new tasks or events.
+
+Here are GUI intentional tests with actions and a logical sequence of user actions to validate the main purpose of the screen:
+
+Test Case 1: Verify Calendar Navigation (Month View)
+
+Objective: To ensure users can navigate between months using the arrow buttons.
+User Actions:
+Click the "top_left_arrow" button (bounds: [0,368][196,555]) to navigate to the previous month.
+Verify the "top_value" text changes from "June" to the previous month (e.g., "May").
+Click the "top_right_arrow" button (bounds: [1244,368][1440,555]) twice to navigate to the next month twice (e.g., "July", then "August").
+Verify the "top_value" text updates accordingly.
+Test Case 2: Create a New Task
+
+Objective: To confirm users can initiate the creation of a new task.
+User Actions:
+Click the "calendar_fab" button (bounds: [1188,2784][1384,2980]).
+Click the "fab_task_icon" (bounds: [1216,2588][1356,2728]) or the "fab_task_label" (bounds: [998,2602][1188,2715]) to open the new task interface.
+Verify that the application transitions to a screen for creating a new task.
+Test Case 3: Create a New Event
+
+Objective: To confirm users can initiate the creation of a new event.
+User Actions:
+Click the "calendar_fab" button (bounds: [1188,2784][1384,2980]).
+Click the "fab_event_label" (bounds: [977,2826][1188,2939]) to open the new event interface.
+Verify that the application transitions to a screen for creating a new event.
+Test Case 4: Verify Search Functionality
+
+Objective: To ensure the search bar is interactive.
+User Actions:
+Click the "top_toolbar_search_icon" (bounds: [56,172][196,340]).
+Verify the keyboard appears and the text field "top_toolbar_search" (bounds: [196,172][838,340]) is ready for input.
+Enter some text into the search field (e.g., "meeting").
+Verify that relevant search results (if any) are displayed or that the screen indicates no results.
+Test Case 5: Access Settings
+
+Objective: To ensure users can access the application settings.
+User Actions:
+Click the "settings" button (bounds: [1062,172][1230,340]).
+Verify that the application navigates to the settings screen.

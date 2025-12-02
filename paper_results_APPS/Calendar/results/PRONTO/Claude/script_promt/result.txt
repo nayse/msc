@@ -1,0 +1,199 @@
+@RunWith(AndroidJUnit4.class)
+@LargeTest
+public class CalendarCoreFunctionalityTest {
+
+    @Rule
+    public ActivityTestRule<MainActivity> activityRule = 
+        new ActivityTestRule<>(MainActivity.class);
+
+    @Test
+    public void testCalendarCoreFunctionality() {
+        
+        // Test 1: Verify calendar screen loads with current month
+        onView(withId(R.id.top_value))
+            .check(matches(isDisplayed()))
+            .check(matches(withText("June")));
+
+        // Test 2: Test month navigation - Previous month
+        onView(withId(R.id.top_left_arrow))
+            .check(matches(isDisplayed()))
+            .perform(click());
+        
+        // Verify month changed (assuming it changes to May)
+        onView(withId(R.id.top_value))
+            .check(matches(not(withText("June"))));
+
+        // Test 3: Test month navigation - Next month (back to June)
+        onView(withId(R.id.top_right_arrow))
+            .check(matches(isDisplayed()))
+            .perform(click());
+
+        // Test 4: Verify search functionality is accessible
+        onView(withId(R.id.top_toolbar_search_icon))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()))
+            .perform(click());
+
+        onView(withId(R.id.top_toolbar_search))
+            .check(matches(isDisplayed()))
+            .check(matches(isEnabled()));
+
+        // Test 5: Test Task creation - Core functionality
+        onView(withId(R.id.fab_task_label))
+            .check(matches(isDisplayed()))
+            .check(matches(withText("Task")))
+            .perform(click());
+
+        // Verify task creation triggers some action (screen change or dialog)
+        // This would depend on the actual implementation
+        SystemClock.sleep(1000); // Allow for UI transition
+
+        // Test 6: Test Event creation - Core functionality  
+        // First navigate back if needed (implementation dependent)
+        try {
+            onView(withId(R.id.fab_event_label))
+                .check(matches(isDisplayed()))
+                .check(matches(withText("Event")))
+                .perform(click());
+            
+            SystemClock.sleep(1000); // Allow for UI transition
+        } catch (Exception e) {
+            // Handle case where we need to navigate back first
+            pressBack();
+            onView(withId(R.id.fab_event_label))
+                .perform(click());
+        }
+
+        // Test 7: Verify calendar FAB is functional
+        onView(withId(R.id.calendar_fab))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()));
+
+        // Test 8: Test date selection on calendar grid
+        // Click on a specific date in the month view
+        onView(withId(R.id.month_view_background))
+            .check(matches(isDisplayed()))
+            .perform(click());
+
+        // Test 9: Verify settings access
+        onView(withId(R.id.settings))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()))
+            .perform(click());
+
+        SystemClock.sleep(500);
+
+        // Navigate back to main calendar
+        pressBack();
+
+        // Test 10: Verify view change functionality
+        onView(withId(R.id.change_view))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()))
+            .perform(click());
+
+        SystemClock.sleep(500);
+    }
+
+    @Test
+    public void testCalendarMonthNavigation() {
+        // Focused test for month navigation core functionality
+        
+        // Store initial month
+        String initialMonth = getText(withId(R.id.top_value));
+        
+        // Navigate forward
+        onView(withId(R.id.top_right_arrow))
+            .perform(click());
+            
+        // Verify month changed
+        onView(withId(R.id.top_value))
+            .check(matches(not(withText(initialMonth))));
+            
+        // Navigate backward twice to go back past initial
+        onView(withId(R.id.top_left_arrow))
+            .perform(click())
+            .perform(click());
+            
+        // Verify we're at a different month than initial
+        onView(withId(R.id.top_value))
+            .check(matches(not(withText(initialMonth))));
+    }
+
+    @Test 
+    public void testTaskEventCreationAccess() {
+        // Focused test for task/event creation access
+        
+        // Test Task creation access
+        onView(withId(R.id.fab_task_label))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()))
+            .perform(click());
+            
+        // Allow for navigation/dialog to appear
+        SystemClock.sleep(1000);
+        
+        // Return to main screen (implementation dependent)
+        pressBack();
+        
+        // Test Event creation access  
+        onView(withId(R.id.fab_event_label))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()))
+            .perform(click());
+            
+        SystemClock.sleep(1000);
+        
+        // Verify we can return to calendar
+        pressBack();
+        
+        // Confirm we're back on main calendar screen
+        onView(withId(R.id.top_value))
+            .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testSearchFunctionality() {
+        // Test search core functionality
+        
+        // Click search icon
+        onView(withId(R.id.top_toolbar_search_icon))
+            .perform(click());
+            
+        // Verify search field is accessible
+        onView(withId(R.id.top_toolbar_search))
+            .check(matches(isDisplayed()))
+            .check(matches(isEnabled()))
+            .perform(typeText("test search"));
+            
+        // Close keyboard
+        closeSoftKeyboard();
+        
+        // Verify text was entered
+        onView(withId(R.id.top_toolbar_search))
+            .check(matches(withText(containsString("test search"))));
+    }
+
+    // Helper method to get text from view
+    private String getText(final Matcher<View> matcher) {
+        final String[] stringHolder = { null };
+        onView(matcher).perform(new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                return isAssignableFrom(TextView.class);
+            }
+
+            @Override
+            public String getDescription() {
+                return "getting text from a TextView";
+            }
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                TextView tv = (TextView) view;
+                stringHolder[0] = tv.getText().toString();
+            }
+        });
+        return stringHolder[0];
+    }
+}

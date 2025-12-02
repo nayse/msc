@@ -1,0 +1,148 @@
+@RunWith(AndroidJUnit4.class)
+public class InboxCoreValidationTest {
+
+    @Rule
+    public ActivityTestRule<MainActivity> activityRule = 
+        new ActivityTestRule<>(MainActivity.class);
+
+    /**
+     * Test the core functionality: Loading additional messages
+     * This validates the primary purpose of the current screen state
+     */
+    @Test
+    public void testLoadMoreMessagesCore() {
+        // Verify the main load more button is displayed and clickable
+        onView(withText("Load up to 100 more"))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()));
+
+        // Perform the core action - tap to load more messages
+        onView(withText("Load up to 100 more"))
+            .perform(click());
+
+        // Wait for potential loading state
+        try {
+            Thread.sleep(2000); // Allow time for network request
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        // Verify that either:
+        // 1. Messages are loaded (button disappears or text changes)
+        // 2. Or appropriate feedback is shown (loading state, error, etc.)
+        // Since we can't predict exact behavior, we verify the button state changed
+        // or some loading indication appeared
+        
+        // Check if button is still visible with same text (might indicate no more messages)
+        // OR if button text changed (indicating loading state/success)
+        // OR if button disappeared (messages loaded successfully)
+        try {
+            onView(withText("Load up to 100 more"))
+                .check(matches(isDisplayed()));
+            // If still visible, verify it's still functional
+            onView(withText("Load up to 100 more"))
+                .check(matches(isClickable()));
+        } catch (AssertionFailedError e) {
+            // Button might have disappeared after loading - this is acceptable
+            // Verify that inbox container is still present (core screen structure intact)
+            onView(withId(R.id.message_list_container))
+                .check(matches(isDisplayed()));
+        }
+    }
+
+    /**
+     * Test supporting functionality: Verify inbox screen structure
+     * Ensures the core UI elements are properly rendered
+     */
+    @Test
+    public void testInboxScreenStructure() {
+        // Verify toolbar with Inbox title is present
+        onView(withText("Inbox"))
+            .check(matches(isDisplayed()));
+
+        // Verify search functionality is accessible
+        onView(withId(R.id.search_button))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()));
+
+        // Verify message list container exists
+        onView(withId(R.id.message_list))
+            .check(matches(isDisplayed()));
+
+        // Verify floating action button for compose is present
+        onView(withId(R.id.floating_action_button))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()));
+    }
+
+    /**
+     * Test the core interaction flow
+     * Validates the primary user journey for loading more messages
+     */
+    @Test
+    public void testCoreInteractionFlow() {
+        // Step 1: Verify user can see the load more option
+        onView(withText("Load up to 100 more"))
+            .check(matches(isDisplayed()));
+
+        // Step 2: Verify user can interact with load more button
+        onView(withText("Load up to 100 more"))
+            .check(matches(isEnabled()))
+            .perform(click());
+
+        // Step 3: Verify the system responds to the interaction
+        // (checking that the UI remains responsive and doesn't crash)
+        onView(withId(R.id.message_list_container))
+            .check(matches(isDisplayed()));
+
+        // Step 4: Verify navigation elements remain functional after core action
+        onView(withText("Inbox"))
+            .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test error handling for core functionality
+     * Ensures app gracefully handles issues during message loading
+     */
+    @Test
+    public void testLoadMoreErrorHandling() {
+        // Simulate network issues or edge cases by rapidly clicking
+        onView(withText("Load up to 100 more"))
+            .perform(click());
+
+        // Verify app doesn't crash and UI remains stable
+        onView(withId(R.id.message_list_container))
+            .check(matches(isDisplayed()));
+
+        // Verify user can still access other functionality
+        onView(withId(R.id.floating_action_button))
+            .check(matches(isClickable()));
+
+        onView(withId(R.id.search_button))
+            .check(matches(isClickable()));
+    }
+
+    /**
+     * Performance test for core functionality
+     * Ensures the load more feature doesn't impact app responsiveness
+     */
+    @Test
+    public void testLoadMorePerformance() {
+        long startTime = System.currentTimeMillis();
+
+        // Perform core action
+        onView(withText("Load up to 100 more"))
+            .perform(click());
+
+        // Verify UI remains responsive within reasonable time
+        onView(withId(R.id.message_list))
+            .check(matches(isDisplayed()));
+
+        long endTime = System.currentTimeMillis();
+        long duration = endTime - startTime;
+
+        // Ensure the interaction completes within reasonable time (5 seconds)
+        assertTrue("Load more action took too long: " + duration + "ms", 
+                   duration < 5000);
+    }
+}

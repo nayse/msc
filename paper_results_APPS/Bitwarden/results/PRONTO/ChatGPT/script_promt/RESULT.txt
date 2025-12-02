@@ -1,0 +1,37 @@
+package com.example.bitwarden;
+
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.*;
+
+@RunWith(AndroidJUnit4.class)
+public class LoginScreenTest {
+
+    @Rule
+    public ActivityScenarioRule<LoginActivity> activityRule =
+            new ActivityScenarioRule<>(LoginActivity.class);
+
+    @Test
+    public void testEmailFieldEnablesContinueButton() {
+        // Step 1: Check "Continue" is initially disabled
+        onView(withId(R.id.continueButton))
+                .check(matches(not(isEnabled())));
+
+        // Step 2: Enter valid email
+        onView(withId(R.id.emailEditText))
+                .perform(ViewActions.typeText("user@example.com"));
+
+        // Step 3: Check "Continue" becomes enabled
+        onView(withId(R.id.continueButton))
+                .check(matches(isEnabled()));
+    }
+}

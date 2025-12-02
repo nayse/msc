@@ -1,0 +1,131 @@
+# AnkiDroid Empty State GUI Intentional Tests
+
+## Test Scenario 1: Verify Empty State Display
+**Objective:** Validate that the empty state is properly displayed when no decks exist
+
+### Test Steps:
+1. Launch AnkiDroid application
+2. Wait for main screen to load completely
+3. Verify empty state elements are visible
+
+### Expected Results:
+- [ ] "AnkiDroid" title appears in header
+- [ ] Empty collection illustration (box with cobweb) is displayed
+- [ ] Text "Collection is empty" is visible and centered
+- [ ] Text "Start adding cards using the + icon." is displayed below
+- [ ] Blue floating action button (+) is visible in bottom right corner
+- [ ] Sync button is present in top right with notification badge
+
+### UI Element Validation:
+- Empty state placeholder bounds: `[0,368][1440,3036]`
+- Main text bounds: `[0,1870][1440,1955]`
+- Instruction text bounds: `[0,1983][1440,2106]`
+- FAB button bounds: `[1132,2725][1328,2921]`
+
+---
+
+## Test Scenario 2: Primary Action - Add First Deck
+**Objective:** Test the main call-to-action for creating the first flashcard deck
+
+### Test Steps:
+1. From empty state screen
+2. Tap the blue floating action button (+) in bottom right
+3. Observe navigation/dialog that appears
+
+### Expected Results:
+- [ ] Tapping FAB button (`fab_main`) triggers action
+- [ ] User is presented with options to create new deck or import cards
+- [ ] Action leads to deck creation workflow
+- [ ] Button provides visual feedback when tapped (button bounds: `[1132,2725][1328,2921]`)
+
+---
+
+## Test Scenario 3: Navigation Menu Access
+**Objective:** Verify hamburger menu functionality for accessing app settings and features
+
+### Test Steps:
+1. From main screen, tap hamburger menu button (☰) in top left
+2. Verify navigation drawer opens
+3. Check available menu options
+
+### Expected Results:
+- [ ] Hamburger button is clickable (`[0,158][196,354]`)
+- [ ] Navigation drawer slides out from left
+- [ ] Menu contains app settings, help, and other navigation options
+- [ ] Drawer can be closed by tapping outside or back button
+
+---
+
+## Test Scenario 4: Sync Functionality
+**Objective:** Test sync button and notification badge behavior
+
+### Test Steps:
+1. Locate sync button in top right corner
+2. Note the red notification badge (showing "1")
+3. Tap the sync button
+4. Observe sync process or login prompt
+
+### Expected Results:
+- [ ] Sync button is accessible (`[1132,172][1300,340]`)
+- [ ] Red badge indicates pending sync or notifications
+- [ ] Tapping triggers sync process or AnkiWeb login if not authenticated
+- [ ] Visual feedback provided during sync operation
+
+---
+
+## Test Scenario 5: Empty State Message Clarity
+**Objective:** Validate that instructional text effectively guides user action
+
+### Test Steps:
+1. Read the empty state messaging
+2. Verify text clarity and actionability
+3. Confirm visual hierarchy guides user to FAB button
+
+### Expected Results:
+- [ ] "Collection is empty" clearly indicates current state
+- [ ] "Start adding cards using the + icon" provides clear next step
+- [ ] Visual design draws attention to the + button
+- [ ] Text is legible and properly positioned
+- [ ] Message encourages user engagement rather than confusion
+
+---
+
+## Test Scenario 6: Screen Responsiveness and Layout
+**Objective:** Ensure proper layout behavior and touch responsiveness
+
+### Test Steps:
+1. Verify all interactive elements respond to touch
+2. Check screen orientation behavior (if applicable)
+3. Test scroll behavior on the main content area
+
+### Expected Results:
+- [ ] All clickable elements provide immediate visual feedback
+- [ ] Layout maintains proper proportions
+- [ ] Touch targets are appropriately sized (minimum 44dp)
+- [ ] No UI elements overlap or appear cut off
+- [ ] Pull-to-refresh may be available (pull_to_sync_wrapper present but disabled)
+
+---
+
+## Test Scenario 7: Accessibility and Usability
+**Objective:** Verify the screen is accessible and user-friendly
+
+### Test Steps:
+1. Test with accessibility services enabled
+2. Verify content descriptions for images and buttons
+3. Check keyboard navigation (if applicable)
+4. Test with different text sizes
+
+### Expected Results:
+- [ ] Empty state illustration has appropriate content description
+- [ ] Buttons have descriptive labels for screen readers
+- [ ] Tab order is logical for keyboard navigation
+- [ ] Text remains readable when system font size is increased
+- [ ] Color contrast meets accessibility standards
+
+---
+
+## Critical User Journey Validation
+**Overall Flow:** Empty State → Add Content → Productive Use
+
+The primary success metric is whether a new user can successfully understand they need to add content and can easily find and use the FAB button to begin creating their first flashcard deck. The empty state should feel welcoming and actionable rather than confusing or abandoned.

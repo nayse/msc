@@ -1,0 +1,40 @@
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+@RunWith(AndroidJUnit4.class)
+public class AnkiDroidEmptyCollectionTest {
+
+    @Rule
+    public ActivityScenarioRule<MainActivity> activityScenarioRule =
+            new ActivityScenarioRule<>(MainActivity.class); // Replace MainActivity with your actual Activity class
+
+    @Test
+    public void testEmptyCollectionScreenCoreFunctionality() {
+        // Test Case 1: Verify Empty Collection Message and Call to Action
+        // Check if "Collection is empty" text is displayed
+        Espresso.onView(ViewMatchers.withText("Collection is empty"))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        // Check if "Start adding cards using the + icon." text is displayed
+        Espresso.onView(ViewMatchers.withText("Start adding cards using the + icon."))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+        // Test Case 2: Verify Functionality of the Add Card Button
+        // Click on the fab_main button (the '+' icon)
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("fab_main")))
+                .perform(ViewActions.click());
+
+        // TODO: Add assertions here to verify navigation to the "add new card" screen.
+        // This will depend on the UI elements present on the subsequent screen.
+        // For example, if there's a specific view or text that appears on the add card screen:
+        // Espresso.onView(ViewMatchers.withId(R.id.new_card_input_field))
+        //         .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+}

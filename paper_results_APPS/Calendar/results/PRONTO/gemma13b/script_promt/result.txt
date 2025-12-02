@@ -1,0 +1,62 @@
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.ViewInteraction
+import androidx.test.espresso.action.Click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class CalendarScreenTest {
+
+    // Adjust these IDs to match your actual element tags from ui_elements.txt
+    private const val leftArrowTag = "top_left_arrow"
+    private const val rightArrowTag = "top_right_arrow"
+    private const val searchTextFieldTag = "top_toolbar_search"
+    private const val calendarFabTag = "calendar_fab"
+
+    @Test
+    fun testMonthNavigation() {
+        // Objective: Verify month navigation.
+        Espresso.onView(withResourceName(leftArrowTag))
+            .perform(Click()) // Click the left arrow
+        Thread.sleep(500)  // Small delay to allow UI update
+
+        Espresso.onView(withText("May")) // Assert that month changed to May
+            .check(matches(isDisplayed()))
+
+        Espresso.onView(withResourceName(rightArrowTag))
+            .perform(Click()) // Click the right arrow
+        Thread.sleep(500)
+
+        Espresso.onView(withText("July")) // Assert that month changed to July
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun testTaskCreation() {
+        // Objective: Verify task creation functionality.
+        Espresso.onView(withResourceName(calendarFabTag))
+            .perform(Click()) // Click the FAB
+        Thread.sleep(500)
+
+        Espresso.onView(withId(android.R.id.content))  // Assuming content view is where task dialog appears
+            .check(matches(isDisplayed()))
+
+        // Add more assertions here to verify that a task can be created and displayed on the calendar.
+    }
+
+    @Test
+    fun testSearchFunctionality() {
+        // Objective: Verify search functionality.
+        Espresso.onView(withResourceName(searchTextFieldTag))
+            .perform(Click()) // Click the search field
+            .perform(typeText("June 10"))  // Enter a date
+
+        Thread.sleep(500)
+
+        Espresso.onView(withId(android.R.id.content))
+            .check(matches(isDisplayed()))
+    }
+}

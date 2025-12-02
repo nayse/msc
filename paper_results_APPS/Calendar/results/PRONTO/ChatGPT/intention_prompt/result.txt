@@ -1,0 +1,96 @@
+✅ Main Purpose Validation: "Create and Manage Calendar Tasks and Events"
+🔍 GUI Intentional Test Scenarios
+Below are intentional GUI tests simulating real user behavior to validate the screen’s functionality.
+
+🧪 Test 1: Create a New Task
+Objective: Verify that a user can initiate the creation of a task.
+
+Steps:
+
+Tap the floating action button labeled "Task" (fab_task_icon or fab_task_label).
+
+Verify the task creation screen appears.
+
+Enter sample data (e.g., task name, date, time, details).
+
+Save the task.
+
+Verify the task appears on the selected date in the calendar.
+
+🧪 Test 2: Create a New Event
+Objective: Ensure that a user can initiate and create a new event.
+
+Steps:
+
+Tap the "Event" floating action button (calendar_fab or fab_event_label).
+
+Confirm that the event creation form opens.
+
+Fill out event details (title, location, date/time).
+
+Save the event.
+
+Return to the calendar and verify the event is visible on the selected date.
+
+🧪 Test 3: Navigate Between Months
+Objective: Ensure calendar month navigation works properly.
+
+Steps:
+
+Tap the left arrow (top_left_arrow) to go to the previous month.
+
+Verify the top_value text updates (e.g., from “June” to “May”).
+
+Tap the right arrow (top_right_arrow) twice.
+
+Verify the top_value updates accordingly (e.g., to “July”).
+
+🧪 Test 4: Use the Search Function
+Objective: Verify that the search bar can locate events/tasks.
+
+Steps:
+
+Tap the search icon (top_toolbar_search_icon).
+
+Type a known event/task name.
+
+Verify search results include the relevant item.
+
+Tap on a result and confirm it opens correctly.
+
+🧪 Test 5: Change Calendar View
+Objective: Ensure that changing the calendar view updates the UI correctly.
+
+Steps:
+
+Tap the view toggle button (change_view).
+
+Select an alternative view (e.g., week or agenda).
+
+Verify the calendar display updates to the selected format.
+
+🧪 Test 6: Access Settings
+Objective: Confirm the settings menu is accessible and functional.
+
+Steps:
+
+Tap the settings icon (settings).
+
+Confirm settings screen appears.
+
+Change a setting (e.g., theme or notifications).
+
+Save and return to the calendar.
+
+Verify changes take effect if applicable.
+
+🧪 Test 7: Tap on a Specific Day
+Objective: Test day selection and related actions.
+
+Steps:
+
+Tap on a visible date (e.g., 3 June).
+
+Verify it's highlighted or brings up a day-specific view.
+
+Optionally initiate event/task creation for that day.

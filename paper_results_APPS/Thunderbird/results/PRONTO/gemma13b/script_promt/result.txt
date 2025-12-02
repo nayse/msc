@@ -1,0 +1,63 @@
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.ViewInteraction
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class InboxScreenTest {
+
+    @Test
+    fun verifyInboxDisplay() {
+        // 1. Verify the screen title is "Inbox"
+        Espresso.onView(ViewMatchers.withId(R.id.toolbarTitle)) // Assuming toolbarTitle tag exists in ui_elements.txt
+            .check(ViewAssertions.withText("Inbox"))
+
+    }
+
+    @Test
+    fun performSearch() {
+        // 2. Perform a search and verify results
+        val searchTerm = "test"  // Replace with a relevant search term if available
+        Espresso.onView(ViewMatchers.withId(R.id.search_bar)) // Assuming search_bar tag exists in ui_elements.txt
+            .perform(ViewActions.click())
+            .perform(ViewActions.typeText(searchTerm))
+
+        // Wait for results to load (adjust delay as needed)
+        Thread.sleep(2000)  // Important: Use a more robust waiting mechanism in production code!
+
+        Espresso.onView(ViewMatchers.withId(R.id.message_list)) // Assuming message_list tag exists in ui_elements.txt
+            .check(ViewAssertions.withTextContaining(searchTerm)) // Verify at least one message contains the search term
+    }
+
+    @Test
+    fun verifyPagination() {
+        // 3. Scroll to the bottom and verify more messages load
+        Espresso.onView(ViewMatchers.withId(R.id.message_list)) // Assuming message_list tag exists in ui_elements.txt
+            .perform(ViewActions.scrollTo())  // Scrolls to the end of the list
+
+        // Wait for pagination to complete (adjust delay as needed)
+        Thread.sleep(3000)
+
+        // Verify that more items are present after scrolling. This is a basic check; you might need a more sophisticated approach
+        Espresso.onView(ViewMatchers.withId(R.id.message_list))
+            .check(ViewAssertions.withSize(greaterThan(10))) // Assuming there were fewer than 10 items initially
+
+    }
+
+    @Test
+    fun verifyComposeButton() {
+        //4. Verify FAB opens compose screen
+        Espresso.onView(ViewMatchers.withId(R.id.floating_action_button))  //Assuming floating_action_button tag exists in ui_elements.txt
+            .perform(ViewActions.click())
+
+        // Wait for the new message screen to load (adjust delay as needed)
+        Thread.sleep(2000)
+
+        Espresso.onView(ViewMatchers.withId(R.id.toolbarTitle)) // Assuming toolbarTitle exists in compose screen
+            .check(ViewAssertions.withText("New Message"))  //Verify the title of new message screen
+    }
+}

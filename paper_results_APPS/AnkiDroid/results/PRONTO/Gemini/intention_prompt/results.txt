@@ -1,0 +1,31 @@
+
+The primary functional objective of the current screen is to inform the user that their card collection is empty and to guide them on how to add new cards. It serves as an initial landing screen for new users or users with no existing cards, prompting them to begin populating their collection.
+
+Here are GUI intentional tests with actions and a logical sequence of user actions to validate the main purpose of the screen:
+
+Test Case 1: Verify Empty Collection Message and Call to Action
+
+Objective: To confirm that the "Collection is empty" message and the "Start adding cards using the + icon." instruction are displayed correctly.
+Actions:
+Assert Text: Verify that the text "Collection is empty" is visible on the screen.
+Assert Text: Verify that the text "Start adding cards using the + icon." is visible on the screen.
+Assert Image: Verify the presence and visibility of the image representing an empty collection (the box with a star).
+Test Case 2: Verify Functionality of the Add Card Button
+
+Objective: To ensure that clicking the "+" icon (fab_main) leads to the expected screen for adding new cards.
+Actions:
+Tap Action: Tap on the "fab_main" button, which is the "+" icon.
+Expected Result: The application should navigate to a new screen or open a dialog where the user can input details for a new card. (This step requires a subsequent assertion on the next screen's elements, which are not provided here).
+Test Case 3: Verify Toolbar Elements
+
+Objective: To ensure that the primary navigation elements in the toolbar are present and accessible.
+Actions:
+Assert Text: Verify that the text "AnkiDroid" is displayed as the application title in the toolbar.
+Assert Button: Verify the presence of the clickable "ImageButton" (likely a menu or navigation drawer toggle) on the left side of the toolbar.
+Assert Button: Verify the presence of the clickable "button" element (likely for settings or more options) on the right side of the toolbar.
+Assert ImageView: Verify the presence of the clickable "ImageView" (likely another icon or action button) next to the aforementioned button.
+Test Case 4: Verify Lack of Deck-Specific Elements on Empty Screen
+
+Objective: To confirm that no deck-specific elements are displayed when the collection is empty.
+Actions:
+Assert Absence: Verify that elements related to "deckpicker_view" or "pull_to_sync_wrapper" do not contain visible or interactive content related to existing decks. (While the elements themselves are present in the UI hierarchy, this test aims to confirm their visual state and non-interactivity if no decks exist).

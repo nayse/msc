@@ -1,0 +1,39 @@
+✅ Intentional GUI Test Cases
+🔹 Test 1: Create a New Card from Empty State
+Goal: Verify that tapping the + FAB initiates the card creation process.
+
+Action 1: Launch the app with an empty collection.
+
+Action 2: Tap the + Floating Action Button.
+
+Expected Result: The app navigates to the card creation interface (e.g., form to enter front and back text).
+
+🔹 Test 2: Validate Placeholder Behavior
+Goal: Ensure correct UI behavior when no cards/decks are present.
+
+Action 1: Launch app with no decks/cards.
+
+Expected Result: Placeholder message “Collection is empty” with image and instruction should appear.
+
+Assertion: Image of box and message are centered and visible.
+
+🔹 Test 3: Open Navigation Drawer
+Goal: Validate drawer accessibility.
+
+Action 1: Tap the hamburger menu icon on the top left.
+
+Expected Result: Navigation drawer slides in with menu options (e.g., Settings, Import, Help).
+
+🔹 Test 4: Attempt to Sync (While Empty)
+Goal: Check behavior of sync button when collection is empty and/or error exists.
+
+Action 1: Tap the sync icon with the red error badge.
+
+Expected Result: Error message or sync status screen appears; error indicator should clear if sync resolves.
+
+🔹 Test 5: Overflow Menu Options
+Goal: Validate additional menu options are accessible.
+
+Action 1: Tap the three-dot menu in the top-right.
+
+Expected Result: A dropdown with options (like Settings, Feedback, etc.) is displayed.

@@ -1,0 +1,36 @@
+import android.support.test.espresso.Espresso
+import android.support.test.espresso.ViewInteraction
+import android.support.test.espresso.matcher.ViewMatchers
+import android.support.test.rule.ActivityTestRule
+import org.junit.Rule
+import org.junit.Test
+
+class BitwardenLoginScreenTest {
+
+    @Rule
+    var mActivityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java) // Replace MainActivity with your actual activity class
+
+    @Test
+    fun successfulLogin() {
+        // 1. Find the Email Address Entry field and enter a valid email address
+        val emailField: ViewInteraction = Espresso.onView(ViewMatchers.withId(R.id.EmailAddressEntry))  // Replace R.id.EmailAddressEntry with the actual resource ID of your TextField
+            .perform(androidx.core.widget.EditTextCompat.setHintTextColor(android.R.color.darker_gray)) // set hint color to gray
+
+        emailField.perform(androidx.test.espresso.action.TypeText("test@example.com"))  // Replace with a valid test email address
+
+        // 2. Find the Continue Button and click it
+        val continueButton: ViewInteraction = Espresso.onView(ViewMatchers.withId(R.id.ContinueButton)) // Replace R.id.ContinueButton with the actual resource ID of your button
+            .perform(Espresso.click())
+
+        // 3. Add a delay to allow the application to navigate to the next screen (adjust as needed)
+        Thread.sleep(2000)  // Wait for navigation - crucial! Adjust time based on app performance
+
+        // 4. Assert that we've navigated to the expected screen. This is VERY important.
+        //    Replace 'VaultActivity' with the actual activity class you expect after successful login.
+        Espresso.onView(ViewMatchers.withText("Your Vault")).check { view, _ -> // Replace "Your Vault" with a unique text on the next screen
+            assertNotNull(view)
+            assertTrue(view.toString().contains("Your Vault"))  // Verify we're on the expected screen
+        }
+
+    }
+}

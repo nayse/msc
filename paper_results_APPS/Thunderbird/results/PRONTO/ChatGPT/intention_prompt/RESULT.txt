@@ -1,0 +1,31 @@
+✅ GUI Intentional Tests with User Actions
+🔸 Test Case 1: Open Navigation Drawer
+Action: Tap on the hamburger icon.
+
+Expected Result: Navigation drawer opens showing available folders (Inbox, Sent, Trash, etc.).
+
+🔸 Test Case 2: Search for an Email
+Action: Tap on the search icon → Type "invoice" → Press Enter.
+
+Expected Result: Email list updates to show results containing "invoice".
+
+🔸 Test Case 3: Filter/Sort Emails
+Action: Tap on the sort/filter icon → Choose "Newest first".
+
+Expected Result: Emails are sorted by date, with the newest at the top.
+
+🔸 Test Case 4: Load More Emails
+Action: Tap on the "Load up to 100 more" text.
+
+Expected Result: The inbox loads up to 100 additional emails.
+
+🔸 Test Case 5: Compose a New Email
+Action: Tap the pencil (FAB) button.
+
+Expected Result: A new email composition screen opens.
+
+🔸 Test Case 6: Open Overflow Menu
+Action: Tap on the three dots (overflow menu).
+
+Expected Result: Additional options are shown, such as “Refresh”, “Settings”, “Mark all as read”, etc.
+

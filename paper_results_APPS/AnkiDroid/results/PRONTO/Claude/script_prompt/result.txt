@@ -1,0 +1,139 @@
+package com.ichi2.anki;
+
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.*;
+
+/**
+ * Espresso test for AnkiDroid empty state screen core functionality
+ * Main objective: Validate that users can initiate deck creation from empty state
+ */
+@RunWith(AndroidJUnit4.class)
+public class AnkiDroidEmptyStateTest {
+
+    @Rule
+    public ActivityTestRule<DeckPicker> activityRule = 
+        new ActivityTestRule<>(DeckPicker.class);
+
+    /**
+     * Test the core functionality: Empty state display and FAB interaction
+     * This validates the primary user flow from empty state to deck creation
+     */
+    @Test
+    public void testEmptyStateAndFabAction() {
+        // Verify empty state elements are displayed
+        onView(withId(R.id.no_decks_placeholder))
+            .check(matches(isDisplayed()));
+        
+        // Verify empty state message is shown
+        onView(withText("Collection is empty"))
+            .check(matches(isDisplayed()));
+        
+        // Verify instruction text is displayed
+        onView(withText("Start adding cards using the + icon."))
+            .check(matches(isDisplayed()));
+        
+        // Verify FAB button is visible and clickable
+        onView(withId(R.id.fab_main))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()));
+        
+        // Core action: Tap the FAB to initiate deck creation
+        onView(withId(R.id.fab_main))
+            .perform(click());
+        
+        // Verify that clicking FAB triggers the expected action
+        // (This would typically open a menu or navigation to deck creation)
+        // The exact assertion depends on the app's behavior after FAB click
+        // For example, if it opens a context menu:
+        // onView(withText("Create deck")).check(matches(isDisplayed()));
+        // Or if it navigates to another activity, verify the new screen elements
+    }
+    
+    /**
+     * Test that the app title is displayed correctly
+     */
+    @Test
+    public void testAppTitleDisplayed() {
+        onView(withText("AnkiDroid"))
+            .check(matches(isDisplayed()));
+    }
+    
+    /**
+     * Test that the hamburger menu button is accessible
+     */
+    @Test
+    public void testNavigationMenuAccessible() {
+        // Find the hamburger menu button (typically an ImageButton)
+        onView(allOf(
+            isAssignableFrom(android.widget.ImageButton.class),
+            withParent(withId(R.id.toolbar))
+        ))
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()));
+    }
+    
+    /**
+     * Test that sync button is present and clickable
+     */
+    @Test
+    public void testSyncButtonPresent() {
+        // Verify sync button exists and is clickable
+        onView(withId(R.id.button)) // Based on UI elements showing sync button
+            .check(matches(isDisplayed()))
+            .check(matches(isClickable()));
+    }
+    
+    /**
+     * Comprehensive test for the core empty state user journey
+     */
+    @Test
+    public void testEmptyStateUserJourney() {
+        // Step 1: Verify user lands on empty state
+        onView(withId(R.id.deckpicker_view))
+            .check(matches(isDisplayed()));
+        
+        // Step 2: Verify empty state communicates the situation clearly
+        onView(withId(R.id.no_decks_placeholder))
+            .check(matches(isDisplayed()));
+        
+        onView(withText("Collection is empty"))
+            .check(matches(isDisplayed()));
+        
+        // Step 3: Verify call-to-action is clear
+        onView(withText("Start adding cards using the + icon."))
+            .check(matches(isDisplayed()));
+        
+        // Step 4: Verify primary action is accessible
+        onView(withId(R.id.fab_main))
+            .check(matches(isDisplayed()))
+            .check(matches(isEnabled()));
+        
+        // Step 5: Execute primary action (core functionality)
+        onView(withId(R.id.fab_main))
+            .perform(click());
+        
+        // Step 6: Verify response to primary action
+        // Note: This assertion would need to be adjusted based on actual app behavior
+        // Examples of what might happen after FAB click:
+        // - Context menu appears: onView(withText("Add")).check(matches(isDisplayed()));
+        // - Navigation occurs: onView(withId(R.id.deck_creation_screen)).check(matches(isDisplayed()));
+        // - Dialog opens: onView(withText("Create New Deck")).check(matches(isDisplayed()));
+        
+        // For now, we verify that some action was triggered by checking
+        // that we're no longer in the exact same state
+        // (This is a placeholder - actual implementation would depend on app behavior)
+    }
+}

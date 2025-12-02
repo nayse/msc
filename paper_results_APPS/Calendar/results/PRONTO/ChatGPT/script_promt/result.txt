@@ -1,0 +1,31 @@
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class CalendarCoreFunctionalityTest {
+
+    @get:Rule
+    val activityRule = ActivityScenarioRule(MainActivity::class.java)
+
+    @Test
+    fun testCreateNewTaskFromCalendar() {
+        // Step 1: Check if calendar view is displayed
+        onView(withId(R.id.month_view))
+            .check(matches(isDisplayed()))
+
+        // Step 2: Click on the "Task" FAB (floating action button)
+        onView(withId(R.id.fab_task_icon)) // or R.id.fab_task_label if that's the clickable element
+            .perform(click())
+
+        // Step 3: Check that the task creation screen is displayed
+        onView(withText("New Task")) // Replace with actual title or ID of the task creation screen
+            .check(matches(isDisplayed()))
+    }
+}

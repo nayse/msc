@@ -1,0 +1,40 @@
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.matcher.ViewMatchers.*;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.action.ViewActions.click;
+
+import android.view.View;
+
+import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.ViewMatchers;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+@RunWith(AndroidJUnit4.class)
+public class AnkiDroidMainScreenTest {
+
+    @Rule
+    public ActivityScenarioRule<YourMainActivity> activityRule =
+            new ActivityScenarioRule<>(YourMainActivity.class); // Replace with actual main activity
+
+    @Test
+    public void testClickFabOpensCardCreation() {
+        // Verify that the collection is empty
+        onView(withText("Collection is empty"))
+                .check(matches(isDisplayed()));
+
+        // Click on the FAB
+        onView(withId(R.id.fab_main))  // Replace with actual FAB ID if different
+                .check(matches(isDisplayed()))
+                .perform(click());
+
+        // Verify that the new screen appears (e.g., "Add Card" or some form title is displayed)
+        onView(withText("Add") /* or another relevant title/label on the new screen */)
+                .check(matches(isDisplayed()));
+    }
+}

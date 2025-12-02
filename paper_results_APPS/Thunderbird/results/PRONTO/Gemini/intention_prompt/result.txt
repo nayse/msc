@@ -1,0 +1,35 @@
+
+The primary functional objective of this screen is to display and manage an inbox, likely for messages or notifications. It provides options to load more content, search, and sort items, and suggests the ability to compose new items via a floating action button.
+
+Here are some GUI intentional tests to validate the main purpose of the screen:
+
+Test Case 1: Verify Inbox Title and Initial State
+
+Actions:
+Launch the application and navigate to the inbox screen.
+Verify that the "Inbox" title is displayed prominently at the top of the screen.
+Verify that the text "Load up to 100 more" is visible, indicating content can be loaded.
+Expected Outcome: The screen title is "Inbox", and the "Load up to 100 more" text is present, indicating an empty or partially loaded inbox.
+Test Case 2: Load More Content
+
+Actions:
+Tap on the "Load up to 100 more" text.
+Expected Outcome: The application should attempt to load more messages or items into the inbox. If no more items are available, appropriate feedback should be provided (e.g., "No more messages").
+Test Case 3: Search Functionality
+
+Actions:
+Tap the "Search" button (magnifying glass icon).
+Enter a search query into the search bar (if one appears).
+Verify that the inbox content is filtered based on the search query.
+Expected Outcome: The search interface becomes active, and the displayed inbox items are relevant to the entered search term.
+Test Case 4: Sort Functionality
+
+Actions:
+Tap the "Sort" button (three lines with circles icon).
+Select a sorting option from the displayed menu (e.g., "Sort by Date", "Sort by Sender").
+Expected Outcome: The inbox items are reordered according to the selected sorting criteria.
+Test Case 5: Compose New Item
+
+Actions:
+Tap the "Floating Action Button" (pencil icon).
+Expected Outcome: The application navigates to a new screen or opens a dialog for composing a new message or item.

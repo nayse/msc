@@ -1,0 +1,34 @@
+
+The primary functional objective of this screen is to allow a user to log in to their Bitwarden account.
+
+Here are GUI intentional tests to validate the main purpose of the screen:
+
+Test Case 1: Successful Login with Valid Email
+
+Action 1: Tap the "Email address" text field.
+Action 2: Enter a valid email address (e.g., "test@example.com") into the "EmailAddressEntry" field.
+Action 3: Tap the "Continue" button.
+Expected Outcome: The application proceeds to the password entry screen or a subsequent login step.
+Test Case 2: Attempt Login with Invalid Email Format
+
+Action 1: Tap the "Email address" text field.
+Action 2: Enter an invalid email address (e.g., "invalid-email") into the "EmailAddressEntry" field.
+Action 3: Tap the "Continue" button.
+Expected Outcome: An error message or visual indication appears, informing the user of the invalid email format, and the screen remains on the login page.
+Test Case 3: Verify "Remember email" Functionality
+
+Action 1: Tap the "Email address" text field.
+Action 2: Enter an email address into the "EmailAddressEntry" field.
+Action 3: Tap the "RememberMeSwitch".
+Action 4: Tap the "Continue" button.
+Action 5: Log out or close the application (if applicable).
+Action 6: Reopen the application and navigate back to the login screen.
+Expected Outcome: The previously entered email address should be pre-filled in the "Email address" field.
+Test Case 4: Navigate to "Create an account"
+
+Action 1: Tap the "CreateAccountLabel" which contains "Create an account" text.
+Expected Outcome: The application navigates to the account creation or sign-up screen.
+Test Case 5: Verify "Logging in on: bitwarden.com" dropdown
+
+Action 1: Tap the "RegionSelectorDropdown" which contains "Logging in on: bitwarden.com" text.
+Expected Outcome: A dropdown or new screen appears, allowing the user to select a different server or region for login.

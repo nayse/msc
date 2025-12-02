@@ -1,0 +1,146 @@
+# Bitwarden Login Screen - GUI Test Cases
+
+## Test Suite: Email Entry and Authentication Flow
+
+### Test Case 1: Valid Email Entry Flow
+**Objective**: Validate successful email entry and continuation to password screen
+
+**Steps**:
+1. Launch Bitwarden application
+2. Verify login screen displays with "Log in to Bitwarden" header
+3. Tap on email address input field (EmailAddressEntry)
+4. Enter valid email: "user@example.com"
+5. Verify "Continue" button becomes enabled
+6. Tap "Continue" button
+7. Verify navigation to password entry screen
+
+**Expected Results**:
+- Email field accepts input
+- Continue button activates after valid email entry
+- Successfully proceeds to next authentication step
+
+### Test Case 2: Invalid Email Format Validation
+**Objective**: Ensure proper email validation prevents invalid entries
+
+**Steps**:
+1. Navigate to login screen
+2. Tap email input field
+3. Enter invalid email formats: "invalid-email", "test@", "@domain.com"
+4. Attempt to tap "Continue" button
+5. Verify error handling for each invalid format
+
+**Expected Results**:
+- Continue button remains disabled for invalid emails
+- Appropriate error messages displayed
+- User cannot proceed with invalid email
+
+### Test Case 3: Remember Email Toggle Functionality
+**Objective**: Validate email persistence feature
+
+**Steps**:
+1. Access login screen
+2. Verify "Remember email" toggle is enabled by default
+3. Enter email address: "test@domain.com"
+4. Tap Continue and complete login flow
+5. Logout and return to login screen
+6. Verify email field is pre-populated
+7. Disable "Remember email" toggle
+8. Complete another login cycle
+9. Verify email field is empty on return
+
+**Expected Results**:
+- Toggle controls email persistence behavior
+- Email saved when toggle enabled
+- Email not saved when toggle disabled
+
+### Test Case 4: Region Selector Functionality
+**Objective**: Test server region selection capability
+
+**Steps**:
+1. Navigate to login screen
+2. Verify default region shows "bitwarden.com"
+3. Tap on region selector dropdown (RegionSelectorDropdown)
+4. Verify dropdown opens with available regions
+5. Select different region if available
+6. Verify selection updates display
+7. Enter email and proceed
+
+**Expected Results**:
+- Dropdown displays available server regions
+- Selection updates properly
+- Login attempts use selected region
+
+### Test Case 5: Create Account Navigation
+**Objective**: Validate new user registration flow access
+
+**Steps**:
+1. Access login screen
+2. Locate "New to Bitwarden?" text
+3. Tap "Create an account" link (CreateAccountLabel)
+4. Verify navigation to account creation screen
+
+**Expected Results**:
+- Link is clearly visible and clickable
+- Successfully navigates to registration flow
+- Can return to login screen if needed
+
+### Test Case 6: Empty Email Field Handling
+**Objective**: Ensure Continue button behavior with empty input
+
+**Steps**:
+1. Navigate to login screen
+2. Verify email field is empty
+3. Verify "Continue" button is disabled
+4. Tap in email field and immediately tap out (no input)
+5. Verify Continue button remains disabled
+6. Enter space characters only
+7. Verify Continue button state
+
+**Expected Results**:
+- Continue button disabled when email empty
+- Button remains disabled for whitespace-only input
+- Proper validation prevents empty submissions
+
+### Test Case 7: UI Element Accessibility and Visual Validation
+**Objective**: Ensure proper UI element rendering and accessibility
+
+**Steps**:
+1. Load login screen
+2. Verify all text elements are readable
+3. Check button and field boundaries match expected bounds
+4. Verify clickable elements respond to touch
+5. Test screen orientation changes
+6. Validate color contrast and text sizing
+
+**Expected Results**:
+- All UI elements render within expected boundaries
+- Text is legible and properly sized
+- Interactive elements provide visual feedback
+- Screen adapts properly to orientation changes
+
+### Test Case 8: Network Connectivity Handling
+**Objective**: Test behavior with various network conditions
+
+**Steps**:
+1. Enter valid email address
+2. Tap Continue with normal network connection
+3. Verify successful progression
+4. Return to login screen
+5. Disable network connection
+6. Enter email and tap Continue
+7. Verify appropriate error handling
+8. Restore connection and retry
+
+**Expected Results**:
+- Normal flow works with good connectivity
+- Appropriate error messages for network issues
+- Graceful recovery when connection restored
+- User can retry failed operations
+
+## Test Execution Notes
+
+- **Test Environment**: Mobile device with Bitwarden app installed
+- **Prerequisites**: Valid Bitwarden account for positive test cases
+- **Test Data**: Mix of valid/invalid email addresses
+- **Automation Potential**: High - UI elements have clear identifiers
+- **Priority**: Critical - Core user authentication flow

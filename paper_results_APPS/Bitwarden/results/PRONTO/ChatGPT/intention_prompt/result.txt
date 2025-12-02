@@ -1,0 +1,93 @@
+🧪 GUI Intentional Tests for Login Screen
+Below are intentional UI test cases that simulate user interactions and validate the functionality, layout, and flow of the login screen.
+
+Test Case 1: Email Field Empty
+Action: Tap "Continue" without entering any email.
+
+Expected Result: "Continue" button remains disabled; possibly shows a tooltip or error message.
+
+Purpose: Validate that the app prevents progression without an email input.
+
+Test Case 2: Valid Email Input
+Action:
+
+Enter a valid email: user@example.com
+
+Observe the "Continue" button
+
+Expected Result: "Continue" button becomes enabled.
+
+Purpose: Ensure that valid input enables login progression.
+
+Test Case 3: Toggle ‘Remember email’ ON
+Action:
+
+Toggle the “Remember email” switch to ON.
+
+Enter email: user@example.com
+
+Press "Continue".
+
+Reopen the app.
+
+Expected Result: The email field is pre-filled with user@example.com.
+
+Purpose: Validate the persistence of the remembered email across sessions.
+
+Test Case 4: Toggle ‘Remember email’ OFF
+Action:
+
+Toggle the “Remember email” switch to OFF.
+
+Enter email and tap "Continue".
+
+Reopen the app.
+
+Expected Result: Email field is empty.
+
+Purpose: Confirm that email is not saved when toggle is OFF.
+
+Test Case 5: Change Server Region
+Action:
+
+Tap on the dropdown (bitwarden.com)
+
+Select an alternative server (e.g., self-hosted or another region, if available).
+
+Expected Result: Selected server is updated and shown in the field.
+
+Purpose: Validate region/server selector functionality.
+
+Test Case 6: Navigate to Create Account
+Action: Tap on the "Create an account" link.
+
+Expected Result: Navigation to the account creation screen.
+
+Purpose: Ensure access to account registration flow.
+
+Test Case 7: Input Invalid Email Format
+Action:
+
+Enter user@invalid or user@.com
+
+Observe the "Continue" button state.
+
+Expected Result: "Continue" remains disabled or error message is shown.
+
+Purpose: Validate email format checking logic.
+
+✅ Suggested Test Execution Order
+Test Case 1 (empty field)
+
+Test Case 7 (invalid format)
+
+Test Case 2 (valid input)
+
+Test Case 3 (remember email ON)
+
+Test Case 4 (remember email OFF)
+
+Test Case 5 (region selection)
+
+Test Case 6 (navigate to create account)
+

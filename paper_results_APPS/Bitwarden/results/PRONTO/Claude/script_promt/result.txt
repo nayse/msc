@@ -1,0 +1,133 @@
+package com.bitwarden.mobile.test;
+
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.is;
+
+@RunWith(AndroidJUnit4.class)
+@LargeTest
+public class BitwardenLoginScreenTest {
+
+    @Rule
+    public ActivityScenarioRule<LoginActivity> activityRule = 
+        new ActivityScenarioRule<>(LoginActivity.class);
+
+    private static final String VALID_EMAIL = "test@example.com";
+    private static final String INVALID_EMAIL = "invalid-email";
+
+    @Test
+    public void testCoreLoginFlow_ValidEmail_EnablesContinueButton() {
+        // Verify initial state - Continue button should be disabled
+        onView(withTagValue(is("ContinueButton")))
+            .check(matches(not(isEnabled())));
+
+        // Enter valid email address
+        onView(withTagValue(is("EmailAddressEntry")))
+            .perform(click())
+            .perform(typeText(VALID_EMAIL))
+            .perform(closeSoftKeyboard());
+
+        // Verify Continue button becomes enabled after valid email entry
+        onView(withTagValue(is("ContinueButton")))
+            .check(matches(isEnabled()));
+
+        // Tap Continue button to proceed
+        onView(withTagValue(is("ContinueButton")))
+            .perform(click());
+
+        // Verify successful navigation (screen should change)
+        // Note: This assertion may need adjustment based on next screen implementation
+        onView(withText("Log in to Bitwarden"))
+            .check(matches(not(isDisplayed())));
+    }
+
+    @Test
+    public void testCoreLoginFlow_InvalidEmail_KeepsContinueButtonDisabled() {
+        // Verify initial state
+        onView(withTagValue(is("ContinueButton")))
+            .check(matches(not(isEnabled())));
+
+        // Enter invalid email format
+        onView(withTagValue(is("EmailAddressEntry")))
+            .perform(click())
+            .perform(typeText(INVALID_EMAIL))
+            .perform(closeSoftKeyboard());
+
+        // Verify Continue button remains disabled
+        onView(withTagValue(is("ContinueButton")))
+            .check(matches(not(isEnabled())));
+    }
+
+    @Test
+    public void testCoreLoginFlow_EmptyEmail_KeepsContinueButtonDisabled() {
+        // Verify Continue button is disabled with empty email field
+        onView(withTagValue(is("ContinueButton")))
+            .check(matches(not(isEnabled())));
+
+        // Click on email field but don't enter anything
+        onView(withTagValue(is("EmailAddressEntry")))
+            .perform(click())
+            .perform(closeSoftKeyboard());
+
+        // Continue button should still be disabled
+        onView(withTagValue(is("ContinueButton")))
+            .check(matches(not(isEnabled())));
+    }
+
+    @Test
+    public void testCoreLoginFlow_EmailFieldAcceptsInput() {
+        // Verify email input field is displayed and clickable
+        onView(withTagValue(is("EmailAddressEntry")))
+            .check(matches(isDisplayed()))
+            .check(matches(isEnabled()));
+
+        // Enter email and verify it's accepted
+        onView(withTagValue(is("EmailAddressEntry")))
+            .perform(click())
+            .perform(typeText(VALID_EMAIL))
+            .perform(closeSoftKeyboard());
+
+        // Verify the email field shows the placeholder text initially
+        onView(withText("Email address"))
+            .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testCoreLoginFlow_ScreenElementsDisplayed() {
+        // Verify core UI elements are displayed
+        onView(withText("Log in to Bitwarden"))
+            .check(matches(isDisplayed()));
+
+        onView(withTagValue(is("EmailAddressEntry")))
+            .check(matches(isDisplayed()));
+
+        onView(withText("Email address"))
+            .check(matches(isDisplayed()));
+
+        onView(withTagValue(is("ContinueButton")))
+            .check(matches(isDisplayed()));
+
+        onView(withText("Continue"))
+            .check(matches(isDisplayed()));
+    }
+}

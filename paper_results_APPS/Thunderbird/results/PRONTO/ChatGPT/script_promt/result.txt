@@ -1,0 +1,68 @@
+package com.example.emailapp;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+
+@RunWith(AndroidJUnit4.class)
+public class InboxScreenTest {
+
+    @Rule
+    public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
+
+    @Test
+    public void testCoreInboxScreenUIElements() {
+        // Check that title "Inbox" is displayed
+        onView(withText("Inbox"))
+                .check(matches(ViewMatchers.isDisplayed()));
+
+        // Check Navigation Drawer Icon is displayed and clickable
+        onView(withId(R.id.nav_drawer_button))
+                .check(matches(ViewMatchers.isDisplayed()))
+                .perform(click());
+
+        // Go back after opening drawer (optional)
+        // Espresso pressBack() can be used if necessary
+
+        // Check Search Button is visible and clickable
+        onView(withId(R.id.search_button))
+                .check(matches(ViewMatchers.isDisplayed()))
+                .perform(click());
+
+        // Optionally verify search input appears here
+
+        // Check Sort/Filter Button is visible and clickable
+        onView(withId(R.id.sort_button))
+                .check(matches(ViewMatchers.isDisplayed()))
+                .perform(click());
+
+        // Check Overflow Menu is visible and clickable
+        onView(withId(R.id.overflow_menu_button))
+                .check(matches(ViewMatchers.isDisplayed()))
+                .perform(click());
+
+        // Check Load More Text is displayed and clickable
+        onView(withId(R.id.load_more_text))
+                .check(matches(ViewMatchers.isDisplayed()))
+                .perform(click());
+
+        // Check Compose FAB is visible and clickable
+        onView(withId(R.id.compose_fab))
+                .check(matches(ViewMatchers.isDisplayed()))
+                .perform(click());
+
+        // Optionally verify that Compose Email screen opens
+    }
+}

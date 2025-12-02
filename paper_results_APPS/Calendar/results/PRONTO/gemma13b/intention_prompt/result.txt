@@ -1,0 +1,36 @@
+GUI Intentional Tests & User Action Sequences:
+
+Here are a few test cases, ranging in complexity, to validate this objective:
+
+Test Case 1: Verify Empty State Message and "+" Button Functionality (Basic)
+
+Objective: Confirm the user is presented with an empty state message and that the "+" button initiates card creation.
+Steps:
+Launch AnkiDroid and navigate to the screen displaying the empty collection state (as described above).
+Verify that the text "Collection is empty" is visible on the screen.
+Verify that the text "Start adding cards using the + icon." is visible on the screen.
+Click/Tap the "+" button (Button(tag="fab_main")).
+Expected Result: The application should transition to a screen allowing the user to create a new deck or add a card (this will depend on AnkiDroid's implementation).
+Test Case 2: Verify Navigation After Card Creation (Medium)
+
+Objective: Confirm that after creating a card/deck, the user is navigated back to a populated view.
+Steps:
+Perform steps 1-4 from Test Case 1.
+Create a new deck or add a card through the resulting screen.
+Expected Result: The application should navigate back to a screen displaying the user's created decks/cards, rather than remaining on the empty state screen.
+Test Case 3: Verify Empty State Persistence (Complex)
+
+Objective: Confirm that the empty state is correctly displayed after clearing all cards and decks.
+Steps:
+Create several decks and add cards to them within AnkiDroid.
+Delete all created decks/cards using the application's functionality (e.g., a "delete all" option or deleting each deck individually).
+Navigate back to the screen displaying the empty collection state.
+Expected Result: The screen should display the "Collection is empty" message and the associated instructions, confirming that the application correctly detects an empty collection.
+Test Case 4: Verify Accessibility (Important)
+
+Objective: Confirm that the screen is accessible to users with disabilities.
+Steps:
+Use a screen reader (e.g., TalkBack on Android) to navigate the screen.
+Verify that the screen reader announces the "Collection is empty" message and instructions clearly.
+Verify that the "+" button is properly labeled or described for accessibility purposes.
+Expected Result: The screen should be navigable and understandable by users relying on assistive technologies.

@@ -1,0 +1,27 @@
+import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.rule.ActivityTestRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+public class EmptyCollectionScreenTest {
+
+    @Rule
+    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class); // Replace MainActivity with the actual activity that displays this screen
+
+    @Test
+    public void clickPlusButton_NavigatesToCardCreation() {
+        // 1. Find the "+" button (FAB) using Espresso's ViewMatchers
+        ViewInteraction plusButton = ViewMatchers.withId(R.id.fab_main); // Replace R.id.fab_main with the actual resource ID of the FAB
+
+        // 2. Perform a click action on the button
+        plusButton.perform(ViewActions.click());
+
+        // 3. Add an assertion to verify navigation (e.g., check for the presence of a card creation screen element)
+        // This is crucial!  Without it, the test won't actually confirm anything happened.
+        // Example: Check if a "Deck Name" EditText exists on the next screen
+        ViewInteraction deckNameEditText = ViewMatchers.withId(R.id.deck_name_edittext); // Replace with actual ID
+        deckNameEditText.check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+    }
+}

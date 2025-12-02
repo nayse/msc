@@ -1,0 +1,32 @@
+Test Suite: Inbox/Message List Functionality
+
+Test 1: Verify Screen Title and Basic Navigation
+
+Action 1: Launch the application.
+Expected Result 1: The screen opens displaying "Inbox" in the toolbar title.
+Action 2: Tap on the menu icon (likely represented by three horizontal lines or a similar symbol) in the top-left corner of the toolbar.
+Expected Result 2: A navigation drawer/menu appears, providing access to other parts of the application.
+Test 2: Search Functionality
+
+Action 1: Tap on the search bar.
+Expected Result 1: The keyboard opens and the search bar is active for text input.
+Action 2: Enter a search term (e.g., "important").
+Expected Result 2: The message list updates to display only messages matching the search term.
+Action 3: Clear the search bar.
+Expected Result 3: The message list returns to its original state, displaying all available messages (or the initial set loaded).
+Test 3: Message Loading/Pagination
+
+Action 1: Observe the screen initially.
+Expected Result 1: The text "Load up to 100 more" is visible.
+Action 2: Scroll down towards the bottom of the message list until you reach the end (or trigger a loading indicator).
+Expected Result 2: More messages are loaded and displayed, potentially replacing the "Load up to 100 more" text with an updated count or another loading indicator.
+Test 4: Compose New Message (FAB)
+
+Action 1: Tap on the Floating Action Button (FAB).
+Expected Result 1: A new message composition screen opens, allowing the user to create a new message.
+Test 5: Sort Functionality
+
+Action 1: Tap on the "set_sort" button.
+Expected Result 1: A sort menu appears with different sorting options (e.g., by date, subject, sender).
+Action 2: Select a sorting option (e.g., "Date - Ascending").
+Expected Result 2: The message list is sorted according to the selected criteria.

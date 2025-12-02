@@ -1,0 +1,49 @@
+2. GUI Intentional Test Cases:
+
+Here are some test cases designed to validate the login functionality, with increasing complexity:
+
+Test Suite: Bitwarden Login Screen Validation
+
+Test Case 1: Successful Login (Positive Flow)
+
+Objective: Verify that a user can successfully log in with valid credentials.
+Steps:
+Click on the EmailAddressEntry TextField.
+Enter a valid email address (e.g., "
+
+").
+Verify that the ContinueButton becomes enabled.
+Click on the ContinueButton.
+Expected Result: The application should proceed to the next screen, indicating successful login (likely displaying the vault or a password list).
+Test Case 2: Invalid Email Format (Negative Flow)
+
+Objective: Verify that the system handles invalid email formats correctly.
+Steps:
+Click on the EmailAddressEntry TextField.
+Enter an invalid email address (e.g., "test").
+Verify that the ContinueButton remains disabled.
+Verify that an error message appears, indicating the invalid format.
+Test Case 3: Remember Me Functionality
+
+Objective: Verify that the "Remember email" switch functions as expected.
+Steps:
+Click on the EmailAddressEntry TextField.
+Enter a valid email address (e.g., "
+
+").
+Click on the SwitchToggle.
+Close and reopen the application.
+Verify that the email address is pre-populated in the EmailAddressEntry TextField.
+Test Case 4: Region Selection (Boundary/Edge Case)
+
+Objective: Verify that region selection works correctly, especially if there are multiple regions available.
+Steps:
+Click on the RegionSelectorDropdown.
+Select a different server domain from the dropdown menu.
+Verify that the selected server is displayed in the text associated with the region selector.
+Test Case 5: Create Account Link (Navigation)
+
+Objective: Verify that the "Create an account" link navigates to the correct screen.
+Steps:
+Click on CreateAccountLabel.
+Verify that the application navigates to the Bitwarden account creation screen.

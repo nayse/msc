@@ -1,0 +1,126 @@
+# Email Inbox GUI Test Cases
+
+## Test Case 1: Load More Messages Functionality
+**Objective**: Validate the primary function of loading additional email messages
+
+**Test Steps**:
+1. Launch the email application
+2. Navigate to Inbox (if not already there)
+3. Scroll to bottom of message list
+4. Verify "Load up to 100 more" button is visible and clickable
+5. Tap the "Load up to 100 more" button
+6. Wait for loading to complete
+
+**Expected Results**:
+- Button should be responsive when tapped
+- Loading indicator should appear
+- Up to 100 additional email messages should be loaded and displayed
+- Button should either disappear (if no more messages) or update count
+- Messages should be properly formatted and clickable
+
+## Test Case 2: Email Composition Flow
+**Objective**: Test the primary email creation functionality
+
+**Test Steps**:
+1. From inbox screen, locate the floating action button (FAB)
+2. Verify FAB is visible in bottom-right corner
+3. Tap the floating action button
+4. Verify compose email screen opens
+
+**Expected Results**:
+- FAB should be clearly visible and accessible
+- Tapping should smoothly transition to compose screen
+- Compose interface should load with appropriate fields (To, Subject, Body)
+
+## Test Case 3: Search Functionality
+**Objective**: Validate email search capabilities
+
+**Test Steps**:
+1. From inbox screen, locate search button in toolbar
+2. Tap the search button
+3. Verify search interface opens
+4. Enter search query
+5. Execute search
+6. Review search results
+
+**Expected Results**:
+- Search button should be responsive
+- Search interface should expand or open new screen
+- Search should return relevant email results
+- Results should be properly formatted and selectable
+
+## Test Case 4: Navigation and Menu Access
+**Objective**: Test primary navigation elements
+
+**Test Steps**:
+1. Tap hamburger menu button (top-left)
+2. Verify navigation drawer opens
+3. Close drawer and tap sort button
+4. Verify sort options are displayed
+5. Tap overflow menu (three dots)
+6. Verify additional options menu appears
+
+**Expected Results**:
+- Navigation drawer should slide out smoothly with menu options
+- Sort button should show sorting preferences (date, sender, subject, etc.)
+- Overflow menu should display additional actions (settings, help, etc.)
+- All menu interactions should be responsive and intuitive
+
+## Test Case 5: Message List Interaction
+**Objective**: Validate core email viewing functionality
+
+**Test Steps**:
+1. If messages are visible above the "Load more" button, tap on a message
+2. Verify message opens in detail view
+3. Test message actions (reply, forward, delete, etc.)
+4. Return to inbox
+5. Test long-press on message for batch operations
+
+**Expected Results**:
+- Messages should open smoothly in detail view
+- All message actions should be accessible and functional
+- Navigation back to inbox should work properly
+- Batch selection should allow multiple message operations
+
+## Test Case 6: Pull-to-Refresh Functionality
+**Objective**: Test inbox refresh mechanism
+
+**Test Steps**:
+1. From top of inbox message list
+2. Pull down to trigger refresh gesture
+3. Verify refresh animation appears
+4. Wait for refresh to complete
+
+**Expected Results**:
+- Pull gesture should trigger refresh indicator
+- New messages should be fetched and displayed
+- Refresh animation should complete smoothly
+- Message list should update with any new emails
+
+## Test Case 7: Empty State Handling
+**Objective**: Validate behavior when no messages are available
+
+**Test Steps**:
+1. Access an empty inbox or folder
+2. Verify appropriate empty state message is displayed
+3. Confirm "Load more" functionality handles empty results gracefully
+
+**Expected Results**:
+- Clear empty state messaging should be shown
+- UI should remain functional and not crash
+- User should understand the current state and available actions
+
+## Performance Test Case: Large Message List Handling
+**Objective**: Test app performance with many loaded messages
+
+**Test Steps**:
+1. Load multiple batches of messages using "Load up to 100 more"
+2. Scroll through large message list
+3. Test search within large dataset
+4. Monitor app responsiveness
+
+**Expected Results**:
+- Scrolling should remain smooth even with many messages
+- Search should complete in reasonable time
+- App should not crash or become unresponsive
+- Memory usage should remain stable

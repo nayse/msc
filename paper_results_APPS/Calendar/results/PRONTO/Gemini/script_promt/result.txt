@@ -1,0 +1,74 @@
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+@RunWith(AndroidJUnit4.class)
+public class CalendarScreenCoreFunctionalityTest {
+
+    @Rule
+    public ActivityScenarioRule<MainActivity> activityRule = new ActivityScenarioRule<>(MainActivity.class);
+
+    @Test
+    public void testCalendarNavigationAndEventCreation() {
+        // Test Case 1: Verify Calendar Navigation (Month View)
+        // Objective: To ensure users can navigate between months using the arrow buttons.
+
+        // Click the "top_left_arrow" button to navigate to the previous month.
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("top_left_arrow")))
+                .perform(ViewActions.click());
+        // Verify the "top_value" text changes (e.g., from "June" to "May").
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("top_value")))
+                .check(ViewAssertions.matches(ViewMatchers.withText("May"))); // Assuming current month is June
+
+        // Click the "top_right_arrow" button twice to navigate to the next month twice.
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("top_right_arrow")))
+                .perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("top_right_arrow")))
+                .perform(ViewActions.click());
+        // Verify the "top_value" text updates accordingly (e.g., to "July" then "August").
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("top_value")))
+                .check(ViewAssertions.matches(ViewMatchers.withText("July"))); // First click
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("top_value")))
+                .check(ViewAssertions.matches(ViewMatchers.withText("August"))); // Second click
+
+        // Test Case 2: Create a New Task
+        // Objective: To confirm users can initiate the creation of a new task.
+
+        // Click the "calendar_fab" button.
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("calendar_fab")))
+                .perform(ViewActions.click());
+        // Click the "fab_task_icon" to open the new task interface.
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("fab_task_icon")))
+                .perform(ViewActions.click());
+        // TODO: Add an assertion here to verify that the application transitions to a screen for creating a new task.
+        // This might involve checking for a specific view or text element that appears on the new task screen.
+        // For example:
+        // Espresso.onView(ViewMatchers.withText("New Task Title")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+
+        // Go back to the calendar screen to prepare for the next test (assuming back button functionality)
+        Espresso.pressBack();
+
+
+        // Test Case 3: Create a New Event
+        // Objective: To confirm users can initiate the creation of a new event.
+
+        // Click the "calendar_fab" button.
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("calendar_fab")))
+                .perform(ViewActions.click());
+        // Click the "fab_event_label" to open the new event interface.
+        Espresso.onView(ViewMatchers.withTagValue(ViewMatchers.is("fab_event_label")))
+                .perform(ViewActions.click());
+        // TODO: Add an assertion here to verify that the application transitions to a screen for creating a new event.
+        // This might involve checking for a specific view or text element that appears on the new event screen.
+        // For example:
+        // Espresso.onView(ViewMatchers.withText("New Event Details")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+}
