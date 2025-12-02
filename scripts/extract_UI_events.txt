@@ -1,0 +1,35 @@
+import re
+import pandas as pd
+import os
+
+arquivos = [
+    #caminho dos arquivos
+]
+
+acoes = ["Tap", "Type", "Swipe", "Drag", "Long Press", "Select", "Check", "Uncheck", "Click"]
+
+for arquivo in arquivos:
+    if not os.path.exists(arquivo):
+        print(f"arquivo não encontrado: {arquivo}")
+        continue
+
+    with open(arquivo, "r", encoding="utf-8") as f:
+        texto = f.read().replace("\n", " ")
+
+    acoes_encontradas = []
+    for acao in acoes:
+        matches = re.findall(rf"\b{acao}\b", texto, flags=re.IGNORECASE)
+        acoes_encontradas.extend([acao.upper()] * len(matches))
+
+    if not acoes_encontradas:
+        print(f"nenhuma ação encontrada em: {arquivo}")
+        continue
+
+    df = pd.DataFrame(acoes_encontradas, columns=["Action"])
+    df_count = df.value_counts().reset_index(name="Count")
+
+    pasta = os.path.dirname(os.path.abspath(arquivo))
+    saida_csv = os.path.join(pasta, "actions_count.csv")
+    df_count.to_csv(saida_csv, index=False, encoding="utf-8")
+
+    print(f"salvo em: {saida_csv}")
